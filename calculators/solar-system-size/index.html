@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Solar System Size</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+    <h1>Solar System Size</h1>
+
+    <p>
+        Estimate the required PV system size.
+    </p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<!-- Calculator starts here -->
+ <main class="app-content">
+
+    <section class="calculator-container">
+
+        <div class="input-group">
+
+            <label>Monthly Electricity Consumption</label>
+
+            <div class="input-wrapper">
+
+               <input
+type="number"
+id="monthlyConsumption"
+placeholder="Enter monthly units"
+min="0"
+step="1">
+
+                <span class="input-unit">kWh</span>
+
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Peak Sun Hours</label>
+
+            <div class="input-wrapper">
+
+                <input
+type="number"
+id="sunHours"
+placeholder="e.g. 5.5"
+min="1"
+max="10"
+step="0.1">
+
+                <span class="input-unit">hrs</span>
+
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>System Efficiency</label>
+
+            <div class="input-wrapper">
+
+               <input
+type="number"
+id="efficiency"
+value="80"
+min="50"
+max="100"
+step="1">
+
+                <span class="input-unit">%</span>
+
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+    <label>Solar Panel Wattage</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="panelSize"
+            placeholder="e.g. 550"
+            min="100"
+            max="1000"
+            step="1">
+
+        <span class="input-unit">W</span>
+
+    </div>
+
+</div>
+
+        <button class="primary-button">
+
+            Calculate
+
+        </button>
+
+        <button class="secondary-button">
+
+            Reset
+
+        </button>
+
+    </section>
+
+
+</main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

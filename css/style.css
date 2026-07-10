@@ -87,3 +87,89 @@
     padding-bottom:32px;
 
 }
+
+/* ===================================
+   BUTTONS
+=================================== */
+
+.primary-button{
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+.secondary-button{
+
+    height:52px;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    background:var(--surface);
+
+    color:var(--text-primary);
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+/* ======================================
+   CALCULATOR HEADER
+====================================== */
+
+.calculator-header{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    margin-left:16px;
+
+}
+
+.calculator-header h1{
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    color:var(--text-primary);
+
+}
+
+.calculator-header p{
+
+    margin-top:4px;
+
+    font-size:13px;
+
+    color:var(--text-secondary);
+
+}
