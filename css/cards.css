@@ -1,0 +1,161 @@
+/*====================================================
+    CARDS
+====================================================*/
+
+.section-title{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-top:36px;
+
+    margin-bottom:18px;
+
+}
+
+/*==========================
+Quick Cards
+==========================*/
+
+.quick-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+}
+
+.quick-card{
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    text-align:center;
+
+    border:1px solid #ECECEC;
+
+    cursor:pointer;
+
+    transition:.30s;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+
+}
+
+.quick-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 12px 30px rgba(0,0,0,.10);
+
+}
+
+.quick-card .material-symbols-rounded{
+
+    font-size:42px;
+
+    color:var(--primary);
+
+    margin-bottom:12px;
+
+}
+
+.quick-card h4{
+
+    font-size:18px;
+
+    margin-bottom:6px;
+
+}
+
+.quick-card p{
+
+    color:#757575;
+
+}
+
+/*==========================
+Calculator Cards
+==========================*/
+
+.calculator-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    margin-bottom:14px;
+
+    border:1px solid #ECECEC;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+
+}
+
+.calculator-card:hover{
+
+    transform:translateX(4px);
+
+}
+
+.calculator-card h4{
+
+    margin-bottom:6px;
+
+}
+
+.calculator-card p{
+
+    color:#757575;
+
+}
+
+/*==========================
+Engineering Tip
+==========================*/
+
+.tip-card{
+
+    margin-top:34px;
+
+    margin-bottom:110px;
+
+    display:flex;
+
+    gap:18px;
+
+    background:#FFF8E1;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    border-left:5px solid #FFC107;
+
+}
+
+.tip-card .material-symbols-rounded{
+
+    font-size:36px;
+
+    color:#FF9800;
+
+}

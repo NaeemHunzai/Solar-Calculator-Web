@@ -1,0 +1,85 @@
+/* ===================================================
+   SOLAR TOOLKIT DESIGN SYSTEM
+   Version: 1.0
+=================================================== */
+
+:root{
+
+    /* ===== Brand Colors ===== */
+
+    --primary:#2E7D32;
+    --primary-light:#43A047;
+    --primary-dark:#1B5E20;
+
+    --secondary:#1565C0;
+    --secondary-light:#1E88E5;
+
+    --accent:#F9A825;
+
+    --success:#2E7D32;
+    --warning:#FB8C00;
+    --danger:#E53935;
+
+
+    /* ===== Background ===== */
+
+    --background:#F6F8FB;
+
+    --surface:#FFFFFF;
+
+    --surface-alt:#EEF2F6;
+
+
+    /* ===== Text ===== */
+
+    --text:#1F2937;
+
+    --text-secondary:#6B7280;
+
+    --text-light:#9CA3AF;
+
+
+    /* ===== Border ===== */
+
+    --border:#E5E7EB;
+
+
+    /* ===== Radius ===== */
+
+    --radius-small:10px;
+
+    --radius:18px;
+
+    --radius-large:28px;
+
+
+    /* ===== Shadows ===== */
+
+    --shadow-small:
+        0 2px 8px rgba(0,0,0,.06);
+
+    --shadow-medium:
+        0 10px 25px rgba(0,0,0,.08);
+
+    --shadow-large:
+        0 18px 40px rgba(0,0,0,.12);
+
+
+    /* ===== Animation ===== */
+
+    --transition:0.25s ease;
+
+
+    /* ===== Spacing ===== */
+
+    --space-xs:6px;
+
+    --space-sm:12px;
+
+    --space-md:20px;
+
+    --space-lg:30px;
+
+    --space-xl:40px;
+
+}
