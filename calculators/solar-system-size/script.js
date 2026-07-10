@@ -19,6 +19,25 @@ const dailyEnergyResult = document.getElementById("dailyEnergyResult");
 const monthlyEnergyResult = document.getElementById("monthlyEnergyResult");
 const roofAreaResult = document.getElementById("roofAreaResult");
 
+const notifier = document.getElementById("notifier");
+const notifierText = document.getElementById("notifierText");
+
+function showNotifier(message){
+
+    notifierText.textContent = message;
+
+    notifier.classList.add("show");
+
+    setTimeout(function(){
+
+        notifier.classList.remove("show");
+
+    },2500);
+
+}
+
+
+
 // -------------------------
 // OPEN RESULT SHEET
 // -------------------------
@@ -60,38 +79,109 @@ resultSheet.addEventListener("click", function(e){
 
 calculateBtn.addEventListener("click", function(){
 
-    const monthly = Number(monthlyConsumption.value);
-    const sun = Number(sunHours.value);
-    const eff = Number(efficiency.value);
-    const panel = Number(panelSize.value);
+  // Check empty fields
 
-    if(monthly <= 0){
+if(monthlyConsumption.value.trim() === ""){
 
-        monthlyConsumption.focus();
-        return;
+    showNotifier("Please enter Monthly Energy Consumption.");
 
-    }
+    monthlyConsumption.focus();
 
-    if(sun < 1 || sun > 10){
+    return;
 
-        sunHours.focus();
-        return;
+}
 
-    }
+if(sunHours.value.trim() === ""){
 
-    if(eff < 50 || eff > 100){
+    showNotifier("Please enter Peak Sun Hours.");
 
-        efficiency.focus();
-        return;
+    sunHours.focus();
 
-    }
+    return;
 
-    if(panel < 350 || panel > 1000){
+}
 
-        panelSize.focus();
-        return;
+if(efficiency.value.trim() === ""){
 
-    }
+    showNotifier("Please enter System Efficiency.");
+
+    efficiency.focus();
+
+    return;
+
+}
+
+if(panelSize.value.trim() === ""){
+
+    showNotifier("Please enter Solar Panel Wattage.");
+
+    panelSize.focus();
+
+    return;
+
+}
+
+// Read values
+
+const monthly = Number(monthlyConsumption.value);
+
+const sun = Number(sunHours.value);
+
+const eff = Number(efficiency.value);
+
+const panel = Number(panelSize.value);
+
+// Validation
+
+if(monthly <= 0){
+
+    showNotifier("Monthly Energy Consumption must be greater than zero.");
+
+    monthlyConsumption.focus();
+
+    return;
+
+}
+
+if(sun > 10){
+
+    showNotifier("Peak Sun Hours cannot be greater than 10.");
+
+    sunHours.focus();
+
+    return;
+
+}
+
+if(sun < 1){
+
+    showNotifier("Peak Sun Hours must be at least 1.");
+
+    sunHours.focus();
+
+    return;
+
+}
+
+if(eff < 50 || eff > 100){
+
+    showNotifier("System Efficiency must be between 50% and 100%.");
+
+    efficiency.focus();
+
+    return;
+
+}
+
+if(panel < 150 || panel > 1000){
+
+    showNotifier("Solar Panel Wattage must be between 150 W and 1000 W.");
+
+    panelSize.focus();
+
+    return;
+
+}
 
     const dailyEnergy = monthly / 30;
 

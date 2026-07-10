@@ -861,3 +861,51 @@ RESULT SHEET
     margin-top:10px;
 
 }
+
+/*==================================
+  NOTIFIER
+==================================*/
+
+.notifier{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:24px;
+
+    transform:translateX(-50%) translateY(100px);
+
+    background:#323232;
+
+    color:#FFFFFF;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+
+    opacity:0;
+
+    transition:.3s ease;
+
+    z-index:10000;
+
+    max-width:90%;
+
+    text-align:center;
+
+}
+
+.notifier.show{
+
+    opacity:1;
+
+    transform:translateX(-50%) translateY(0);
+
+}
