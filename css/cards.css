@@ -544,3 +544,147 @@
     gap:14px;
 
 }
+
+/* ===================================
+   RESULT CARD
+=================================== */
+
+.result-card{
+
+    margin-top:24px;
+
+    background:var(--surface);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.result-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+}
+
+.result-header .material-symbols-rounded{
+
+    font-size:22px !important;
+
+    color:var(--primary);
+
+}
+
+.result-header h3{
+
+    margin:0;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    color:var(--text-primary);
+
+}
+
+.result-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 0;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.result-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.result-item span{
+
+    font-size:14px;
+
+    color:var(--text-secondary);
+
+}
+
+.result-item strong{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+/* ===================================
+   ENGINEERING NOTES
+=================================== */
+
+.notes-card{
+
+    margin-top:20px;
+
+    background:#FFFDE7;
+
+    border:1px solid #FFE082;
+
+    border-radius:18px;
+
+    padding:18px;
+
+}
+
+.notes-card h3{
+
+    margin:0 0 12px;
+
+    font-size:16px;
+
+    color:#8D6E00;
+
+}
+
+.notes-card ul{
+
+    margin:0;
+
+    padding-left:18px;
+
+}
+
+.notes-card li{
+
+    margin-bottom:8px;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    color:#6B7280;
+
+}
+
+.notes-card li:last-child{
+
+    margin-bottom:0;
+
+}
