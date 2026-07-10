@@ -181,89 +181,37 @@ step="1">
 
 </main>
 
-<!-- RESULT SHEET -->
-
 <div class="result-sheet" id="resultSheet">
 
     <div class="result-sheet-content">
 
-        <div class="sheet-handle"></div>
-
         <div class="sheet-header">
 
-            <h2>Calculation Result</h2>
+            <h2>Solar System Size</h2>
 
-            <button id="closeSheet" class="icon-button">
+            <button class="icon-button" id="closeSheet">
 
                 <span class="material-symbols-rounded">
+
                     close
+
                 </span>
 
             </button>
 
         </div>
 
-      <div class="sheet-results">
+        <div class="sheet-results">
 
-    <!-- Hero Result -->
+            <div class="result-row">
 
-    <div class="hero-result">
+                <span>Required PV System Size</span>
 
-        <div class="hero-label">
+                <strong id="systemSizeResult">--</strong>
 
-            Required PV System Size
+            </div>
 
-        </div>
-
-        <div class="hero-value" id="systemSizeResult">
-
-            --
-
-        </div>
-
-    </div>
-
-    <!-- Other Results -->
-
-    <div id="resultList">
-
-        <div class="result-row">
-
-            <span>Solar Panels Required</span>
-
-            <strong id="panelCountResult">--</strong>
-
-        </div>
-
-        <div class="result-row">
-
-            <span>Estimated Daily Energy</span>
-
-            <strong id="dailyEnergyResult">--</strong>
-
-        </div>
-
-        <div class="result-row">
-
-            <span>Estimated Monthly Energy</span>
-
-            <strong id="monthlyEnergyResult">--</strong>
-
-        </div>
-
-        <div class="result-row">
-
-            <span>Estimated Roof Area</span>
-
-            <strong id="roofAreaResult">--</strong>
-
-        </div>
-
-    </div>
-
-</div>
-
-            <div class="sheet-item">
+            <div class="result-row">
 
                 <span>Solar Panels Required</span>
 
@@ -271,7 +219,7 @@ step="1">
 
             </div>
 
-            <div class="sheet-item">
+            <div class="result-row">
 
                 <span>Estimated Daily Energy</span>
 
@@ -279,7 +227,7 @@ step="1">
 
             </div>
 
-            <div class="sheet-item">
+            <div class="result-row">
 
                 <span>Estimated Monthly Energy</span>
 
@@ -287,7 +235,7 @@ step="1">
 
             </div>
 
-            <div class="sheet-item">
+            <div class="result-row">
 
                 <span>Estimated Roof Area</span>
 
@@ -297,17 +245,19 @@ step="1">
 
         </div>
 
-    <button class="primary-button" id="copyResults">
-    Copy Results
-</button>
+        <button class="primary-button" id="copyResults">
 
-<button class="secondary-button" id="doneButton">
-    Done
-</button>
+            Share Results
+
+        </button>
+
+        <button class="secondary-button" id="doneButton">
+
+            Done
+
+        </button>
 
     </div>
-
-</div>
 
 </div>
 

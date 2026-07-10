@@ -691,33 +691,31 @@
 
 /* ===================================
    RESULT SHEET
-=================================== */
-/* ===================================
-   RESULT SHEET
-=================================== */
 
-/*==================================
-  RESULT SHEET
-==================================*/
-/*==================================
-  RESULT SHEET
+   /*==================================
+RESULT SHEET
 ==================================*/
 
 .result-sheet{
 
     position:fixed;
+
     inset:0;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     background:rgba(0,0,0,.45);
 
-    padding:16px;
+    padding:20px;
 
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
 
     transition:.25s;
@@ -729,23 +727,26 @@
 .result-sheet.show{
 
     opacity:1;
+
     visibility:visible;
+
     pointer-events:auto;
 
 }
 
 .result-sheet-content{
 
-    width:92%;
+    width:100%;
+
     max-width:380px;
 
     background:#fff;
 
-    border-radius:20px;
+    border-radius:22px;
 
-    padding:20px;
+    padding:22px;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.18);
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
 
     transform:scale(.95);
 
@@ -762,10 +763,12 @@
 .sheet-header{
 
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 
 }
 
@@ -781,9 +784,19 @@
 
 }
 
+.sheet-header .icon-button{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+}
+
 .sheet-results{
 
-    margin:18px 0;
+    margin-bottom:18px;
 
 }
 
@@ -809,7 +822,7 @@
 
     color:#6B7280;
 
-    margin-bottom:4px;
+    margin-bottom:5px;
 
 }
 
@@ -819,17 +832,31 @@
 
     font-size:18px;
 
-    color:#2E7D32;
-
     font-weight:600;
+
+    color:#2E7D32;
 
 }
 
-.result-sheet .primary-button,
+.result-sheet .primary-button{
+
+    width:100%;
+
+    height:46px;
+
+    border-radius:12px;
+
+    margin-top:10px;
+
+}
 
 .result-sheet .secondary-button{
 
     width:100%;
+
+    height:46px;
+
+    border-radius:12px;
 
     margin-top:10px;
 
