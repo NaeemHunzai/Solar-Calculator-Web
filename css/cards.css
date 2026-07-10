@@ -183,3 +183,111 @@
     line-height:1.35;
 
 }
+
+/* ===================================
+   CALCULATOR LIST
+=================================== */
+
+.calculator-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.calculator-card{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+}
+
+.calculator-card:active{
+
+    transform:scale(.98);
+
+}
+
+.calculator-icon{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:14px;
+
+    background:#E8F5E9;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+.calculator-icon .material-symbols-rounded{
+
+    font-size:24px !important;
+
+    color:var(--primary);
+
+}
+
+.calculator-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.calculator-info h4{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:var(--text-primary);
+
+    margin-bottom:3px;
+
+}
+
+.calculator-info p{
+
+    font-size:12px;
+
+    color:var(--text-secondary);
+
+    line-height:1.4;
+
+}
+
+.arrow-icon{
+
+    font-size:20px !important;
+
+    color:var(--text-secondary);
+
+}
