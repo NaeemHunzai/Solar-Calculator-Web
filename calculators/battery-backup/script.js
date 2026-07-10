@@ -14,7 +14,6 @@ const batteryCount = document.getElementById("batteryCount");
 
 const loadPower = document.getElementById("loadPower");
 
-const batteryConnection = document.getElementById("batteryConnection");
 
 const dod = document.getElementById("dod");
 
@@ -324,7 +323,6 @@ resetBtn.addEventListener("click", function(){
 
     loadPower.value = "";
 
-    batteryConnection.selectedIndex = 0;
 
     dod.value = 80;
 
