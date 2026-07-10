@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Battery Backup Calculator</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button class="icon-button" onclick="history.back()">
+<span class="material-symbols-rounded">arrow_back</span>
+</button>
+
+<div class="calculator-header">
+<h1>Battery Backup Calculator</h1>
+<p>Estimate battery backup time and usable energy.</p>
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<div class="input-group">
+<label>Calculation Mode</label>
+<select id="mode">
+<option value="simple" selected>Simple</option>
+<option value="professional">Professional</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>Battery Voltage</label>
+<div class="input-wrapper">
+<input type="number" id="batteryVoltage" placeholder="e.g. 48" min="6" max="100">
+<span class="input-unit">V</span>
+</div>
+</div>
+
+<div class="input-group">
+<label>Battery Capacity</label>
+<div class="input-wrapper">
+<input type="number" id="batteryCapacity" placeholder="e.g. 200" min="10" max="1000">
+<span class="input-unit">Ah</span>
+</div>
+</div>
+
+<div class="input-group">
+<label>Number of Batteries</label>
+<div class="input-wrapper">
+<input type="number" id="batteryCount" value="1" min="1" max="100">
+</div>
+</div>
+
+<div class="input-group">
+<label>Load Power</label>
+<div class="input-wrapper">
+<input type="number" id="loadPower" placeholder="e.g. 1000" min="1">
+<span class="input-unit">W</span>
+</div>
+</div>
+
+<div id="professionalFields">
+
+<div class="input-group">
+<label>Battery Connection</label>
+<select id="batteryConnection">
+<option value="series">Series</option>
+<option value="parallel">Parallel</option>
+<option value="series-parallel">Series-Parallel</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>Depth of Discharge</label>
+<div class="input-wrapper">
+<input type="number" id="dod" value="80" min="50" max="100">
+<span class="input-unit">%</span>
+</div>
+</div>
+
+<div class="input-group">
+<label>Inverter Efficiency</label>
+<div class="input-wrapper">
+<input type="number" id="inverterEfficiency" value="90" min="70" max="100">
+<span class="input-unit">%</span>
+</div>
+</div>
+
+</div>
+
+<button class="primary-button">Calculate</button>
+<button class="secondary-button">Reset</button>
+
+<div class="notes-card">
+<h3>Engineering Notes</h3>
+<ul>
+<li>Battery runtime is approximate.</li>
+<li>Battery age and temperature affect backup time.</li>
+<li>Inverter losses are included in the calculation.</li>
+<li>Use manufacturer recommended DoD values.</li>
+</ul>
+</div>
+
+</section>
+
+</main>
+
+<div class="result-sheet" id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+<h2>Battery Backup</h2>
+<button class="icon-button" id="closeSheet">
+<span class="material-symbols-rounded">close</span>
+</button>
+</div>
+
+<div class="sheet-results">
+
+<div class="result-row">
+<span>Battery Bank Energy</span>
+<strong id="bankEnergyResult">--</strong>
+</div>
+
+<div class="result-row">
+<span>Usable Energy</span>
+<strong id="usableEnergyResult">--</strong>
+</div>
+
+<div class="result-row">
+<span>Backup Time</span>
+<strong id="backupTimeResult">--</strong>
+</div>
+
+<div class="result-row">
+<span>Current Draw</span>
+<strong id="currentDrawResult">--</strong>
+</div>
+
+<div class="result-row">
+<span>Runtime</span>
+<strong id="runtimeResult">--</strong>
+</div>
+
+</div>
+
+<button class="primary-button" id="copyResults">Share Results</button>
+<button class="secondary-button" id="doneButton">Done</button>
+
+</div>
+
+</div>
+
+<div id="notifier" class="notifier">
+<span id="notifierText"></span>
+</div>
+
+<script src="script.js"></script>
+
+</div>
+</body>
+</html>
