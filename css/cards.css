@@ -696,31 +696,175 @@
    RESULT SHEET
 =================================== */
 
+/*==================================
+  RESULT SHEET
+==================================*/
+
 .result-sheet{
 
-    position: fixed;
+    position:fixed;
 
-    inset: 0;
+    inset:0;
 
-    display: flex;
+    background:rgba(0,0,0,.45);
 
-    justify-content: center;
+    display:flex;
 
-    align-items: center;
+    justify-content:center;
 
-    padding: 20px;
+    align-items:center;
 
-    background: rgba(0,0,0,.45);
+    padding:18px;
 
-    opacity: 0;
+    opacity:0;
 
-    visibility: hidden;
+    visibility:hidden;
 
-    pointer-events: none;
+    pointer-events:none;
 
-    transition: .25s ease;
+    transition:.25s ease;
 
-    z-index: 9999;
+    z-index:9999;
+
+}
+
+.result-sheet.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
+
+}
+
+.result-sheet-content{
+
+    width:100%;
+
+    max-width:420px;
+
+    background:#FFFFFF;
+
+    border-radius:24px;
+
+    padding:22px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,.18);
+
+    transform:scale(.94);
+
+    transition:.25s ease;
+
+}
+
+.result-sheet.show .result-sheet-content{
+
+    transform:scale(1);
+
+}
+
+.sheet-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.sheet-header h2{
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:600;
+
+}
+
+.hero-result{
+
+    background:#E8F5E9;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+.hero-label{
+
+    font-size:13px;
+
+    color:#2E7D32;
+
+    margin-bottom:8px;
+
+    font-weight:500;
+
+}
+
+.hero-value{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:#2E7D32;
+
+}
+
+.result-row{
+
+    padding:16px 0;
+
+    border-bottom:1px solid #ECECEC;
+
+}
+
+.result-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.result-row span{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#6B7280;
+
+    margin-bottom:5px;
+
+}
+
+.result-row strong{
+
+    font-size:20px;
+
+    color:#1F2937;
+
+    font-weight:600;
+
+}
+
+.result-sheet .primary-button,
+
+.result-sheet .secondary-button{
+
+    width:100%;
+
+    margin-top:14px;
 
 }
 
