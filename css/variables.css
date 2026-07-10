@@ -1,85 +1,86 @@
-/* ===================================================
-   SOLAR TOOLKIT DESIGN SYSTEM
-   Version: 1.0
-=================================================== */
-
 :root{
 
-    /* ===== Brand Colors ===== */
+    /* ===========================
+       COLORS
+    ============================ */
 
     --primary:#2E7D32;
     --primary-light:#43A047;
     --primary-dark:#1B5E20;
 
-    --secondary:#1565C0;
-    --secondary-light:#1E88E5;
-
-    --accent:#F9A825;
-
-    --success:#2E7D32;
-    --warning:#FB8C00;
-    --danger:#E53935;
-
-
-    /* ===== Background ===== */
-
-    --background:#F6F8FB;
-
+    --background:#F5F7FA;
     --surface:#FFFFFF;
 
-    --surface-alt:#EEF2F6;
-
-
-    /* ===== Text ===== */
-
-    --text:#1F2937;
-
+    --text-primary:#1F2937;
     --text-secondary:#6B7280;
-
-    --text-light:#9CA3AF;
-
-
-    /* ===== Border ===== */
 
     --border:#E5E7EB;
 
+    --success:#4CAF50;
+    --warning:#FFC107;
+    --danger:#E53935;
 
-    /* ===== Radius ===== */
+    /* ===========================
+       TYPOGRAPHY
+    ============================ */
 
-    --radius-small:10px;
+    --font-family:'Inter',sans-serif;
 
-    --radius:18px;
+    --text-xs:12px;
+    --text-sm:13px;
+    --text-md:14px;
+    --text-lg:16px;
+    --text-xl:18px;
+    --text-2xl:22px;
 
-    --radius-large:28px;
+    --font-normal:400;
+    --font-medium:500;
+    --font-semibold:600;
+    --font-bold:700;
 
+    /* ===========================
+       SPACING
+    ============================ */
 
-    /* ===== Shadows ===== */
+    --space-1:4px;
+    --space-2:8px;
+    --space-3:12px;
+    --space-4:16px;
+    --space-5:20px;
+    --space-6:24px;
+    --space-7:32px;
 
-    --shadow-small:
-        0 2px 8px rgba(0,0,0,.06);
+    /* ===========================
+       BORDER RADIUS
+    ============================ */
 
-    --shadow-medium:
-        0 10px 25px rgba(0,0,0,.08);
+    --radius-sm:10px;
+    --radius-md:14px;
+    --radius-lg:18px;
+    --radius-xl:24px;
 
-    --shadow-large:
-        0 18px 40px rgba(0,0,0,.12);
+    /* ===========================
+       SHADOWS
+    ============================ */
 
+    --shadow-sm:0 1px 3px rgba(0,0,0,.08);
 
-    /* ===== Animation ===== */
+    --shadow-md:0 4px 12px rgba(0,0,0,.08);
 
-    --transition:0.25s ease;
+    --shadow-lg:0 8px 24px rgba(0,0,0,.10);
 
+    /* ===========================
+       TRANSITIONS
+    ============================ */
 
-    /* ===== Spacing ===== */
+    --transition:200ms ease;
 
-    --space-xs:6px;
+    /* ===========================
+       APP LAYOUT
+    ============================ */
 
-    --space-sm:12px;
+    --header-height:64px;
 
-    --space-md:20px;
-
-    --space-lg:30px;
-
-    --space-xl:40px;
+    --bottom-nav-height:72px;
 
 }

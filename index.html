@@ -1,370 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <title>Solar Toolkit</title>
 
     <!-- Google Font -->
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    <!-- Material Icons -->
-
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
-          rel="stylesheet">
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
 
     <!-- CSS -->
-
-   <!-- CSS -->
-
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/style.css">
-
-<link rel="stylesheet" href="css/forms.css">
-<link rel="stylesheet" href="css/cards.css">
-<link rel="stylesheet" href="css/navigation.css">
-
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/animations.css">
-    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
 
 </head>
 
 <body>
 
-<body>
-
 <div class="app">
 
-<header class="app-header">
-
-<div class="brand">
-
-<div class="brand-icon">
-<span class="material-symbols-rounded">solar_power</span>
-</div>
-
-<div>
-
-<h1>Solar Toolkit</h1>
-
-<p>Professional Solar Engineering Suite</p>
-
-</div>
-
-</div>
-
-</header>
-
-<main class="container">
-
-<section class="hero-card">
-
-<h2>Hello, Naeem 👋</h2>
-
-<p>
-Design, size and calculate complete solar systems
-with professional engineering tools.
-</p>
-
-</section>
-
-<section class="search-box">
-
-<span class="material-symbols-rounded">
-search
-</span>
-
-<input
-type="text"
-placeholder="Search calculators...">
-
-</section>
-
-
-
-<section class="quick-actions">
-
-<h3 class="section-title">
-
-Quick Access
-
-</h3>
-
-<div class="quick-grid">
-
-<div class="quick-card">
-
-    <div class="quick-icon battery">
-
-        <span class="material-symbols-rounded">
-            battery_full
-        </span>
-
-    </div>
-
-    <h3>Battery</h3>
-
-    <p>Backup Time</p>
-
-    <div class="card-footer">
-
-        <span>Tap to calculate</span>
-
-        <span class="material-symbols-rounded">
-            arrow_forward_ios
-        </span>
-
-    </div>
-
-</div>
-
-<div class="quick-card">
-
-<div class="quick-icon solar">
-<span class="material-symbols-rounded">
-solar_power
-</span>
-</div>
-
-<h3>Solar</h3>
-
-<p>PV System Size</p>
-
-<div class="card-footer">
-
-<span>Open</span>
-
-<span class="material-symbols-rounded">
-arrow_forward
-</span>
-
-</div>
-
-</div>
-
-<div class="quick-card">
-
-<div class="quick-icon inverter">
-<span class="material-symbols-rounded">
-bolt
-</span>
-</div>
-
-<h3>Inverter</h3>
-
-<p>Inverter Sizing</p>
-
-<div class="card-footer">
-
-<span>Open</span>
-
-<span class="material-symbols-rounded">
-arrow_forward
-</span>
-
-</div>
-
-</div>
-
-<div class="quick-card">
-
-<div class="quick-icon roi">
-<span class="material-symbols-rounded">
-payments
-</span>
-</div>
-
-<h3>ROI</h3>
-
-<p>Investment Return</p>
-
-<div class="card-footer">
-
-<span>Open</span>
-
-<span class="material-symbols-rounded">
-arrow_forward
-</span>
-
-</div>
-
-</div>
-
-<p>Investment</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="calculator-section">
-
-    <h3 class="section-title">
-        General Calculators
-    </h3>
-
-    <div class="calculator-card">
+    <header class="app-header">
 
         <div>
 
-            <h4>Battery Backup</h4>
+            <h1>Solar Toolkit</h1>
 
-            <p>Estimate backup duration</p>
-
-        </div>
-
-        <span class="material-symbols-rounded">
-            chevron_right
-        </span>
-
-    </div>
-
-    <div class="calculator-card">
-
-        <div>
-
-            <h4>Solar System Size</h4>
-
-            <p>Calculate required PV capacity</p>
+            <p>Professional Solar Engineering Tools</p>
 
         </div>
 
-        <span class="material-symbols-rounded">
-            chevron_right
-        </span>
+        <button class="icon-button">
 
-    </div>
+            <span class="material-symbols-rounded">
+                settings
+            </span>
 
-</section>
+        </button>
 
+    </header>
 
-<section class="calculator-section">
+    <main class="app-content">
 
-    <h3 class="section-title">
-        Technical Calculators
-    </h3>
+        <!-- Home Dashboard starts here -->
 
-    <div class="calculator-card">
-
-        <div>
-
-            <h4>Cable Size</h4>
-
-            <p>Select the proper conductor size</p>
-
-        </div>
-
-        <span class="material-symbols-rounded">
-            chevron_right
-        </span>
-
-    </div>
-
-    <div class="calculator-card">
-
-        <div>
-
-            <h4>Voltage Drop</h4>
-
-            <p>Calculate line voltage losses</p>
-
-        </div>
-
-        <span class="material-symbols-rounded">
-            chevron_right
-        </span>
-
-    </div>
-
-</section>
-
-
-<section class="tip-card">
-
-    <span class="material-symbols-rounded">
-        lightbulb
-    </span>
-
-    <div>
-
-        <h4>Engineering Tip</h4>
-
-        <p>
-            Oversizing the PV array by 10–20% can improve
-            winter energy production.
-        </p>
-
-    </div>
-
-</section>
-
-
-<nav class="bottom-nav">
-
-    <div class="nav-item active">
-
-        <span class="material-symbols-rounded">
-            home
-        </span>
-
-        <small>Home</small>
-
-    </div>
-
-    <div class="nav-item">
-
-        <span class="material-symbols-rounded">
-            calculate
-        </span>
-
-        <small>Tools</small>
-
-    </div>
-
-    <div class="nav-item">
-
-        <span class="material-symbols-rounded">
-            star
-        </span>
-
-        <small>Favorites</small>
-
-    </div>
-
-    <div class="nav-item">
-
-        <span class="material-symbols-rounded">
-            settings
-        </span>
-
-        <small>Settings</small>
-
-    </div>
-
-</nav>
-
-</main>
+    </main>
 
 </div>
 
 </body>
-
-</body>
-
 </html>
