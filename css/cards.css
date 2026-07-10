@@ -1,292 +1,71 @@
-/*====================================================
-    SECTION TITLES
-====================================================*/
+.welcome-card{
 
-.section-title{
-    font-size:24px;
-    font-weight:700;
-    color:#1F2937;
-    margin:40px 0 20px;
-}
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-light)
+    );
 
-/*====================================================
-    QUICK ACCESS GRID
-====================================================*/
+    color:#fff;
 
-.quick-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
+    border-radius:20px;
 
-/*====================================================
-    QUICK CARD
-====================================================*/
-
-.quick-card{
-
-    background:#fff;
-
-    border-radius:26px;
-
-    padding:24px;
+    padding:18px;
 
     display:flex;
-
-    flex-direction:column;
 
     justify-content:space-between;
 
-    min-height:205px;
-
-    box-shadow:
-    0 12px 35px rgba(0,0,0,.06);
-
-    transition:.28s ease;
-
-    cursor:pointer;
-
-    border:1px solid rgba(0,0,0,.03);
-
-}
-
-.quick-card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:
-    0 18px 45px rgba(0,0,0,.12);
-
-}
-
-/*====================================================
-    ICON
-====================================================*/
-
-.quick-icon{
-
-    width:72px;
-
-    height:72px;
-
-    border-radius:22px;
-
-    display:flex;
-
     align-items:center;
 
-    justify-content:center;
+    box-shadow:var(--shadow-md);
 
-    margin-bottom:22px;
-
-}
-
-.quick-icon span{
-
-    font-size:38px;
+    margin-bottom:18px;
 
 }
 
-/* icon colors */
+.welcome-card h2{
 
-.quick-icon.battery{
+    font-size:20px;
 
-    background:#E8F5E9;
+    margin-top:8px;
 
-    color:#2E7D32;
-
-}
-
-.quick-icon.solar{
-
-    background:#FFF8E1;
-
-    color:#FF9800;
+    margin-bottom:6px;
 
 }
 
-.quick-icon.inverter{
+.welcome-card p{
 
-    background:#E3F2FD;
+    font-size:13px;
 
-    color:#1976D2;
-
-}
-
-.quick-icon.roi{
-
-    background:#E8F5E9;
-
-    color:#43A047;
-
-}
-
-/*====================================================
-    CARD TEXT
-====================================================*/
-
-.quick-card h3{
-
-    font-size:28px;
-
-    font-weight:700;
-
-    color:#1F2937;
-
-    margin-bottom:8px;
-
-}
-
-.quick-card p{
-
-    font-size:15px;
-
-    color:#7A7A7A;
+    opacity:.95;
 
     line-height:1.5;
 
+    max-width:230px;
+
 }
 
-/*====================================================
-    FOOTER
-====================================================*/
+.welcome-badge{
 
-.card-footer{
+    display:inline-block;
 
-    display:flex;
+    background:rgba(255,255,255,.18);
 
-    justify-content:space-between;
+    padding:4px 10px;
 
-    align-items:center;
+    border-radius:30px;
 
-    margin-top:22px;
-
-    padding-top:16px;
-
-    border-top:1px solid #EEEEEE;
-
-    color:#2E7D32;
-
-    font-size:14px;
+    font-size:11px;
 
     font-weight:600;
 
 }
 
-.card-footer .material-symbols-rounded{
+.hero-icon{
 
-    font-size:22px;
+    font-size:58px !important;
 
-}
-
-/*====================================================
-    CALCULATOR CARDS
-====================================================*/
-
-.calculator-card{
-
-    background:#fff;
-
-    border-radius:24px;
-
-    padding:22px 24px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:16px;
-
-    box-shadow:
-    0 8px 24px rgba(0,0,0,.05);
-
-    transition:.25s;
-
-    cursor:pointer;
-
-}
-
-.calculator-card:hover{
-
-    transform:translateX(5px);
-
-}
-
-.calculator-card h4{
-
-    font-size:20px;
-
-    margin-bottom:6px;
-
-    color:#1F2937;
-
-}
-
-.calculator-card p{
-
-    color:#757575;
-
-    font-size:15px;
-
-}
-
-.calculator-card .material-symbols-rounded{
-
-    font-size:28px;
-
-    color:#2E7D32;
-
-}
-
-/*====================================================
-    ENGINEERING TIP
-====================================================*/
-
-.tip-card{
-
-    display:flex;
-
-    gap:18px;
-
-    align-items:flex-start;
-
-    margin:42px 0 120px;
-
-    background:#FFF8E1;
-
-    padding:24px;
-
-    border-radius:24px;
-
-    border-left:6px solid #FFC107;
-
-    box-shadow:
-    0 10px 30px rgba(255,193,7,.18);
-
-}
-
-.tip-card .material-symbols-rounded{
-
-    font-size:42px;
-
-    color:#FF9800;
-
-}
-
-.tip-card h4{
-
-    font-size:20px;
-
-    margin-bottom:8px;
-
-}
-
-.tip-card p{
-
-    color:#616161;
-
-    line-height:1.7;
+    opacity:.22;
 
 }
