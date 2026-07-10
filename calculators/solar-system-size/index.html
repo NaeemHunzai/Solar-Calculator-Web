@@ -58,7 +58,6 @@ arrow_back
 <main class="app-content">
 
 <!-- Calculator starts here -->
- <main class="app-content">
 
     <section class="calculator-container">
 
@@ -153,42 +152,9 @@ step="1">
 
         </button>
 
-<div class="result-card" id="resultCard" hidden>
-    <div class="result-header">
 
-        <span class="material-symbols-rounded">
-            calculate
-        </span>
 
-        <h3>Calculation Result</h3>
-
-    </div>
-
-    <div class="result-item">
-
-        <span>Required System Size</span>
-
-        <strong id="systemSizeResult">--</strong>
-
-    </div>
-
-    <div class="result-item">
-
-        <span>Number of Solar Panels</span>
-
-        <strong id="panelCountResult">--</strong>
-
-    </div>
-
-    <div class="result-item">
-
-        <span>Estimated Daily Energy</span>
-
-        <strong id="dailyEnergyResult">--</strong>
-
-    </div>
-
-</div>
+    
 
 
 
@@ -214,6 +180,84 @@ step="1">
 
 
 </main>
+
+<!-- RESULT SHEET -->
+
+<div class="result-sheet" id="resultSheet">
+
+    <div class="result-sheet-content">
+
+        <div class="sheet-handle"></div>
+
+        <div class="sheet-header">
+
+            <h2>Calculation Result</h2>
+
+            <button id="closeSheet" class="icon-button">
+
+                <span class="material-symbols-rounded">
+                    close
+                </span>
+
+            </button>
+
+        </div>
+
+        <div class="sheet-results">
+
+            <div class="sheet-item">
+
+                <span>Required System Size</span>
+
+                <strong id="systemSizeResult">--</strong>
+
+            </div>
+
+            <div class="sheet-item">
+
+                <span>Solar Panels Required</span>
+
+                <strong id="panelCountResult">--</strong>
+
+            </div>
+
+            <div class="sheet-item">
+
+                <span>Estimated Daily Energy</span>
+
+                <strong id="dailyEnergyResult">--</strong>
+
+            </div>
+
+            <div class="sheet-item">
+
+                <span>Estimated Monthly Energy</span>
+
+                <strong id="monthlyEnergyResult">--</strong>
+
+            </div>
+
+            <div class="sheet-item">
+
+                <span>Estimated Roof Area</span>
+
+                <strong id="roofAreaResult">--</strong>
+
+            </div>
+
+        </div>
+
+    <button class="primary-button" id="copyResults">
+    Copy Results
+</button>
+
+<button class="secondary-button" id="doneButton">
+    Done
+</button>
+
+    </div>
+
+</div>
 
 </div>
 
