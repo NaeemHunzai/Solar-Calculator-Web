@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Daily Energy Consumption</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Daily Energy Consumption
+
+</h1>
+
+<p>
+
+Estimate household energy usage and electricity cost by adding multiple appliances.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<!-- =====================================
+Calculation Mode
+===================================== -->
+
+<div class="input-group">
+
+<label>
+
+Calculation Mode
+
+</label>
+
+<select id="mode">
+
+<option
+value="simple"
+selected>
+
+Simple
+
+</option>
+
+<option
+value="professional">
+
+Professional
+
+</option>
+
+</select>
+
+</div>
+
+<!-- =====================================
+Appliance
+===================================== -->
+
+<div class="input-group">
+
+<label>
+
+Appliance
+
+</label>
+
+<select id="appliance">
+
+<option value="10">LED Bulb</option>
+
+<option value="20">CFL Bulb</option>
+
+<option value="40">Tube Light</option>
+
+<option value="75" selected>Ceiling Fan</option>
+
+<option value="90">Pedestal Fan</option>
+
+<option value="40">Exhaust Fan</option>
+
+<option value="50">LED TV 32"</option>
+
+<option value="80">LED TV 43"</option>
+
+<option value="120">LED TV 55"</option>
+
+<option value="250">Desktop Computer</option>
+
+<option value="65">Laptop</option>
+
+<option value="12">Wi-Fi Router</option>
+
+<option value="180">Refrigerator</option>
+
+<option value="250">Deep Freezer</option>
+
+<option value="1200">Air Conditioner (1 Ton)</option>
+
+<option value="1800">Air Conditioner (1.5 Ton)</option>
+
+<option value="2400">Air Conditioner (2 Ton)</option>
+
+<option value="500">Washing Machine</option>
+
+<option value="1200">Microwave Oven</option>
+
+<option value="1500">Electric Kettle</option>
+
+<option value="1000">Electric Iron</option>
+
+<option value="700">Rice Cooker</option>
+
+<option value="750">Water Pump</option>
+
+<option value="2000">Water Heater</option>
+
+<option value="1000">Vacuum Cleaner</option>
+
+<option value="1500">Hair Dryer</option>
+
+<option value="10">Mobile Charger</option>
+
+<option value="60">Printer</option>
+
+<option value="180">Gaming Console</option>
+
+<option value="1800">Dishwasher</option>
+
+<option value="900">Coffee Maker</option>
+
+<option value="0">Custom Appliance</option>
+
+</select>
+
+</div>
+
+<!-- =====================================
+Power
+===================================== -->
+
+<div class="input-group">
+
+<label>
+
+Power
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="power"
+value="75"
+min="1">
+
+<span class="input-unit">
+
+W
+
+</span>
+
+</div>
+
+</div>
+
+<!-- =====================================
+Quantity
+===================================== -->
+
+<div class="input-group">
+
+<label>
+
+Quantity
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="quantity"
+value="1"
+min="1">
+
+</div>
+
+</div>
+
+<!-- =====================================
+Hours
+===================================== -->
+
+<div class="input-group">
+
+<label>
+
+Hours Used Per Day
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="hours"
+placeholder="e.g. 8"
+min="0"
+max="24"
+step="0.5">
+
+<span class="input-unit">
+
+hrs
+
+</span>
+
+</div>
+
+</div>
+
+<!-- =====================================
+ADD APPLIANCE
+===================================== -->
+
+<button
+class="primary-button"
+id="addAppliance">
+
++ Add Appliance
+
+</button>
+
+<!-- =====================================
+APPLIANCE LIST
+===================================== -->
+
+<h3 style="margin-top:30px;">
+
+Added Appliances
+
+</h3>
+
+<div id="applianceList">
+
+<!-- JavaScript will add appliance cards here -->
+
+</div>
+<!-- =====================================
+GENERAL SETTINGS
+===================================== -->
+
+<div class="input-group">
+
+<label>
+
+Days Used Per Month
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="days"
+value="30"
+min="1"
+max="31">
+
+<span class="input-unit">
+
+Days
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Electricity Rate
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="rate"
+value="0.15"
+step="0.01"
+min="0">
+
+<span class="input-unit">
+
+USD/kWh
+
+</span>
+
+</div>
+
+</div>
+
+<!-- =====================================
+PROFESSIONAL SETTINGS
+===================================== -->
+
+<div id="professionalFields">
+
+<div class="input-group">
+
+<label>
+
+Standby Power
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="standby"
+value="0"
+min="0">
+
+<span class="input-unit">
+
+W
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Load Factor
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="loadFactor"
+value="100"
+min="1"
+max="100">
+
+<span class="input-unit">
+
+%
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Utilization Factor
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="utilization"
+value="100"
+min="1"
+max="100">
+
+<span class="input-unit">
+
+%
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================
+ACTION BUTTONS
+===================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- =====================================
+ENGINEERING NOTES
+===================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>Typical appliance wattages are pre-filled and can be edited.</li>
+
+<li>Add all appliances used in your home or office for better accuracy.</li>
+
+<li>Electricity cost is calculated using the entered tariff.</li>
+
+<li>Estimated CO₂ emissions use an average grid emission factor.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- =====================================
+RESULT SHEET
+===================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- HERO RESULT -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Monthly Energy
+
+</div>
+
+<div
+class="hero-value"
+id="monthlyEnergyResult">
+
+--
+
+</div>
+
+</div>
+
+<!-- RESULTS -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+Total Appliances
+
+</span>
+
+<strong id="totalAppliancesResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Daily Energy
+
+</span>
+
+<strong id="dailyEnergyResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Average Daily Cost
+
+</span>
+
+<strong id="dailyCostResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Monthly Cost
+
+</span>
+
+<strong id="monthlyCostResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Yearly Energy
+
+</span>
+
+<strong id="yearlyEnergyResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Yearly Cost
+
+</span>
+
+<strong id="yearlyCostResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Estimated CO₂ Emissions
+
+</span>
+
+<strong id="co2Result">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================
+NOTIFIER
+===================================== -->
+
+<div
+id="notifier"
+class="notifier">
+
+<span id="notifierText"></span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
