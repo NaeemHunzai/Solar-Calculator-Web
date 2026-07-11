@@ -271,6 +271,7 @@ return;
 const designKvar=
 
 Q*(1+margin/100);
+const designVar = designKvar * 1000;
 
 // ------------------------------------------
 // CALCULATE CAPACITANCE
@@ -284,9 +285,9 @@ if(phase.value==="single"){
 
 // Single Phase
 
-capacitance=
-
-(designKvar*1000000)/(2*Math.PI*F*V*V);
+capacitance =
+designVar /
+(2*Math.PI*F*V*V);
 
 current=
 
@@ -306,9 +307,9 @@ if(connection.value==="delta"){
 
 // Delta
 
-capacitance=
-
-(designKvar*1000000)/(3*2*Math.PI*F*V*V);
+capacitance =
+designVar /
+(3*2*Math.PI*F*V*V);
 
 }
 
@@ -316,9 +317,9 @@ else{
 
 // Star
 
-capacitance=
-
-(designKvar*3000000)/(2*Math.PI*F*V*V);
+capacitance =
+(3*designVar) /
+(2*Math.PI*F*V*V);
 
 }
 
@@ -449,19 +450,26 @@ Math.ceil(V/100)*100+
 
 let capDisplay="";
 
-if(capacitance>=1000){
 
-    capDisplay=
-    (capacitance/1000).toFixed(2)
-    +" mF / Phase";
+const capacitanceMicro = capacitance * 1000000;
+
+let capDisplay;
+
+if(capacitanceMicro >= 1000){
+
+    capDisplay =
+    (capacitanceMicro / 1000).toFixed(2) +
+    " mF / Phase";
+
+}
+else{
+
+    capDisplay =
+    capacitanceMicro.toFixed(2) +
+    " µF / Phase";
 
 }
 
-else{
-
-    capDisplay=
-    capacitance.toFixed(2)
-    +" µF / Phase";
 
 }
 
