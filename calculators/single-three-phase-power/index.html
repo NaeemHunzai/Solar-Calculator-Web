@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Single & Three Phase Power</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+   SINGLE & THREE PHASE RESULT SHEET
+========================================== */
+
+#resultSheet .result-sheet-content{
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+}
+
+#resultSheet .hero-result{
+
+    margin-bottom:12px;
+
+}
+
+#resultSheet .hero-label{
+
+    font-size:14px;
+
+}
+
+#resultSheet .hero-value{
+
+    font-size:26px;
+
+    margin-top:4px;
+
+    margin-bottom:10px;
+
+}
+
+#resultSheet .sheet-results{
+
+    gap:0;
+
+}
+
+#resultSheet .result-row{
+
+    padding:7px 0;
+
+}
+
+#resultSheet .result-row span{
+
+    font-size:13px;
+
+}
+
+#resultSheet .result-row strong{
+
+    font-size:14px;
+
+}
+
+#resultSheet .primary-button,
+
+#resultSheet .secondary-button{
+
+    padding:10px;
+
+    font-size:14px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Single & Three Phase Power
+
+</h1>
+
+<p>
+
+Calculate Current, Voltage or Power for single-phase and three-phase systems.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<!-- Calculation Mode -->
+
+<div class="input-group">
+
+<label>
+
+Calculation Mode
+
+</label>
+
+<select id="mode">
+
+<option value="simple" selected>
+
+Simple
+
+</option>
+
+<option value="professional">
+
+Professional
+
+</option>
+
+</select>
+
+</div>
+
+<!-- Phase -->
+
+<div class="input-group">
+
+<label>
+
+Phase Type
+
+</label>
+
+<select id="phase">
+
+<option value="single">
+
+Single Phase
+
+</option>
+
+<option value="three">
+
+Three Phase
+
+</option>
+
+</select>
+
+</div>
+
+<!-- What To Calculate -->
+
+<div class="input-group">
+
+<label>
+
+Calculate
+
+</label>
+
+<select id="calculateType">
+
+<option value="current">
+
+Current (A)
+
+</option>
+
+<option value="power">
+
+Power (W)
+
+</option>
+
+<option value="voltage">
+
+Voltage (V)
+
+</option>
+
+</select>
+
+</div>
+<!-- ==========================================
+     POWER INPUT
+========================================== -->
+
+<div class="input-group" id="powerGroup">
+
+    <label>Power</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="power"
+            placeholder="e.g. 5000"
+            min="1">
+
+        <span class="input-unit">
+
+            W
+
+        </span>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     VOLTAGE INPUT
+========================================== -->
+
+<div class="input-group" id="voltageGroup">
+
+    <label>Voltage</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="voltage"
+            placeholder="e.g. 230"
+            min="1">
+
+        <span class="input-unit">
+
+            V
+
+        </span>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     CURRENT INPUT
+========================================== -->
+
+<div class="input-group" id="currentGroup">
+
+    <label>Current</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="current"
+            placeholder="e.g. 20"
+            min="0.1"
+            step="0.1">
+
+        <span class="input-unit">
+
+            A
+
+        </span>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     POWER FACTOR
+========================================== -->
+
+<div class="input-group">
+
+    <label>Power Factor</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="powerFactor"
+            value="0.90"
+            min="0.70"
+            max="1"
+            step="0.01">
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     PROFESSIONAL SETTINGS
+========================================== -->
+
+<div id="professionalFields">
+
+    <!-- Efficiency -->
+
+    <div class="input-group">
+
+        <label>Equipment Efficiency</label>
+
+        <div class="input-wrapper">
+
+            <input
+                type="number"
+                id="efficiency"
+                value="95"
+                min="80"
+                max="100">
+
+            <span class="input-unit">
+
+                %
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- Safety Margin -->
+
+    <div class="input-group">
+
+        <label>Safety Margin</label>
+
+        <div class="input-wrapper">
+
+            <input
+                type="number"
+                id="safetyMargin"
+                value="20"
+                min="0"
+                max="50">
+
+            <span class="input-unit">
+
+                %
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- Demand Factor -->
+
+    <div class="input-group">
+
+        <label>Demand Factor</label>
+
+        <div class="input-wrapper">
+
+            <input
+                type="number"
+                id="demandFactor"
+                value="100"
+                min="1"
+                max="100">
+
+            <span class="input-unit">
+
+                %
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- Frequency -->
+
+    <div class="input-group">
+
+        <label>Frequency</label>
+
+        <select id="frequency">
+
+            <option value="50" selected>
+
+                50 Hz
+
+            </option>
+
+            <option value="60">
+
+                60 Hz
+
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     BUTTONS
+========================================== -->
+
+<button
+    class="primary-button"
+    id="calculateBtn">
+
+    Calculate
+
+</button>
+
+<button
+    class="secondary-button"
+    id="resetBtn">
+
+    Reset
+
+</button>
+
+<!-- ==========================================
+     ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+    <h3>
+
+        Engineering Notes
+
+    </h3>
+
+    <ul>
+
+        <li>Single-phase calculations use P = V × I × PF.</li>
+
+        <li>Three-phase calculations use P = √3 × V × I × PF.</li>
+
+        <li>Power factor affects current and real power.</li>
+
+        <li>Breaker and cable recommendations are approximate.</li>
+
+    </ul>
+
+</div>
+
+</section>
+
+</main>
+<!-- ==========================================
+     RESULT SHEET
+========================================== -->
+
+<div class="result-sheet" id="resultSheet">
+
+    <div class="result-sheet-content">
+
+        <!-- Header -->
+
+        <div class="sheet-header">
+
+            <h2>
+
+                Calculation Result
+
+            </h2>
+
+            <button
+                class="icon-button"
+                id="closeSheet">
+
+                <span class="material-symbols-rounded">
+
+                    close
+
+                </span>
+
+            </button>
+
+        </div>
+
+        <!-- Hero Result -->
+
+        <div class="hero-result">
+
+            <div
+                class="hero-label"
+                id="heroLabel">
+
+                Result
+
+            </div>
+
+            <div
+                class="hero-value"
+                id="heroResult">
+
+                --
+
+            </div>
+
+        </div>
+
+        <!-- Results -->
+
+        <div class="sheet-results">
+
+            <div class="result-row">
+
+                <span>
+
+                    Apparent Power
+
+                </span>
+
+                <strong id="apparentPowerResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>
+
+                    Reactive Power
+
+                </span>
+
+                <strong id="reactivePowerResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>
+
+                    Power Factor
+
+                </span>
+
+                <strong id="powerFactorResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>
+
+                    Recommended Breaker
+
+                </span>
+
+                <strong id="breakerResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>
+
+                    Recommended Cable
+
+                </span>
+
+                <strong id="cableResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>
+
+                    System Type
+
+                </span>
+
+                <strong id="systemTypeResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>
+
+                    Frequency
+
+                </span>
+
+                <strong id="frequencyResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+
+        <button
+            class="primary-button"
+            id="copyResults">
+
+            Share Results
+
+        </button>
+
+        <button
+            class="secondary-button"
+            id="doneButton">
+
+            Done
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     NOTIFIER
+========================================== -->
+
+<div
+    id="notifier"
+    class="notifier">
+
+    <span id="notifierText"></span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
