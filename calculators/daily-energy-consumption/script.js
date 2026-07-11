@@ -374,22 +374,18 @@ addAppliance.addEventListener("click",function(){
 
         1000;
 
-    appliances.push({
+  appliances.push({
 
-        name:
+    name:
+    appliance.options[appliance.selectedIndex].text,
 
-        appliance.options[appliance.selectedIndex].text,
+    power:watt,
 
-        power:watt,
+    quantity:qty,
 
-        quantity:qty,
+    hours:hrs
 
-        hours:hrs,
-
-        dailyEnergy:dailyEnergy
-
-    });
-
+});
     renderAppliances();
 
     quantity.value = 1;
@@ -517,18 +513,61 @@ if(mode.value==="professional"){
     }
 
 }
+// -----------------------------
+// TOTAL DAILY ENERGY
+// -----------------------------
 
-    // -----------------------------
-    // TOTAL DAILY ENERGY
-    // -----------------------------
+let standbyPower = 0;
 
-    let totalDailyEnergy = 0;
+let load = 100;
 
-    appliances.forEach(function(item){
+let util = 100;
 
-        totalDailyEnergy += item.dailyEnergy;
+if(mode.value==="professional"){
 
-    });
+    standbyPower = Number(standby.value);
+
+    load = Number(loadFactor.value);
+
+    util = Number(utilization.value);
+
+}
+
+let totalDailyEnergy = 0;
+
+appliances.forEach(function(item){
+
+    const effectivePower =
+
+        (item.power + standbyPower)
+
+        *
+
+        (load / 100)
+
+        *
+
+        (util / 100);
+
+    const energy =
+
+        effectivePower
+
+        *
+
+        item.quantity
+
+        *
+
+        item.hours
+
+        /
+
+        1000;
+
+    totalDailyEnergy += energy;
+
+});
 
     const monthlyEnergy =
         totalDailyEnergy * monthDays;
@@ -658,7 +697,6 @@ Quantity : ${item.quantity}
 
 Hours : ${item.hours}
 
-Daily Energy : ${item.dailyEnergy.toFixed(2)} kWh
 
 -------------------------
 
