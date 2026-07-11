@@ -6,8 +6,7 @@
 // INPUTS
 // ==========================================
 
-const mode =
-document.getElementById("mode");
+
 
 const bandCount =
 document.getElementById("bandCount");
@@ -158,29 +157,7 @@ resultSheet.addEventListener("click",function(e){
     }
 
 });
-// ==========================================
-// SIMPLE / PROFESSIONAL
-// ==========================================
 
-function updateMode(){
-
-    if(mode.value==="simple"){
-
-        // Professional UI will be added later
-
-    }
-
-    else{
-
-        // Professional UI
-
-    }
-
-}
-
-mode.addEventListener("change",updateMode);
-
-updateMode();
 
 // ==========================================
 // BAND VISIBILITY
@@ -473,6 +450,74 @@ Violet:5
 
 };
 
+
+// ==========================================
+// REVERSE LOOKUP
+// ==========================================
+
+const digitColors=[
+
+"Black",
+"Brown",
+"Red",
+"Orange",
+"Yellow",
+"Green",
+"Blue",
+"Violet",
+"Grey",
+"White"
+
+];
+
+const multiplierColors={
+
+0.01:"Silver",
+
+0.1:"Gold",
+
+1:"Black",
+
+10:"Brown",
+
+100:"Red",
+
+1000:"Orange",
+
+10000:"Yellow",
+
+100000:"Green",
+
+1000000:"Blue",
+
+10000000:"Violet",
+
+100000000:"Grey",
+
+1000000000:"White"
+
+};
+
+const toleranceColors={
+
+1:"Brown",
+
+2:"Red",
+
+0.5:"Green",
+
+0.25:"Blue",
+
+0.1:"Violet",
+
+0.05:"Grey",
+
+5:"Gold",
+
+10:"Silver"
+
+};
+
 // ==========================================
 // FORMAT RESISTANCE
 // ==========================================
@@ -499,7 +544,9 @@ function formatResistance(value){
 // CALCULATE
 // ==========================================
 
+
 calculateBtn.addEventListener("click",function(){
+
 
     const bands=
     Number(bandCount.value);
@@ -671,7 +718,6 @@ calculateBtn.addEventListener("click",function(){
 
 resetBtn.addEventListener("click",function(){
 
-    mode.value="simple";
 
     bandCount.value="4";
 
@@ -687,7 +733,6 @@ resetBtn.addEventListener("click",function(){
 
     temperatureBand.value="Brown";
 
-    updateMode();
 
     updateBandVisibility();
 
