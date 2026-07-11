@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Inverter Size Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button class="icon-button" onclick="history.back()">
+<span class="material-symbols-rounded">arrow_back</span>
+</button>
+
+<div class="calculator-header">
+<h1>Inverter Size Calculator</h1>
+
+<p>
+Calculate the recommended inverter size based on your electrical load.
+</p>
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<!-- Calculation Mode -->
+
+<!-- ===========================
+     CALCULATION MODE
+=========================== -->
+
+<div class="input-group">
+
+    <label>Calculation Mode</label>
+
+    <select id="mode">
+
+        <option value="simple" selected>
+
+            Simple
+
+        </option>
+
+        <option value="professional">
+
+            Professional
+
+        </option>
+
+    </select>
+
+</div>
+
+<!-- ===========================
+     CONNECTED LOAD
+=========================== -->
+
+<div class="input-group">
+
+    <label>Total Connected Load</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="connectedLoad"
+            placeholder="Enter connected load"
+            min="1"
+            step="1">
+
+        <span class="input-unit">
+
+            W
+
+        </span>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     SAFETY MARGIN
+=========================== -->
+
+<div class="input-group">
+
+    <label>Safety Margin</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="safetyMargin"
+            value="25"
+            min="10"
+            max="50"
+            step="1">
+
+        <span class="input-unit">
+
+            %
+
+        </span>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     POWER FACTOR
+=========================== -->
+
+<div class="input-group">
+
+    <label>Power Factor</label>
+
+    <div class="input-wrapper">
+
+        <input
+            type="number"
+            id="powerFactor"
+            value="0.90"
+            min="0.70"
+            max="1.00"
+            step="0.01">
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     PROFESSIONAL SETTINGS
+=========================== -->
+
+<div id="professionalFields">
+
+    <!-- Surge Factor -->
+
+    <div class="input-group">
+
+        <label>Surge Factor</label>
+
+        <div class="input-wrapper">
+
+            <input
+                type="number"
+                id="surgeFactor"
+                value="2"
+                min="1"
+                max="5"
+                step="0.1">
+
+        </div>
+
+    </div>
+
+    <!-- Battery Voltage -->
+
+    <div class="input-group">
+
+        <label>Battery System Voltage</label>
+
+        <select id="systemVoltage">
+
+            <option value="12">
+
+                12 V
+
+            </option>
+
+            <option value="24">
+
+                24 V
+
+            </option>
+
+            <option value="48" selected>
+
+                48 V
+
+            </option>
+
+            <option value="96">
+
+                96 V
+
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- Efficiency -->
+
+    <div class="input-group">
+
+        <label>Inverter Efficiency</label>
+
+        <div class="input-wrapper">
+
+            <input
+                type="number"
+                id="inverterEfficiency"
+                value="95"
+                min="80"
+                max="100"
+                step="1">
+
+            <span class="input-unit">
+
+                %
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<button class="primary-button">Calculate</button>
+<button class="secondary-button">Reset</button>
+
+<div class="notes-card">
+<h3>Engineering Notes</h3>
+<ul>
+<li>Select an inverter equal to or larger than the calculated value.</li>
+<li>Motor loads require higher surge capacity.</li>
+<li>Higher battery voltages reduce DC current.</li>
+<li>Always verify manufacturer surge ratings.</li>
+</ul>
+</div>
+
+</section>
+
+</main>
+
+<div class="result-sheet" id="resultSheet">
+
+
+    <div class="result-sheet-content">
+
+        <div class="sheet-header">
+
+            <h2>Calculation Result</h2>
+
+            <button class="icon-button" id="closeSheet">
+
+                <span class="material-symbols-rounded">
+
+                    close
+
+                </span>
+
+            </button>
+
+        </div>
+
+        <div class="sheet-results">
+
+            <div class="result-row">
+
+                <span>Recommended Inverter Size</span>
+
+                <strong id="recommendedInverterResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>Connected Load</span>
+
+                <strong id="connectedLoadResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>Surge Rating</span>
+
+                <strong id="surgeRatingResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>Estimated DC Current</span>
+
+                <strong id="dcCurrentResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>Recommended Battery Voltage</span>
+
+                <strong id="batteryVoltageResult">
+
+                    --
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <button
+            class="primary-button"
+            id="copyResults">
+
+            Share Results
+
+        </button>
+
+        <button
+            class="secondary-button"
+            id="doneButton">
+
+            Done
+
+        </button>
+
+    </div>
+
+</div>
+
+<div id="notifier" class="notifier">
+<span id="notifierText"></span>
+</div>
+
+<script src="script.js"></script>
+
+</div>
+</body>
+</html>
