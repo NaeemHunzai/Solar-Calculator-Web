@@ -27,10 +27,10 @@ const categories = {
             },
 
             {
-                name: "Ohm's Law",
-                icon: "functions",
-                folder: "ohms-law"
-            },
+    name: "Resistor Color Code",
+    icon: "memory",
+    folder: "ohms-law"
+},
 
             {
                 name: "Capacitor Bank",

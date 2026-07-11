@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Resistor Color Code</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+.color-select{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.color-preview{
+
+width:26px;
+
+height:26px;
+
+border-radius:6px;
+
+border:1px solid #ccc;
+
+flex-shrink:0;
+
+}
+
+.resistor-card{
+
+margin-top:24px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:#fff;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.resistor{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+margin-top:20px;
+
+}
+
+.lead{
+
+width:60px;
+
+height:4px;
+
+background:#777;
+
+}
+
+.body{
+
+width:170px;
+
+height:48px;
+
+background:#e8d2a8;
+
+border-radius:24px;
+
+display:flex;
+
+justify-content:space-evenly;
+
+align-items:center;
+
+}
+
+.band{
+
+width:10px;
+
+height:100%;
+
+background:#000;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Resistor Color Code
+
+</h1>
+
+<p>
+
+Decode resistor values or generate color bands from resistance.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<!-- ==========================================
+MODE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Calculation Mode
+
+</label>
+
+<select id="mode">
+
+<option value="simple" selected>
+
+Simple
+
+</option>
+
+<option value="professional">
+
+Professional
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+BAND COUNT
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Resistor Type
+
+</label>
+
+<select id="bandCount">
+
+<option value="4">
+
+4 Band
+
+</option>
+
+<option value="5">
+
+5 Band
+
+</option>
+
+<option value="6">
+
+6 Band
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+BAND 1
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+1st Digit
+
+</label>
+
+<select id="band1">
+
+<option>Black</option>
+
+<option>Brown</option>
+
+<option>Red</option>
+
+<option>Orange</option>
+
+<option>Yellow</option>
+
+<option>Green</option>
+
+<option>Blue</option>
+
+<option>Violet</option>
+
+<option>Grey</option>
+
+<option>White</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+BAND 2
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+2nd Digit
+
+</label>
+
+<select id="band2">
+
+<option>Black</option>
+
+<option>Brown</option>
+
+<option>Red</option>
+
+<option>Orange</option>
+
+<option>Yellow</option>
+
+<option>Green</option>
+
+<option>Blue</option>
+
+<option>Violet</option>
+
+<option>Grey</option>
+
+<option>White</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+3RD DIGIT (5/6 BAND)
+========================================== -->
+
+<div
+class="input-group"
+id="thirdDigitGroup">
+
+<label>
+
+3rd Digit
+
+</label>
+
+<select id="band3">
+
+<option>Black</option>
+
+<option>Brown</option>
+
+<option>Red</option>
+
+<option>Orange</option>
+
+<option>Yellow</option>
+
+<option>Green</option>
+
+<option>Blue</option>
+
+<option>Violet</option>
+
+<option>Grey</option>
+
+<option>White</option>
+
+</select>
+
+</div>
+<!-- ==========================================
+MULTIPLIER
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Multiplier
+
+</label>
+
+<div class="color-select">
+
+<div
+id="multiplierPreview"
+class="color-preview">
+
+</div>
+
+<select id="multiplier">
+
+<option>Black</option>
+
+<option>Brown</option>
+
+<option>Red</option>
+
+<option>Orange</option>
+
+<option>Yellow</option>
+
+<option>Green</option>
+
+<option>Blue</option>
+
+<option>Violet</option>
+
+<option>Grey</option>
+
+<option>White</option>
+
+<option>Gold</option>
+
+<option>Silver</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+TOLERANCE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Tolerance
+
+</label>
+
+<div class="color-select">
+
+<div
+id="tolerancePreview"
+class="color-preview">
+
+</div>
+
+<select id="tolerance">
+
+<option>Brown</option>
+
+<option>Red</option>
+
+<option>Green</option>
+
+<option>Blue</option>
+
+<option>Violet</option>
+
+<option>Grey</option>
+
+<option>Gold</option>
+
+<option selected>Silver</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+TEMPERATURE COEFFICIENT
+========================================== -->
+
+<div
+class="input-group"
+id="tempGroup">
+
+<label>
+
+Temperature Coefficient
+
+</label>
+
+<div class="color-select">
+
+<div
+id="tempPreview"
+class="color-preview">
+
+</div>
+
+<select id="temperatureBand">
+
+<option>Brown</option>
+
+<option>Red</option>
+
+<option>Orange</option>
+
+<option>Yellow</option>
+
+<option>Blue</option>
+
+<option>Violet</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LIVE RESISTOR
+========================================== -->
+
+<div class="resistor-card">
+
+<h3>
+
+Live Resistor Preview
+
+</h3>
+
+<div class="resistor">
+
+<div class="lead"></div>
+
+<div class="body">
+
+<div
+class="band"
+id="liveBand1"></div>
+
+<div
+class="band"
+id="liveBand2"></div>
+
+<div
+class="band"
+id="liveBand3"></div>
+
+<div
+class="band"
+id="liveBand4"></div>
+
+<div
+class="band"
+id="liveBand5"></div>
+
+<div
+class="band"
+id="liveBand6"></div>
+
+</div>
+
+<div class="lead"></div>
+
+</div>
+
+</div>
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>4-band resistors are commonly used for general-purpose applications.</li>
+
+<li>5-band resistors provide higher precision using three significant digits.</li>
+
+<li>6-band resistors include a temperature coefficient for precision circuits.</li>
+
+<li>Gold and Silver bands are valid only as multiplier and tolerance bands.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- ==========================================
+RESULT SHEET
+========================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- Hero -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Resistance
+
+</div>
+
+<div
+class="hero-value"
+id="resistanceResult">
+
+--
+
+</div>
+
+</div>
+
+<!-- Results -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+Tolerance
+
+</span>
+
+<strong
+id="toleranceResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Minimum Resistance
+
+</span>
+
+<strong
+id="minimumResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Maximum Resistance
+
+</span>
+
+<strong
+id="maximumResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Temperature Coefficient
+
+</span>
+
+<strong
+id="temperatureResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Band Colors
+
+</span>
+
+<strong
+id="colorSequenceResult">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+NOTIFIER
+========================================== -->
+
+<div
+id="notifier"
+class="notifier">
+
+<span id="notifierText"></span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
