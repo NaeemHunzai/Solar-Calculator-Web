@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>
+
+Capacitor Bank Sizing Calculator
+
+</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+COMPACT RESULT SHEET
+========================================== */
+
+#resultSheet .result-sheet-content{
+
+max-height:85vh;
+
+overflow-y:auto;
+
+padding:18px;
+
+}
+
+#resultSheet .hero-result{
+
+padding:14px;
+
+margin-bottom:14px;
+
+}
+
+#resultSheet .hero-label{
+
+font-size:13px;
+
+}
+
+#resultSheet .hero-value{
+
+font-size:28px;
+
+line-height:1.1;
+
+margin-top:4px;
+
+margin-bottom:2px;
+
+}
+
+#resultSheet .sheet-results{
+
+margin-top:8px;
+
+}
+
+#resultSheet .result-row{
+
+padding:8px 0;
+
+min-height:auto;
+
+}
+
+#resultSheet .result-row span{
+
+font-size:13px;
+
+}
+
+#resultSheet .result-row strong{
+
+font-size:14px;
+
+text-align:right;
+
+}
+
+#resultSheet .primary-button,
+#resultSheet .secondary-button{
+
+height:46px;
+
+margin-top:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Capacitor Bank Sizing Calculator
+
+</h1>
+
+<p>
+
+Calculate capacitor bank capacitance, current, voltage rating and standard bank size for single-phase and three-phase systems.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<!-- ==========================================
+REACTIVE POWER
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Required Reactive Power
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="kvar"
+placeholder="Enter required kVAR">
+
+<span>
+
+kVAR
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+SYSTEM TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Type
+
+</label>
+
+<select id="phase">
+
+<option value="single">
+
+Single Phase
+
+</option>
+
+<option value="three" selected>
+
+Three Phase
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+CONNECTION TYPE
+========================================== -->
+
+<div
+class="input-group"
+id="connectionGroup">
+
+<label>
+
+Connection Type
+
+</label>
+
+<select id="connection">
+
+<option value="delta" selected>
+
+Delta (Δ)
+
+</option>
+
+<option value="star">
+
+Star (Y)
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+SYSTEM VOLTAGE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Voltage
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="voltage"
+placeholder="Enter voltage">
+
+<select
+id="voltageUnit"
+class="unit-select">
+
+<option value="1">
+
+V
+
+</option>
+
+<option value="1000">
+
+kV
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+FREQUENCY
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Frequency
+
+</label>
+
+<select id="frequency">
+
+<option value="50" selected>
+
+50 Hz
+
+</option>
+
+<option value="60">
+
+60 Hz
+
+</option>
+
+</select>
+
+</div>
+<!-- ==========================================
+SAFETY MARGIN
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Safety Margin
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="safetyMargin"
+value="10"
+placeholder="Enter safety margin">
+
+<span>
+
+%
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CAPACITOR STEP SIZE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Capacitor Step Size
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="stepSize"
+value="5"
+placeholder="Enter step size">
+
+<span>
+
+kVAR
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CONTINUOUS DUTY
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Continuous Duty
+
+</label>
+
+<select id="continuousDuty">
+
+<option value="yes" selected>
+
+Yes
+
+</option>
+
+<option value="no">
+
+No
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>Use the required reactive power (kVAR) obtained from a Power Factor Correction study or system design.</li>
+
+<li>For three-phase systems, the selected connection (Delta or Star) affects the required capacitance per phase.</li>
+
+<li>A safety margin helps compensate for capacitor ageing and future load growth.</li>
+
+<li>Select a capacitor voltage rating higher than the operating system voltage.</li>
+
+<li>Use detuned capacitor banks where harmonic distortion is significant.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+<!-- ==========================================
+RESULT SHEET
+========================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+HERO RESULT
+========================================== -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Required Capacitance
+
+</div>
+
+<div
+class="hero-value"
+id="capacitanceResult">
+
+--
+
+</div>
+
+</div>
+
+<!-- ==========================================
+RESULTS
+========================================== -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+Required Reactive Power
+
+</span>
+
+<strong
+id="kvarResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Capacitor Current
+
+</span>
+
+<strong
+id="currentResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Recommended Capacitor Bank
+
+</span>
+
+<strong
+id="recommendationResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Step Configuration
+
+</span>
+
+<strong
+id="stepsResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Recommended Voltage Rating
+
+</span>
+
+<strong
+id="voltageRatingResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Connection Type
+
+</span>
+
+<strong
+id="connectionResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Frequency
+
+</span>
+
+<strong
+id="frequencyResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Safety Margin
+
+</span>
+
+<strong
+id="marginResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Continuous Duty
+
+</span>
+
+<strong
+id="dutyResult">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+NOTIFIER
+========================================== -->
+
+<div
+class="notifier"
+id="notifier">
+
+<span
+id="notifierText">
+
+</span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
