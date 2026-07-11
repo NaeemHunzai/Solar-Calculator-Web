@@ -448,7 +448,6 @@ Math.ceil(V/100)*100+
 // FORMAT CAPACITANCE
 // ==========================================
 
-let capDisplay="";
 
 
 const capacitanceMicro = capacitance * 1000000;
@@ -471,7 +470,7 @@ else{
 }
 
 
-}
+
 
 // ==========================================
 // POPULATE RESULT SHEET
