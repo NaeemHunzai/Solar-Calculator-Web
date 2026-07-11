@@ -318,8 +318,8 @@ else{
 // Star
 
 capacitance =
-(3*designVar) /
-(2*Math.PI*F*V*V);
+designVar /
+(2 * Math.PI * F * V * V);
 
 }
 
