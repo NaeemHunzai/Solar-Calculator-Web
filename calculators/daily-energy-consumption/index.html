@@ -89,6 +89,84 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 }
 
+/* ===========================
+   Appliance Table
+=========================== */
+
+.table-container{
+
+    margin-top:12px;
+
+    max-height:240px;
+
+    overflow-y:auto;
+
+    border:1px solid #e2e2e2;
+
+    border-radius:12px;
+
+    background:#fff;
+
+}
+
+#applianceTable{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:14px;
+
+}
+
+#applianceTable thead{
+
+    position:sticky;
+
+    top:0;
+
+    background:#f8f8f8;
+
+    z-index:5;
+
+}
+
+#applianceTable th{
+
+    padding:12px 10px;
+
+    text-align:left;
+
+    font-weight:600;
+
+    border-bottom:1px solid #e5e5e5;
+
+}
+
+#applianceTable td{
+
+    padding:12px 10px;
+
+    border-bottom:1px solid #f0f0f0;
+
+    font-size:13px;
+
+}
+
+.remove-btn{
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    color:#d32f2f;
+
+}
+
 </style>
 
 </head>
@@ -350,15 +428,35 @@ id="addAppliance">
 APPLIANCE LIST
 ===================================== -->
 
-<h3 style="margin-top:30px;">
+<h3 style="margin-top:28px;">
 
 Added Appliances
 
 </h3>
 
-<div id="applianceList">
+<div class="table-container">
 
-<!-- JavaScript will add appliance cards here -->
+<table id="applianceTable">
+
+<thead>
+
+<tr>
+
+<th>Appliance</th>
+
+<th>Qty</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="applianceList">
+
+</tbody>
+
+</table>
 
 </div>
 <!-- =====================================

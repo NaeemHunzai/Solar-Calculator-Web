@@ -213,9 +213,20 @@ function renderAppliances(){
 
     if(appliances.length===0){
 
-        applianceList.innerHTML =
+        applianceList.innerHTML = `
 
-        "<p style='text-align:center;color:#888;'>No appliances added yet.</p>";
+        <tr>
+
+            <td colspan="3"
+                style="text-align:center;padding:20px;color:#888;">
+
+                No appliances added yet
+
+            </td>
+
+        </tr>
+
+        `;
 
         return;
 
@@ -225,55 +236,25 @@ function renderAppliances(){
 
         applianceList.innerHTML += `
 
-        <div class="result-card" style="margin-bottom:15px;">
+        <tr>
 
-            <h3 style="margin-bottom:12px;">
+            <td>${item.name}</td>
 
-                ${item.name}
+            <td>${item.quantity}</td>
 
-            </h3>
+            <td>
 
-            <div class="result-row">
+                <button
+                    class="remove-btn"
+                    onclick="removeAppliance(${index})">
 
-                <span>Power</span>
+                    🗑
 
-                <strong>${item.power} W</strong>
+                </button>
 
-            </div>
+            </td>
 
-            <div class="result-row">
-
-                <span>Quantity</span>
-
-                <strong>${item.quantity}</strong>
-
-            </div>
-
-            <div class="result-row">
-
-                <span>Hours/Day</span>
-
-                <strong>${item.hours}</strong>
-
-            </div>
-
-            <div class="result-row">
-
-                <span>Daily Energy</span>
-
-                <strong>${item.dailyEnergy.toFixed(2)} kWh</strong>
-
-            </div>
-
-            <button
-                class="secondary-button"
-                onclick="removeAppliance(${index})">
-
-                Remove
-
-            </button>
-
-        </div>
+        </tr>
 
         `;
 
@@ -490,7 +471,52 @@ calculateBtn.addEventListener("click",function(){
 
         return;
 
+        
     }
+
+    // ----------------------------------
+// PROFESSIONAL MODE VALIDATION
+// ----------------------------------
+
+if(mode.value==="professional"){
+
+    const standbyPower = Number(standby.value);
+
+    const load = Number(loadFactor.value);
+
+    const util = Number(utilization.value);
+
+    if(standbyPower < 0 || standbyPower > 500){
+
+        showNotifier("Standby Power must be between 0 W and 500 W.");
+
+        standby.focus();
+
+        return;
+
+    }
+
+    if(load < 1 || load > 100){
+
+        showNotifier("Load Factor must be between 1% and 100%.");
+
+        loadFactor.focus();
+
+        return;
+
+    }
+
+    if(util < 1 || util > 100){
+
+        showNotifier("Utilization Factor must be between 1% and 100%.");
+
+        utilization.focus();
+
+        return;
+
+    }
+
+}
 
     // -----------------------------
     // TOTAL DAILY ENERGY
