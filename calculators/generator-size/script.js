@@ -278,9 +278,23 @@ if(loadUnit.value==="1"){
 // VALIDATION
 // ------------------------------------------
 
-if(isNaN(loadKW) || loadKW<=0){
+// ------------------------------------------
+// VALIDATION
+// ------------------------------------------
+
+if(isNaN(loadKW) || loadKW <= 0){
 
     showNotifier("Enter a valid connected load.");
+
+    load.focus();
+
+    return;
+
+}
+
+if(loadKW > 10000){
+
+    showNotifier("Maximum supported connected load is 10 MW (10,000 kW).");
 
     load.focus();
 
@@ -505,7 +519,6 @@ engineEfficiency;
 // ------------------------------------------
 // STANDARD GENERATORS
 // ------------------------------------------
-
 const standardGenerators=[
 
 5,
@@ -527,10 +540,47 @@ const standardGenerators=[
 300,
 400,
 500,
+625,
 750,
-1000
+800,
+1000,
+1250,
+1500,
+1600,
+1750,
+2000,
+2250,
+2500,
+2750,
+3000,
+3500,
+4000,
+4500,
+5000,
+6000,
+7000,
+8000,
+9000,
+10000,
+12500
 
 ];
+
+const maxGenerator =
+standardGenerators[standardGenerators.length-1];
+
+if(requiredGenerator > maxGenerator){
+
+    showNotifier(
+    "Required generator size exceeds the maximum supported rating."
+    );
+
+    return;
+
+}
+
+let recommendedGenerator=
+standardGenerators[standardGenerators.length-1];
 
 let recommendedGenerator=
 standardGenerators[standardGenerators.length-1];
