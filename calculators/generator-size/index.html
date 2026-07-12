@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>
+
+Generator Size Calculator
+
+</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+COMPACT RESULT SHEET
+========================================== */
+
+#resultSheet .result-sheet-content{
+
+max-height:85vh;
+
+overflow-y:auto;
+
+padding:18px;
+
+}
+
+#resultSheet .hero-result{
+
+padding:14px;
+
+margin-bottom:14px;
+
+}
+
+#resultSheet .hero-label{
+
+font-size:13px;
+
+}
+
+#resultSheet .hero-value{
+
+font-size:28px;
+
+line-height:1.1;
+
+margin-top:4px;
+
+margin-bottom:2px;
+
+}
+
+#resultSheet .sheet-results{
+
+margin-top:8px;
+
+}
+
+#resultSheet .result-row{
+
+padding:8px 0;
+
+}
+
+#resultSheet .result-row span{
+
+font-size:13px;
+
+}
+
+#resultSheet .result-row strong{
+
+font-size:14px;
+
+text-align:right;
+
+}
+
+#resultSheet .primary-button,
+#resultSheet .secondary-button{
+
+height:46px;
+
+margin-top:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Generator Size Calculator
+
+</h1>
+
+<p>
+
+Calculate the recommended generator size for residential, commercial and industrial loads.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+    <!-- ==========================================
+CALCULATION MODE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Calculation Mode
+
+</label>
+
+<select id="mode">
+
+<option value="simple" selected>
+
+Simple
+
+</option>
+
+<option value="professional">
+
+Professional
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+PHASE TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Phase Type
+
+</label>
+
+<select id="phase">
+
+<option value="single">
+
+Single Phase
+
+</option>
+
+<option value="three" selected>
+
+Three Phase
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+CONNECTED LOAD
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Connected Load
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="load"
+placeholder="Enter connected load">
+
+<select
+id="loadUnit"
+class="unit-select">
+
+<option value="1000" selected>
+
+kW
+
+</option>
+
+<option value="1">
+
+W
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LOAD TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Load Type
+
+</label>
+
+<select id="loadType">
+
+<option value="resistive">
+
+Resistive
+
+</option>
+
+<option value="residential">
+
+Residential
+
+</option>
+
+<option value="commercial" selected>
+
+Commercial
+
+</option>
+
+<option value="industrial">
+
+Industrial
+
+</option>
+
+<option value="motor">
+
+Motor Load
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+POWER FACTOR
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Power Factor
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="powerFactor"
+value="0.80"
+min="0.5"
+max="1"
+step="0.01">
+
+</div>
+
+</div>
+
+<!-- ==========================================
+SYSTEM VOLTAGE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Voltage
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="voltage"
+value="400">
+
+<span>
+
+V
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+FREQUENCY
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Frequency
+
+</label>
+
+<select id="frequency">
+
+<option value="50" selected>
+
+50 Hz
+
+</option>
+
+<option value="60">
+
+60 Hz
+
+</option>
+
+</select>
+
+</div>
+<!-- ==========================================
+PROFESSIONAL MODE
+========================================== -->
+
+<div
+id="professionalFields"
+style="display:none;">
+
+<!-- ==========================================
+STARTING CURRENT MULTIPLIER
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Starting Current Multiplier
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="startingMultiplier"
+value="1"
+min="1"
+max="8"
+step="0.1">
+
+<span>
+
+×
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Typical: Resistive = 1× • Pumps = 3× • Compressors = 5× • Large Motors = 6–7×
+
+</div>
+
+</div>
+
+<!-- ==========================================
+DIVERSITY FACTOR
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Diversity Factor
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="diversityFactor"
+value="1"
+min="0.3"
+max="1"
+step="0.01">
+
+</div>
+
+<div class="helper-text">
+
+Use 1.0 when all connected loads operate simultaneously.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+SIMULTANEOUS LOAD FACTOR
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Simultaneous Load Factor
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="simultaneousFactor"
+value="100"
+min="10"
+max="100">
+
+<span>
+
+%
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Percentage of connected load expected to operate at the same time.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ALTITUDE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Installation Altitude
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="altitude"
+value="0"
+min="0"
+max="5000">
+
+<span>
+
+m
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Generator output gradually decreases above 1000 m.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+AMBIENT TEMPERATURE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Ambient Temperature
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="temperature"
+value="25"
+min="-10"
+max="60">
+
+<span>
+
+°C
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Higher temperatures reduce generator cooling efficiency.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+DIESEL ENGINE EFFICIENCY
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Diesel Engine Efficiency
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="efficiency"
+value="90"
+min="80"
+max="98">
+
+<span>
+
+%
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Typical diesel generators operate between 85–95% efficiency.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>Select the next higher standard generator size instead of the exact calculated value.</li>
+
+<li>Motor loads require additional generator capacity due to starting current.</li>
+
+<li>High altitude and high ambient temperature reduce generator output.</li>
+
+<li>Generators operate most efficiently between approximately 60% and 80% loading.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- ==========================================
+RESULT SHEET
+========================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+HERO RESULT
+========================================== -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Recommended Generator
+
+</div>
+
+<div
+class="hero-value"
+id="generatorResult">
+
+--
+
+</div>
+
+</div>
+
+<!-- ==========================================
+RESULTS
+========================================== -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+Connected Load
+
+</span>
+
+<strong
+id="loadResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Apparent Power
+
+</span>
+
+<strong
+id="apparentPowerResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Starting kVA
+
+</span>
+
+<strong
+id="startingResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Recommended Generator
+
+</span>
+
+<strong
+id="recommendedResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Load Current
+
+</span>
+
+<strong
+id="currentResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Generator Loading
+
+</span>
+
+<strong
+id="loadingResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Estimated Fuel Consumption
+
+</span>
+
+<strong
+id="fuelResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Voltage
+
+</span>
+
+<strong
+id="voltageResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Frequency
+
+</span>
+
+<strong
+id="frequencyResult">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ENGINEERING SUMMARY
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Summary
+
+</h3>
+
+<p
+id="engineeringSummary">
+
+--
+
+</p>
+
+</div>
+
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+NOTIFIER
+========================================== -->
+
+<div
+class="notifier"
+id="notifier">
+
+<span
+id="notifierText">
+
+</span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
