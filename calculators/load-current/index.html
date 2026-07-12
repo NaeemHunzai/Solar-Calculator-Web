@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>
+
+Load Current Calculator
+
+</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+INPUT STYLING
+========================================== */
+
+.calculator-container input,
+.calculator-container select{
+
+    background:#F8FAFC;
+
+    border:1px solid #E2E8F0;
+
+    transition:.2s;
+
+}
+
+.calculator-container input:focus,
+.calculator-container select:focus{
+
+    background:#FFFFFF;
+
+    border-color:#2563EB;
+
+}
+
+/* ==========================================
+RESULT SHEET
+========================================== */
+
+#resultSheet .result-sheet-content{
+
+    max-height:85vh;
+
+    overflow-y:auto;
+
+    padding:18px;
+
+}
+
+#resultSheet .hero-result{
+
+    padding:14px;
+
+    margin-bottom:14px;
+
+}
+
+#resultSheet .hero-label{
+
+    font-size:13px;
+
+}
+
+#resultSheet .hero-value{
+
+    font-size:28px;
+
+    line-height:1.1;
+
+    margin-top:4px;
+
+    margin-bottom:2px;
+
+}
+
+#resultSheet .sheet-results{
+
+    margin-top:8px;
+
+}
+
+#resultSheet .result-row{
+
+    padding:8px 0;
+
+}
+
+#resultSheet .result-row span{
+
+    font-size:13px;
+
+}
+
+#resultSheet .result-row strong{
+
+    font-size:14px;
+
+    text-align:right;
+
+}
+
+#resultSheet .primary-button,
+#resultSheet .secondary-button{
+
+    height:46px;
+
+    margin-top:10px;
+
+}
+
+/* ==========================================
+HELPER TEXT
+========================================== */
+
+.helper-text{
+
+    font-size:11px;
+
+    color:#9CA3AF;
+
+    margin-top:4px;
+
+    margin-left:4px;
+
+    font-weight:500;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Load Current Calculator
+
+</h1>
+
+<p>
+
+Calculate the load current for single-phase and three-phase electrical systems.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+    <!-- ==========================================
+PHASE TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Phase Type
+
+</label>
+
+<select id="phase">
+
+<option value="single">
+
+Single Phase
+
+</option>
+
+<option value="three" selected>
+
+Three Phase
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+SYSTEM VOLTAGE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Voltage
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="voltage"
+value="400"
+placeholder="Enter system voltage">
+
+<span>
+
+V
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Typical values: 230 V (Single Phase) • 400/415 V (Three Phase)
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LOAD VALUE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Load
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="load"
+placeholder="Enter load value">
+
+<select
+id="loadUnit"
+class="unit-select">
+
+<option value="kw" selected>
+
+kW
+
+</option>
+
+<option value="w">
+
+W
+
+</option>
+
+<option value="kva">
+
+kVA
+
+</option>
+
+</select>
+
+</div>
+
+<div class="helper-text">
+
+Select the appropriate load unit before calculation.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+POWER FACTOR
+========================================== -->
+
+<div
+class="input-group"
+id="powerFactorGroup">
+
+<label>
+
+Power Factor
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="powerFactor"
+value="0.80"
+min="0.1"
+max="1"
+step="0.01">
+
+</div>
+
+<div class="helper-text">
+
+Required only for Watt and kW calculations.
+
+</div>
+
+</div>
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>Calculated current represents the estimated full-load current under normal operating conditions.</li>
+
+<li>For loads entered in Watts or kW, Power Factor is required for accurate current calculation.</li>
+
+<li>Always select cables, breakers and protective devices according to applicable electrical codes.</li>
+
+<li>Consider voltage drop, ambient temperature and installation conditions during system design.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- ==========================================
+RESULT SHEET
+========================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+HERO RESULT
+========================================== -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Calculated Load Current
+
+</div>
+
+<div
+class="hero-value"
+id="currentResult">
+
+--
+
+</div>
+
+</div>
+
+<!-- ==========================================
+RESULTS
+========================================== -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+Phase Type
+
+</span>
+
+<strong
+id="phaseResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Voltage
+
+</span>
+
+<strong
+id="voltageResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Input Load
+
+</span>
+
+<strong
+id="loadResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Power Factor
+
+</span>
+
+<strong
+id="pfResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Apparent Power
+
+</span>
+
+<strong
+id="apparentPowerResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Calculated Current
+
+</span>
+
+<strong
+id="currentValueResult">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ENGINEERING SUMMARY
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Summary
+
+</h3>
+
+<p
+id="engineeringSummary">
+
+--
+
+</p>
+
+</div>
+
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+NOTIFIER
+========================================== -->
+
+<div
+class="notifier"
+id="notifier">
+
+<span
+id="notifierText">
+
+</span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
