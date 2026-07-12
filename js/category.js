@@ -57,9 +57,9 @@ const categories = {
             },
 
             {
-                name: "Demand Load",
-                icon: "speed",
-                folder: "demand-load"
+                name: "Lighting Calculator",
+                icon: "lightbulb",
+                folder: "lighting-calculator"
             }
 
         ]
