@@ -91,7 +91,11 @@ COMPACT RESULT SHEET
 
 #resultSheet .sheet-results{
 
-    margin-top:8px;
+    display:flex;
+
+    flex-direction:column;
+
+    gap:0;
 
 }
 
@@ -154,38 +158,64 @@ INPUT FIELD ENHANCEMENT
 ENGINEERING SUMMARY
 ========================================== */
 
-.summary-section{
 
-    margin-top:14px;
 
-    padding-top:14px;
+.summary-label{
 
-    border-top:1px solid #E5E7EB;
-
-}
-
-.summary-title{
-
-    font-size:13px;
+    font-size:12px;
 
     color:#6B7280;
 
-    margin-bottom:8px;
+    font-weight:500;
 
 }
 
-.engineering-summary{
+/* ==========================================
+ENGINEERING SUMMARY CARD
+========================================== */
+/* ==========================================
+ENGINEERING SUMMARY CARD
+========================================== */
+
+.summary-card{
+
+    margin-top:18px;
+
+    padding:18px;
+
+    background:#FFFBEA;
+
+    border:1px solid #F4C542;
+
+    border-radius:16px;
+
+}
+
+.summary-card h3{
+
+    margin:0 0 12px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:#8A5A00;
+
+}
+
+.summary-card p{
+
+    margin:0;
 
     font-size:14px;
 
-    line-height:1.6;
+    line-height:1.7;
 
-    font-weight:600;
+    font-weight:400;
 
-    color:#1F2937;
+    color:#374151;
 
 }
-
 </style>
 
 </head>
@@ -941,6 +971,7 @@ id="calculatedCapacityResult">
 
 </div>
 
+
 <div class="result-row">
 
 <span>
@@ -1094,22 +1125,26 @@ id="frequencyResult">
 
 </div>
 
-< class="summary-section">
+<!-- ==========================================
+ENGINEERING SUMMARY
+========================================== -->
+<!-- ==========================================
+ENGINEERING SUMMARY
+========================================== -->
 
-    <div class="summary-title">
+<div class="summary-card">
 
-        Engineering Summary
+<h3>
 
-    </div>
+Engineering Summary
 
-    <div
-    id="engineeringSummary"
-    class="engineering-summary">
+</h3>
 
-        --
+<p id="engineeringSummary">
 
-    </div>
+--
 
+</p>
 
 </div>
 
