@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>
+
+DC Cable Size Calculator
+
+</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+INPUT STYLING
+========================================== */
+
+.calculator-container input,
+.calculator-container select{
+
+background:#F8FAFC;
+
+border:1px solid #E2E8F0;
+
+transition:.2s;
+
+}
+
+.calculator-container input:focus,
+.calculator-container select:focus{
+
+background:#FFFFFF;
+
+border-color:#2563EB;
+
+}
+
+/* ==========================================
+COMPACT RESULT SHEET
+========================================== */
+
+#resultSheet .result-sheet-content{
+
+max-height:85vh;
+
+overflow-y:auto;
+
+padding:18px;
+
+}
+
+#resultSheet .hero-result{
+
+padding:14px;
+
+margin-bottom:14px;
+
+}
+
+#resultSheet .hero-label{
+
+font-size:13px;
+
+}
+
+#resultSheet .hero-value{
+
+font-size:30px;
+
+line-height:1.1;
+
+margin-top:4px;
+
+margin-bottom:2px;
+
+}
+
+#resultSheet .sheet-results{
+
+margin-top:8px;
+
+}
+
+#resultSheet .result-row{
+
+padding:8px 0;
+
+}
+
+#resultSheet .result-row span{
+
+font-size:13px;
+
+}
+
+#resultSheet .result-row strong{
+
+font-size:14px;
+
+text-align:right;
+
+}
+
+#resultSheet .primary-button,
+#resultSheet .secondary-button{
+
+height:46px;
+
+margin-top:10px;
+
+}
+
+/* ==========================================
+HELPER TEXT
+========================================== */
+
+.helper-text{
+
+font-size:11px;
+
+color:#9CA3AF;
+
+margin-top:4px;
+
+margin-left:4px;
+
+font-weight:500;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+DC Cable Size Calculator
+
+</h1>
+
+<p>
+
+Calculate the recommended DC cable size based on voltage drop, current, cable length and conductor material.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+    <!-- ==========================================
+SYSTEM VOLTAGE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Voltage
+
+</label>
+
+<select id="systemVoltage">
+
+<option value="12">
+
+12 V
+
+</option>
+
+<option value="24">
+
+24 V
+
+</option>
+
+<option value="48" selected>
+
+48 V
+
+</option>
+
+<option value="96">
+
+96 V
+
+</option>
+
+<option value="120">
+
+120 V
+
+</option>
+
+<option value="250">
+
+250 V
+
+</option>
+
+<option value="600">
+
+600 V
+
+</option>
+
+<option value="1000">
+
+1000 V
+
+</option>
+
+<option value="1500">
+
+1500 V
+
+</option>
+
+<option value="custom">
+
+Custom
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+CUSTOM VOLTAGE
+========================================== -->
+
+<div
+class="input-group"
+id="customVoltageGroup"
+style="display:none;">
+
+<label>
+
+Custom Voltage
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="customVoltage"
+placeholder="Enter system voltage">
+
+<span>
+
+V
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LOAD CURRENT
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Load Current
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="loadCurrent"
+placeholder="Enter load current">
+
+<span>
+
+A
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Supported range: 0.1 A to 2000 A
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CABLE LENGTH
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+One-way Cable Length
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="cableLength"
+placeholder="Enter cable length">
+
+<select id="lengthUnit">
+
+<option value="m" selected>
+
+m
+
+</option>
+
+<option value="ft">
+
+ft
+
+</option>
+
+</select>
+
+</div>
+
+<div class="helper-text">
+
+Enter the one-way cable length.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+MAXIMUM VOLTAGE DROP
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Maximum Voltage Drop
+
+</label>
+
+<select id="voltageDrop">
+
+<option value="1">
+
+1 %
+
+</option>
+
+<option value="2">
+
+2 %
+
+</option>
+
+<option value="3" selected>
+
+3 %
+
+</option>
+
+<option value="5">
+
+5 %
+
+</option>
+
+<option value="custom">
+
+Custom
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+CUSTOM VOLTAGE DROP
+========================================== -->
+
+<div
+class="input-group"
+id="customDropGroup"
+style="display:none;">
+
+<label>
+
+Custom Voltage Drop
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="customDrop"
+placeholder="Enter voltage drop">
+
+<span>
+
+%
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CONDUCTOR MATERIAL
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Conductor Material
+
+</label>
+
+<select id="material">
+
+<option value="copper" selected>
+
+Copper
+
+</option>
+
+<option value="aluminium">
+
+Aluminium
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+CONDUCTOR TEMPERATURE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Conductor Temperature
+
+</label>
+
+<select id="temperature">
+
+<option value="75">
+
+75°C
+
+</option>
+
+<option value="90" selected>
+
+90°C
+
+</option>
+
+</select>
+
+<div class="helper-text">
+
+Used for future temperature correction features.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>Calculation is based on the DC voltage drop method.</li>
+
+<li>Enter the one-way cable length. The return conductor is considered during the calculation.</li>
+
+<li>Standard cable sizes are used for cable selection.</li>
+
+<li>Typical conductor resistance values are applied.</li>
+
+<li>Final cable selection should also satisfy local electrical codes, installation methods and ampacity requirements.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- ==========================================
+RESULT SHEET
+========================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+HERO RESULT
+========================================== -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Recommended Cable
+
+</div>
+
+<div
+class="hero-value"
+id="recommendedCable">
+
+--
+
+</div>
+
+<div
+class="helper-text"
+id="recommendedReason">
+
+Smallest standard cable meeting the selected voltage drop limit.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+RESULTS
+========================================== -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+System Voltage
+
+</span>
+
+<strong id="voltageResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Load Current
+
+</span>
+
+<strong id="currentResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Cable Length
+
+</span>
+
+<strong id="lengthResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Conductor Material
+
+</span>
+
+<strong id="materialResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Voltage Drop
+
+</span>
+
+<strong id="dropVoltResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Voltage Drop %
+
+</span>
+
+<strong id="dropPercentResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Cable Resistance
+
+</span>
+
+<strong id="resistanceResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Estimated Power Loss
+
+</span>
+
+<strong id="powerLossResult">
+
+--
+
+</strong>
+
+</div>
+
+
+
+<div class="result-row">
+
+<span>
+
+Safety Margin
+
+</span>
+
+<strong id="marginResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Voltage Drop Status
+
+</span>
+
+<strong id="statusResult">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CABLE COMPARISON
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Cable Comparison
+
+</h3>
+
+<div class="result-row">
+
+<span>
+
+Smaller Cable
+
+</span>
+
+<strong id="smallerCable">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Result
+
+</span>
+
+<strong id="smallerStatus">
+
+--
+
+</strong>
+
+</div>
+
+<hr>
+
+<div class="result-row">
+
+<span>
+
+Larger Cable
+
+</span>
+
+<strong id="largerCable">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Benefit
+
+</span>
+
+<strong id="largerBenefit">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CABLE DETAILS
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Cable Details
+
+</h3>
+
+<div class="result-row">
+
+<span>
+
+Equivalent AWG
+
+</span>
+
+<strong id="awgResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Resistance
+
+</span>
+
+<strong id="ohmKmResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Current Capacity
+
+</span>
+
+<strong id="ampacityResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Ampacity Utilization
+
+</span>
+
+<strong id="utilizationResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Approx. Weight
+
+</span>
+
+<strong id="weightResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Typical Applications
+
+</span>
+
+<strong id="applicationResult">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ENGINEERING SUMMARY
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Summary
+
+</h3>
+
+<p id="engineeringSummary">
+
+--
+
+</p>
+
+</div>
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+NOTIFIER
+========================================== -->
+
+<div
+class="notifier"
+id="notifier">
+
+<span
+id="notifierText">
+
+</span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
