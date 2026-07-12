@@ -265,6 +265,8 @@ Select the desired lighting level.
 ROOM LENGTH
 ========================================== -->
 
+ 
+
 <div class="input-group">
 
 <label>
@@ -280,17 +282,27 @@ type="number"
 id="roomLength"
 placeholder="Enter room length">
 
-<span>
+<select id="lengthUnit">
+
+<option value="m" selected>
 
 m
 
-</span>
+</option>
+
+<option value="ft">
+
+ft
+
+</option>
+
+</select>
 
 </div>
 
 <div class="helper-text">
 
-Maximum supported length: 500 m
+Enter room length in metres or feet.
 
 </div>
 
@@ -315,17 +327,27 @@ type="number"
 id="roomWidth"
 placeholder="Enter room width">
 
-<span>
+<select id="widthUnit">
+
+<option value="m" selected>
 
 m
 
-</span>
+</option>
+
+<option value="ft">
+
+ft
+
+</option>
+
+</select>
 
 </div>
 
 <div class="helper-text">
 
-Maximum supported width: 500 m
+Enter room width in metres or feet.
 
 </div>
 

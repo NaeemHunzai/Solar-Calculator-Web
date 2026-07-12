@@ -13,8 +13,14 @@ document.getElementById("lux");
 const roomLength =
 document.getElementById("roomLength");
 
+const lengthUnit =
+document.getElementById("lengthUnit");
+
 const roomWidth =
 document.getElementById("roomWidth");
+
+const widthUnit =
+document.getElementById("widthUnit");
 
 const fixture =
 document.getElementById("fixture");
@@ -198,16 +204,26 @@ calculateBtn.addEventListener("click",function(){
 // ------------------------------------------
 // INPUT VALUES
 // ------------------------------------------
-
 const length =
 Number(roomLength.value);
 
 const width =
 Number(roomWidth.value);
 
-
 const selectedFixture =
 fixture.value;
+
+// Convert to metres
+
+const lengthMeters =
+lengthUnit.value === "ft"
+? length * 0.3048
+: length;
+
+const widthMeters =
+widthUnit.value === "ft"
+? width * 0.3048
+: width;
 
 // ------------------------------------------
 // VALIDATION
@@ -269,7 +285,7 @@ fixtureDatabase[selectedFixture];
 // Room Area
 
 const area =
-length*width;
+lengthMeters * widthMeters;
 
 // Standard Design Factors
 
