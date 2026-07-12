@@ -582,8 +582,7 @@ if(requiredGenerator > maxGenerator){
 let recommendedGenerator=
 standardGenerators[standardGenerators.length-1];
 
-let recommendedGenerator=
-standardGenerators[standardGenerators.length-1];
+
 
 for(const rating of standardGenerators){
 
