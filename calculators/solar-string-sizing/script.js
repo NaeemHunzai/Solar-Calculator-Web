@@ -44,7 +44,7 @@ const tempCoefficient =
 document.getElementById("tempCoefficient");
 
 // ==========================================
-// INVERTER
+// INVERTER SPECIFICATIONS
 // ==========================================
 
 const maxDcVoltage =
@@ -133,11 +133,15 @@ document.getElementById("closeSheet");
 const resultSheet =
 document.getElementById("resultSheet");
 
-const configurationStatus =
-document.getElementById("configurationStatus");
+// Hero Result
 
-const designVerdict =
-document.getElementById("designVerdict");
+const heroLabel =
+document.getElementById("heroLabel");
+
+const heroResult =
+document.getElementById("heroResult");
+
+// Results
 
 const totalPanelsResult =
 document.getElementById("totalPanelsResult");
@@ -190,6 +194,8 @@ document.getElementById("recommendedSeriesResult");
 const enteredConfigurationResult =
 document.getElementById("enteredConfigurationResult");
 
+// Engineering Analysis
+
 const configurationReview =
 document.getElementById("configurationReview");
 
@@ -218,19 +224,12 @@ const panelDatabase = {
 longi:{
 
 "LR5-72HTH-550M":{
-
 power:550,
-
 voc:49.50,
-
 vmp:41.80,
-
 isc:13.90,
-
 imp:13.16,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -238,19 +237,12 @@ tempCoeff:-0.29
 jasolar:{
 
 "JAM72S30-550":{
-
 power:550,
-
 voc:49.45,
-
 vmp:41.65,
-
 isc:13.95,
-
 imp:13.21,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -258,19 +250,12 @@ tempCoeff:-0.29
 jinko:{
 
 "JKM550M-72HL4":{
-
 power:550,
-
 voc:49.60,
-
 vmp:41.75,
-
 isc:13.94,
-
 imp:13.18,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -278,19 +263,12 @@ tempCoeff:-0.29
 trina:{
 
 "TSM-550DE18M":{
-
 power:550,
-
 voc:49.30,
-
 vmp:41.40,
-
 isc:13.88,
-
 imp:13.29,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -298,19 +276,12 @@ tempCoeff:-0.29
 canadian:{
 
 "CS6W-550MS":{
-
 power:550,
-
 voc:49.40,
-
 vmp:41.60,
-
 isc:13.91,
-
 imp:13.22,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -318,19 +289,12 @@ tempCoeff:-0.29
 risen:{
 
 "RSM144-550M":{
-
 power:550,
-
 voc:49.50,
-
 vmp:41.70,
-
 isc:13.93,
-
 imp:13.19,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -338,19 +302,12 @@ tempCoeff:-0.29
 astronergy:{
 
 "CHSM72M-550":{
-
 power:550,
-
 voc:49.48,
-
 vmp:41.68,
-
 isc:13.90,
-
 imp:13.20,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -358,19 +315,12 @@ tempCoeff:-0.29
 twsolar:{
 
 "TWMNH-550":{
-
 power:550,
-
 voc:49.42,
-
 vmp:41.63,
-
 isc:13.92,
-
 imp:13.21,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -378,19 +328,12 @@ tempCoeff:-0.29
 qcells:{
 
 "Q.PEAK DUO XL 550":{
-
 power:550,
-
 voc:49.55,
-
 vmp:41.85,
-
 isc:13.89,
-
 imp:13.15,
-
 tempCoeff:-0.29
-
 }
 
 },
@@ -398,275 +341,155 @@ tempCoeff:-0.29
 rec:{
 
 "REC550AA":{
-
 power:550,
-
 voc:49.47,
-
 vmp:41.72,
-
 isc:13.91,
-
 imp:13.18,
-
 tempCoeff:-0.29
-
 }
 
 }
 
 };
+
 // ==========================================
 // PANEL SOURCE
 // ==========================================
 
-function updatePanelSource(){
+function updatePanelSource() {
 
-const useDatabase=
+    const useDatabase = panelSource.value === "database";
 
-panelSource.value==="database";
-
-manufacturerGroup.style.display=
-
-useDatabase?"block":"none";
-
-modelGroup.style.display=
-
-useDatabase?"block":"none";
+    manufacturerGroup.style.display = useDatabase ? "block" : "none";
+    modelGroup.style.display = useDatabase ? "block" : "none";
 
 }
 
-panelSource.addEventListener(
-
-"change",
-
-updatePanelSource
-
-);
+panelSource.addEventListener("change", updatePanelSource);
 
 // ==========================================
-// LOAD MODELS
+// LOAD PANEL MODELS
 // ==========================================
 
-function loadModels(){
+function loadModels() {
 
-panelModel.innerHTML=
+    panelModel.innerHTML =
+        '<option value="">Select Model</option>';
 
-'<option value="">Select Model</option>';
+    const brand = manufacturer.value;
 
-const brand=
+    if (!brand || !panelDatabase[brand]) return;
 
-manufacturer.value;
+    Object.keys(panelDatabase[brand]).forEach(model => {
 
-if(
+        const option = document.createElement("option");
 
-!brand||
-!panelDatabase[brand]
+        option.value = model;
+        option.textContent = model;
 
-){
+        panelModel.appendChild(option);
 
-return;
-
-}
-
-Object.keys(
-
-panelDatabase[brand]
-
-).forEach(function(model){
-
-const option=
-
-document.createElement("option");
-
-option.value=model;
-
-option.textContent=model;
-
-panelModel.appendChild(option);
-
-});
+    });
 
 }
 
-manufacturer.addEventListener(
-
-"change",
-
-loadModels
-
-);
+manufacturer.addEventListener("change", loadModels);
 
 // ==========================================
 // LOAD PANEL DATA
 // ==========================================
 
-function loadPanelData(){
+function loadPanelData() {
 
-const brand=
+    const brand = manufacturer.value;
+    const model = panelModel.value;
 
-manufacturer.value;
+    if (!brand || !model) return;
 
-const model=
+    const panel = panelDatabase[brand][model];
 
-panelModel.value;
+    panelPower.value = panel.power;
+    panelVoc.value = panel.voc;
+    panelVmp.value = panel.vmp;
+    panelIsc.value = panel.isc;
+    panelImp.value = panel.imp;
+    tempCoefficient.value = panel.tempCoeff;
 
-if(
-
-!brand||
-!model
-
-){
-
-return;
-
-}
-
-const panel=
-
-panelDatabase[brand][model];
-
-panelPower.value=
-
-panel.power;
-
-panelVoc.value=
-
-panel.voc;
-
-panelVmp.value=
-
-panel.vmp;
-
-panelIsc.value=
-
-panel.isc;
-
-panelImp.value=
-
-panel.imp;
-
-tempCoefficient.value=
-
-panel.tempCoeff;
-
-updateLiveInformation();
+    updateLiveInformation();
 
 }
 
-panelModel.addEventListener(
-
-"change",
-
-loadPanelData
-
-);
+panelModel.addEventListener("change", loadPanelData);
 
 // ==========================================
 // LIVE INFORMATION
 // ==========================================
 
-function updateLiveInformation(){
+function updateLiveInformation() {
 
-const series=
+    const series = Number(seriesPanels.value);
+    const parallel = Number(parallelStrings.value);
 
-Number(seriesPanels.value);
+    const power = Number(panelPower.value);
+    const voc = Number(panelVoc.value);
+    const vmp = Number(panelVmp.value);
+    const imp = Number(panelImp.value);
 
-const parallel=
+    if (
+        series <= 0 ||
+        parallel <= 0 ||
+        power <= 0 ||
+        voc <= 0 ||
+        vmp <= 0 ||
+        imp <= 0
+    ) {
 
-Number(parallelStrings.value);
+        liveInfoCard.style.display = "none";
+        return;
 
-const power=
+    }
 
-Number(panelPower.value);
+    const totalPanels = series * parallel;
+    const totalPower = totalPanels * power;
 
-const voc=
+    const stringVoc = series * voc;
+    const stringVmp = series * vmp;
+    const arrayCurrent = parallel * imp;
 
-Number(panelVoc.value);
+    liveTotalPanels.textContent = totalPanels;
 
-const vmp=
+    liveTotalPower.textContent =
+        totalPower.toFixed(0) + " W";
 
-Number(panelVmp.value);
+    liveStringVoc.textContent =
+        stringVoc.toFixed(1) + " V";
 
-const imp=
+    liveStringVmp.textContent =
+        stringVmp.toFixed(1) + " V";
 
-Number(panelImp.value);
+    liveArrayCurrent.textContent =
+        arrayCurrent.toFixed(2) + " A";
 
-if(
-
-series<=0||
-parallel<=0||
-power<=0||
-voc<=0||
-vmp<=0||
-imp<=0
-
-){
-
-liveInfoCard.style.display="none";
-
-return;
-
-}
-
-const totalPanels=
-
-series*
-parallel;
-
-const totalPower=
-
-totalPanels*
-power;
-
-const stringVoc=
-
-series*
-voc;
-
-const stringVmp=
-
-series*
-vmp;
-
-const arrayCurrent=
-
-parallel*
-imp;
-
-liveTotalPanels.textContent=
-
-totalPanels;
-
-liveTotalPower.textContent=
-
-totalPower.toFixed(0)+
-" W";
-
-liveStringVoc.textContent=
-
-stringVoc.toFixed(1)+
-" V";
-
-liveStringVmp.textContent=
-
-stringVmp.toFixed(1)+
-" V";
-
-liveArrayCurrent.textContent=
-
-arrayCurrent.toFixed(1)+
-" A";
-
-liveInfoCard.style.display="block";
+    liveInfoCard.style.display = "block";
 
 }
 
 // ==========================================
-// LIVE LISTENERS
+// LIVE UPDATE LISTENERS
 // ==========================================
 
-panelPower.addEventListener(
+[
+panelPower,
+panelVoc,
+panelVmp,
+panelImp,
+seriesPanels,
+parallelStrings
+
+].forEach(function(element){
+
+element.addEventListener(
 
 "input",
 
@@ -674,45 +497,7 @@ updateLiveInformation
 
 );
 
-panelVoc.addEventListener(
-
-"input",
-
-updateLiveInformation
-
-);
-
-panelVmp.addEventListener(
-
-"input",
-
-updateLiveInformation
-
-);
-
-panelImp.addEventListener(
-
-"input",
-
-updateLiveInformation
-
-);
-
-seriesPanels.addEventListener(
-
-"input",
-
-updateLiveInformation
-
-);
-
-parallelStrings.addEventListener(
-
-"input",
-
-updateLiveInformation
-
-);
+});
 
 // ==========================================
 // NOTIFIER
@@ -720,23 +505,13 @@ updateLiveInformation
 
 function showNotifier(message){
 
-notifierText.textContent=
+notifierText.textContent = message;
 
-message;
-
-notifier.classList.add(
-
-"show"
-
-);
+notifier.classList.add("show");
 
 setTimeout(function(){
 
-notifier.classList.remove(
-
-"show"
-
-);
+notifier.classList.remove("show");
 
 },2500);
 
@@ -746,9 +521,11 @@ notifier.classList.remove(
 // RESULT SHEET
 // ==========================================
 
-function openSheet(){
+function openResultSheet(){
 
-const content=
+resultSheet.classList.add("show");
+
+const content =
 
 resultSheet.querySelector(
 
@@ -758,27 +535,25 @@ resultSheet.querySelector(
 
 if(content){
 
-content.scrollTop=0;
+content.scrollTop = 0;
 
 }
-
-resultSheet.classList.add(
-
-"show"
-
-);
 
 }
 
 function closeResultSheet(){
 
-resultSheet.classList.remove(
-
-"show"
-
-);
+resultSheet.classList.remove("show");
 
 }
+
+closeSheet.addEventListener(
+
+"click",
+
+closeResultSheet
+
+);
 
 doneButton.addEventListener(
 
@@ -788,7 +563,794 @@ closeResultSheet
 
 );
 
+resultSheet.addEventListener(
+
+"click",
+
+function(e){
+
+if(e.target===resultSheet){
+
+closeResultSheet();
+
+}
+
+}
+
+);
+
+// ==========================================
+// RESET
+// ==========================================
+
+resetBtn.addEventListener(
+
+"click",
+
+function(){
+
+document.querySelector("form")?.reset();
+
+panelModel.innerHTML =
+'<option value="">Select Model</option>';
+
+updatePanelSource();
+
+liveInfoCard.style.display="none";
+
+resultSheet.classList.remove("show");
+
+showNotifier("Calculator reset.");
+
+}
+
+);
+
+// ==========================================
+// INITIALIZE
+// ==========================================
+
+updatePanelSource();
+
+liveInfoCard.style.display="none";
+// ==========================================
+// RESET CALCULATOR
+// ==========================================
+
+resetBtn.addEventListener("click", function () {
+
+panelSource.value="database";
+
+manufacturer.value="";
+panelModel.innerHTML='<option value="">Select Model</option>';
+
+[
+panelPower,
+panelVoc,
+panelVmp,
+panelIsc,
+panelImp,
+tempCoefficient,
+maxDcVoltage,
+mpptMinVoltage,
+mpptMaxVoltage,
+maxMpptCurrent,
+maxShortCircuitCurrent,
+lowestTemperature,
+highestTemperature,
+seriesPanels,
+parallelStrings
+
+].forEach(function(input){
+
+input.value="";
+
+});
+
+mpptCount.value="2";
+
+updatePanelSource();
+
+liveInfoCard.style.display="none";
+
+resultSheet.classList.remove("show");
+
+showNotifier("Calculator reset successfully.");
+
+});
+
+// ==========================================
+// CALCULATE
+// ==========================================
+
+calculateBtn.addEventListener("click",function(){
+
+// ------------------------------------------
+// READ INPUTS
+// ------------------------------------------
+
+const power=Number(panelPower.value);
+
+const voc=Number(panelVoc.value);
+
+const vmp=Number(panelVmp.value);
+
+const isc=Number(panelIsc.value);
+
+const imp=Number(panelImp.value);
+
+const tempCoeff=Number(tempCoefficient.value);
+
+const maxDc=Number(maxDcVoltage.value);
+
+const mpptMin=Number(mpptMinVoltage.value);
+
+const mpptMax=Number(mpptMaxVoltage.value);
+
+const maxCurrent=Number(maxMpptCurrent.value);
+
+const maxIsc=Number(maxShortCircuitCurrent.value);
+
+const lowestTemp=Number(lowestTemperature.value);
+
+const highestTemp=Number(highestTemperature.value);
+
+const series=Number(seriesPanels.value);
+
+const parallel=Number(parallelStrings.value);
+
+// ------------------------------------------
+// VALIDATION
+// ------------------------------------------
+
+if(power<=0){
+
+showNotifier("Enter a valid panel power.");
+
+return;
+
+}
+
+if(voc<=0){
+
+showNotifier("Enter a valid Voc.");
+
+return;
+
+}
+
+if(vmp<=0){
+
+showNotifier("Enter a valid Vmp.");
+
+return;
+
+}
+
+if(isc<=0){
+
+showNotifier("Enter a valid Isc.");
+
+return;
+
+}
+
+if(imp<=0){
+
+showNotifier("Enter a valid Imp.");
+
+return;
+
+}
+
+if(maxDc<=0){
+
+showNotifier("Enter maximum DC voltage.");
+
+return;
+
+}
+
+if(mpptMin<=0||mpptMax<=0){
+
+showNotifier("Enter MPPT voltage range.");
+
+return;
+
+}
+
+if(mpptMin>=mpptMax){
+
+showNotifier("Invalid MPPT voltage range.");
+
+return;
+
+}
+
+if(maxCurrent<=0){
+
+showNotifier("Enter maximum MPPT current.");
+
+return;
+
+}
+
+if(maxIsc<=0){
+
+showNotifier("Enter maximum short-circuit current.");
+
+return;
+
+}
+
+if(series<=0){
+
+showNotifier("Enter panels in series.");
+
+return;
+
+}
+
+if(parallel<=0){
+
+showNotifier("Enter parallel strings.");
+
+return;
+
+}
+
+if(isNaN(lowestTemp)||isNaN(highestTemp)){
+
+showNotifier("Enter site temperatures.");
+
+return;
+
+}
+
+if(lowestTemp>highestTemp){
+
+showNotifier("Lowest temperature cannot exceed highest temperature.");
+
+return;
+
+}
+
+// ------------------------------------------
+// ELECTRICAL CALCULATIONS
+// ------------------------------------------
+
+const totalPanels=
+
+series*parallel;
+
+const totalPower=
+
+totalPanels*power;
+
+const stringVoc=
+
+series*voc;
+
+const stringVmp=
+
+series*vmp;
+
+const arrayImp=
+
+parallel*imp;
+
+const arrayIsc=
+
+parallel*isc;
+
+// ------------------------------------------
+// COLD WEATHER VOC
+// ------------------------------------------
+
+const deltaTemp=
+
+25-lowestTemp;
+
+const correctedVocPerPanel=
+
+voc*(1+(Math.abs(tempCoeff)/100)*deltaTemp);
+
+const correctedStringVoc=
+
+correctedVocPerPanel*series;
+
+// ------------------------------------------
+// PASS / FAIL
+// ------------------------------------------
+
+const dcPass=
+
+correctedStringVoc<=maxDc;
+
+const mpptPass=
+
+stringVmp>=mpptMin&&
+stringVmp<=mpptMax;
+
+const currentPass=
+
+arrayImp<=maxCurrent;
+
+const iscPass=
+
+arrayIsc<=maxIsc;
+
+// ------------------------------------------
+// MARGINS
+// ------------------------------------------
+
+const voltageMargin=
+
+maxDc-correctedStringVoc;
+
+const currentMargin=
+
+maxCurrent-arrayImp;
+
+const iscMargin=
+
+maxIsc-arrayIsc;
+
+let mpptMargin=0;
+
+if(stringVmp<mpptMin){
+
+mpptMargin=
+
+mpptMin-stringVmp;
+
+}
+
+else if(stringVmp>mpptMax){
+
+mpptMargin=
+
+stringVmp-mpptMax;
+
+}
+
+else{
+
+mpptMargin=
+
+Math.min(
+
+stringVmp-mpptMin,
+
+mpptMax-stringVmp
+
+);
+
+}
+
+// ------------------------------------------
+// RECOMMENDED SERIES RANGE
+// ------------------------------------------
+
+const recommendedMinimum=
+
+Math.ceil(mpptMin/vmp);
+
+const recommendedMaximum=
+
+Math.floor(maxDc/correctedVocPerPanel);
+// ==========================================
+// HERO RESULT
+// ==========================================
+
+heroLabel.textContent = "Configuration Status";
+
+if(dcPass && mpptPass && currentPass && iscPass){
+
+    if(voltageMargin>100 &&
+       currentMargin>5 &&
+       iscMargin>5){
+
+        heroResult.textContent =
+        "🟢 Excellent Design";
+
+    }
+    else{
+
+        heroResult.textContent =
+        "🟡 Acceptable Design";
+
+    }
+
+}
+else{
+
+    heroResult.textContent =
+    "🔴 Redesign Required";
+
+}
+
+// ==========================================
+// ELECTRICAL RESULTS
+// ==========================================
+
+totalPanelsResult.textContent =
+totalPanels;
+
+totalPowerResult.textContent =
+totalPower.toFixed(0)+" W";
+
+stringVocResult.textContent =
+stringVoc.toFixed(1)+" V";
+
+correctedVocResult.textContent =
+correctedStringVoc.toFixed(1)+" V";
+
+stringVmpResult.textContent =
+stringVmp.toFixed(1)+" V";
+
+arrayCurrentResult.textContent =
+arrayImp.toFixed(2)+" A";
+
+arrayIscResult.textContent =
+arrayIsc.toFixed(2)+" A";
+
+// ==========================================
+// COMPATIBILITY
+// ==========================================
+
+dcVoltageCheck.textContent =
+dcPass
+?
+"🟢 PASS"
+:
+"🔴 FAIL";
+
+mpptVoltageCheck.textContent =
+mpptPass
+?
+"🟢 PASS"
+:
+"🔴 FAIL";
+
+currentCheck.textContent =
+currentPass
+?
+"🟢 PASS"
+:
+"🔴 FAIL";
+
+iscCheck.textContent =
+iscPass
+?
+"🟢 PASS"
+:
+"🔴 FAIL";
+
+// ==========================================
+// ENGINEERING MARGINS
+// ==========================================
+
+voltageMarginResult.textContent =
+voltageMargin.toFixed(1)+" V";
+
+mpptMarginResult.textContent =
+mpptMargin.toFixed(1)+" V";
+
+currentMarginResult.textContent =
+currentMargin.toFixed(2)+" A";
+
+iscMarginResult.textContent =
+iscMargin.toFixed(2)+" A";
+
+// ==========================================
+// CONFIGURATION
+// ==========================================
+
+recommendedSeriesResult.textContent =
+recommendedMinimum+
+" - "+
+recommendedMaximum+
+" Panels";
+
+enteredConfigurationResult.textContent =
+series+
+"S × "+
+parallel+
+"P";
+
+// ==========================================
+// CONFIGURATION REVIEW
+// ==========================================
+
+let review="";
+
+if(dcPass &&
+   mpptPass &&
+   currentPass &&
+   iscPass){
+
+review=
+"The proposed PV string configuration is electrically compatible with the selected inverter.";
+
+}
+else{
+
+review=
+"The proposed PV string configuration requires modification before installation.";
+
+}
+
+configurationReview.textContent=
+review;
+
+// ==========================================
+// WARNINGS
+// ==========================================
+
+let warnings=[];
+
+if(!dcPass){
+
+warnings.push(
+"❌ Cold-weather string voltage exceeds the inverter maximum DC voltage."
+);
+
+}
+
+else if(voltageMargin<=50){
+
+warnings.push(
+"⚠ Cold-weather string voltage is close to the inverter limit."
+);
+
+}
+
+if(!mpptPass){
+
+if(stringVmp<mpptMin){
+
+warnings.push(
+"⚠ String voltage is below the MPPT operating range."
+);
+
+}
+else{
+
+warnings.push(
+"⚠ String voltage is above the MPPT operating range."
+);
+
+}
+
+}
+
+if(!currentPass){
+
+warnings.push(
+"❌ Array operating current exceeds the inverter rating."
+);
+
+}
+
+if(!iscPass){
+
+warnings.push(
+"❌ Array short-circuit current exceeds the inverter rating."
+);
+
+}
+
+if(series<recommendedMinimum){
+
+warnings.push(
+"⚠ Increase the number of panels in series."
+);
+
+}
+
+if(series>recommendedMaximum){
+
+warnings.push(
+"⚠ Reduce the number of panels in series."
+);
+
+}
+
+if(warnings.length===0){
+
+warnings.push(
+"🟢 No engineering issues detected."
+);
+
+}
+
+warningsResult.innerHTML=
+warnings.join("<br><br>");
+
+// ==========================================
+// ENGINEERING SUMMARY
+// ==========================================
+
+engineeringSummary.textContent=
+
+"The system consists of "+
+
+totalPanels+
+
+" solar panels arranged as "+
+
+series+
+
+"S × "+
+
+parallel+
+
+", producing "+
+
+totalPower.toFixed(0)+
+
+" W. The corrected cold-weather string voltage is "+
+
+correctedStringVoc.toFixed(1)+
+
+" V while the operating string voltage is "+
+
+stringVmp.toFixed(1)+
+
+" V. The array operating current is "+
+
+arrayImp.toFixed(2)+
+
+" A and the short-circuit current is "+
+
+arrayIsc.toFixed(2)+
+
+" A. "+
+
+review;
+
+// ==========================================
+// SHOW RESULT
+// ==========================================
+
+openResultSheet();
+
+});
+// ==========================================
+// SHARE RESULTS
+// ==========================================
+
+copyResults.addEventListener("click",function(){
+
+const report =
+
+`Solar String Sizing Results
+
+Configuration:
+${heroResult.textContent}
+
+Total Panels:
+${totalPanelsResult.textContent}
+
+Total PV Power:
+${totalPowerResult.textContent}
+
+String Voc:
+${stringVocResult.textContent}
+
+Corrected Cold Voc:
+${correctedVocResult.textContent}
+
+String Vmp:
+${stringVmpResult.textContent}
+
+Operating Current:
+${arrayCurrentResult.textContent}
+
+Short-Circuit Current:
+${arrayIscResult.textContent}
+
+DC Voltage Check:
+${dcVoltageCheck.textContent}
+
+MPPT Voltage Check:
+${mpptVoltageCheck.textContent}
+
+Current Check:
+${currentCheck.textContent}
+
+Short-Circuit Check:
+${iscCheck.textContent}
+
+Voltage Margin:
+${voltageMarginResult.textContent}
+
+MPPT Margin:
+${mpptMarginResult.textContent}
+
+Current Margin:
+${currentMarginResult.textContent}
+
+Short-Circuit Margin:
+${iscMarginResult.textContent}
+
+Recommended Series:
+${recommendedSeriesResult.textContent}
+
+Entered Configuration:
+${enteredConfigurationResult.textContent}
+
+Configuration Review:
+${configurationReview.textContent}
+
+Warnings:
+${warningsResult.innerText}
+
+Engineering Summary:
+${engineeringSummary.textContent}
+
+Generated by Solar Toolkit`;
+
+navigator.clipboard.writeText(report)
+.then(function(){
+
+showNotifier(
+
+"Results copied successfully."
+
+);
+
+})
+.catch(function(){
+
+showNotifier(
+
+"Unable to copy results."
+
+);
+
+});
+
+});
+
+// ==========================================
+// LIVE UPDATE LISTENERS
+// ==========================================
+
+[
+panelPower,
+panelVoc,
+panelVmp,
+panelImp,
+seriesPanels,
+parallelStrings
+
+].forEach(function(input){
+
+input.addEventListener(
+
+"input",
+
+updateLiveInformation
+
+);
+
+});
+
+// ==========================================
+// RESULT SHEET CLOSE
+// ==========================================
+
 closeSheet.addEventListener(
+
+"click",
+
+closeResultSheet
+
+);
+
+doneButton.addEventListener(
 
 "click",
 
@@ -819,741 +1381,3 @@ closeResultSheet();
 updatePanelSource();
 
 liveInfoCard.style.display="none";
-// ==========================================
-// CALCULATE
-// ==========================================
-
-calculateBtn.addEventListener(
-
-"click",
-
-function(){
-
-// ------------------------------------------
-// READ INPUTS
-// ------------------------------------------
-
-const power =
-Number(panelPower.value);
-
-const voc =
-Number(panelVoc.value);
-
-const vmp =
-Number(panelVmp.value);
-
-const isc =
-Number(panelIsc.value);
-
-const imp =
-Number(panelImp.value);
-
-const tempCoeff =
-Number(tempCoefficient.value);
-
-const maxDc =
-Number(maxDcVoltage.value);
-
-const mpptMin =
-Number(mpptMinVoltage.value);
-
-const mpptMax =
-Number(mpptMaxVoltage.value);
-
-const maxCurrent =
-Number(maxMpptCurrent.value);
-
-const maxIsc =
-Number(maxShortCircuitCurrent.value);
-
-const lowestTemp =
-Number(lowestTemperature.value);
-
-const highestTemp =
-Number(highestTemperature.value);
-
-const series =
-Number(seriesPanels.value);
-
-const parallel =
-Number(parallelStrings.value);
-
-// ------------------------------------------
-// VALIDATION
-// ------------------------------------------
-
-if(
-
-power<=0||
-voc<=0||
-vmp<=0||
-isc<=0||
-imp<=0
-
-){
-
-showNotifier(
-
-"Enter valid panel specifications."
-
-);
-
-return;
-
-}
-
-if(
-
-maxDc<=0||
-mpptMin<=0||
-mpptMax<=0||
-maxCurrent<=0||
-maxIsc<=0
-
-){
-
-showNotifier(
-
-"Enter valid inverter specifications."
-
-);
-
-return;
-
-}
-
-if(
-
-series<=0||
-parallel<=0
-
-){
-
-showNotifier(
-
-"Enter a valid string configuration."
-
-);
-
-return;
-
-}
-
-if(
-
-isNaN(lowestTemp)||
-isNaN(highestTemp)
-
-){
-
-showNotifier(
-
-"Enter valid site temperatures."
-
-);
-
-return;
-
-}
-
-// ------------------------------------------
-// TOTAL PANELS
-// ------------------------------------------
-
-const totalPanels =
-series*
-parallel;
-
-// ------------------------------------------
-// TOTAL POWER
-// ------------------------------------------
-
-const totalPower =
-totalPanels*
-power;
-
-// ------------------------------------------
-// TEMPERATURE CORRECTION
-// ------------------------------------------
-
-const deltaTemperature =
-25-
-lowestTemp;
-
-// Temperature coefficient entered as %/°C
-
-const correctedVocPerPanel =
-
-voc*
-(
-
-1+
-(
-Math.abs(tempCoeff)/100
-)*
-deltaTemperature
-
-);
-
-// ------------------------------------------
-// STRING VALUES
-// ------------------------------------------
-
-const stringVoc =
-series*
-voc;
-
-const correctedStringVoc =
-series*
-correctedVocPerPanel;
-
-const stringVmp =
-series*
-vmp;
-
-// ------------------------------------------
-// ARRAY CURRENTS
-// ------------------------------------------
-
-const arrayImp =
-parallel*
-imp;
-
-const arrayIsc =
-parallel*
-isc;
-
-// ------------------------------------------
-// MARGINS
-// ------------------------------------------
-
-const voltageMargin =
-maxDc-
-correctedStringVoc;
-
-const currentMargin =
-maxCurrent-
-arrayImp;
-
-const iscMargin =
-maxIsc-
-arrayIsc;
-
-// MPPT Margin
-
-let mpptMargin;
-
-if(stringVmp<mpptMin){
-
-mpptMargin=
-
-mpptMin-
-stringVmp;
-
-}
-else if(stringVmp>mpptMax){
-
-mpptMargin=
-
-stringVmp-
-mpptMax;
-
-}
-else{
-
-mpptMargin=
-
-Math.min(
-
-stringVmp-
-mpptMin,
-
-mpptMax-
-stringVmp
-
-);
-
-}
-
-// ------------------------------------------
-// PASS / FAIL
-// ------------------------------------------
-
-const dcPass =
-correctedStringVoc<=maxDc;
-
-const mpptPass =
-
-stringVmp>=mpptMin&&
-stringVmp<=mpptMax;
-
-const currentPass =
-arrayImp<=maxCurrent;
-
-const iscPass =
-arrayIsc<=maxIsc;
-
-// ------------------------------------------
-// RECOMMENDED SERIES RANGE
-// ------------------------------------------
-
-const recommendedMinimum =
-
-Math.ceil(
-
-mpptMin/
-vmp
-
-);
-
-const recommendedMaximum =
-
-Math.floor(
-
-maxDc/
-correctedVocPerPanel
-
-);
-// ==========================================
-// HERO RESULT
-// ==========================================
-
-configurationStatus.textContent=
-
-dcPass&&
-mpptPass&&
-currentPass&&
-iscPass
-
-?
-
-"PASS"
-
-:
-
-"FAIL";
-
-// ==========================================
-// DESIGN VERDICT
-// ==========================================
-
-if(
-
-dcPass&&
-mpptPass&&
-currentPass&&
-iscPass
-
-){
-
-if(
-
-voltageMargin>100&&
-currentMargin>5&&
-iscMargin>5
-
-){
-
-designVerdict.textContent=
-
-"🟢 Excellent Design";
-
-}
-else{
-
-designVerdict.textContent=
-
-"🟡 Acceptable Design";
-
-}
-
-}
-else{
-
-designVerdict.textContent=
-
-"🔴 Redesign Required";
-
-}
-
-// ==========================================
-// ELECTRICAL RESULTS
-// ==========================================
-
-totalPanelsResult.textContent=
-
-totalPanels;
-
-totalPowerResult.textContent=
-
-totalPower.toFixed(0)+
-" W";
-
-stringVocResult.textContent=
-
-stringVoc.toFixed(1)+
-" V";
-
-correctedVocResult.textContent=
-
-correctedStringVoc.toFixed(1)+
-" V";
-
-stringVmpResult.textContent=
-
-stringVmp.toFixed(1)+
-" V";
-
-arrayCurrentResult.textContent=
-
-arrayImp.toFixed(2)+
-" A";
-
-arrayIscResult.textContent=
-
-arrayIsc.toFixed(2)+
-" A";
-
-// ==========================================
-// INVERTER COMPATIBILITY
-// ==========================================
-
-dcVoltageCheck.textContent=
-
-dcPass
-
-?
-
-"🟢 PASS"
-
-:
-
-"🔴 FAIL";
-
-mpptVoltageCheck.textContent=
-
-mpptPass
-
-?
-
-"🟢 PASS"
-
-:
-
-"🔴 FAIL";
-
-currentCheck.textContent=
-
-currentPass
-
-?
-
-"🟢 PASS"
-
-:
-
-"🔴 FAIL";
-
-iscCheck.textContent=
-
-iscPass
-
-?
-
-"🟢 PASS"
-
-:
-
-"🔴 FAIL";
-
-// ==========================================
-// ENGINEERING MARGINS
-// ==========================================
-
-voltageMarginResult.textContent=
-
-voltageMargin.toFixed(1)+
-" V";
-
-mpptMarginResult.textContent=
-
-mpptMargin.toFixed(1)+
-" V";
-
-currentMarginResult.textContent=
-
-currentMargin.toFixed(2)+
-" A";
-
-iscMarginResult.textContent=
-
-iscMargin.toFixed(2)+
-" A";
-
-// ==========================================
-// CONFIGURATION
-// ==========================================
-
-recommendedSeriesResult.textContent=
-
-recommendedMinimum+
-" - "+
-recommendedMaximum+
-" Panels";
-
-enteredConfigurationResult.textContent=
-
-series+
-"S × "+
-parallel+
-"P";
-// ==========================================
-// ENGINEERING ANALYSIS
-// ==========================================
-
-let warnings=[];
-
-let review="";
-
-// ------------------------------------------
-// DC VOLTAGE
-// ------------------------------------------
-
-if(!dcPass){
-
-warnings.push(
-
-"❌ Cold-weather string voltage exceeds the inverter maximum DC input voltage. Reduce the number of panels in series."
-
-);
-
-}
-
-else if(voltageMargin<=50){
-
-warnings.push(
-
-"⚠ Cold-weather string voltage is close to the inverter maximum voltage limit."
-
-);
-
-}
-
-// ------------------------------------------
-// MPPT RANGE
-// ------------------------------------------
-
-if(!mpptPass){
-
-if(stringVmp<mpptMin){
-
-warnings.push(
-
-"⚠ String operating voltage is below the inverter MPPT operating range. Increase the number of panels in series."
-
-);
-
-}
-else{
-
-warnings.push(
-
-"⚠ String operating voltage is above the inverter MPPT operating range. Reduce the number of panels in series."
-
-);
-
-}
-
-}
-
-// ------------------------------------------
-// OPERATING CURRENT
-// ------------------------------------------
-
-if(!currentPass){
-
-warnings.push(
-
-"❌ Array operating current exceeds the inverter MPPT current rating. Reduce the number of parallel strings."
-
-);
-
-}
-
-else if(currentMargin<=2){
-
-warnings.push(
-
-"⚠ Operating current is very close to the inverter limit."
-
-);
-
-}
-
-// ------------------------------------------
-// SHORT CIRCUIT CURRENT
-// ------------------------------------------
-
-if(!iscPass){
-
-warnings.push(
-
-"❌ Array short-circuit current exceeds the inverter limit."
-
-);
-
-}
-
-else if(iscMargin<=2){
-
-warnings.push(
-
-"⚠ Short-circuit current is very close to the inverter limit."
-
-);
-
-}
-
-// ------------------------------------------
-// SERIES RANGE
-// ------------------------------------------
-
-if(series<recommendedMinimum){
-
-warnings.push(
-
-"⚠ Too few panels in series. Increase the series string length."
-
-);
-
-}
-
-if(series>recommendedMaximum){
-
-warnings.push(
-
-"⚠ Too many panels in series. Reduce the series string length."
-
-);
-
-}
-
-// ------------------------------------------
-// MPPT TRACKER
-// ------------------------------------------
-
-if(
-
-parallel>
-Number(mpptCount.value)*2
-
-){
-
-warnings.push(
-
-"ℹ Consider using additional MPPT trackers or redistributing strings for improved system design."
-
-);
-
-}
-
-// ------------------------------------------
-// DEFAULT
-// ------------------------------------------
-
-if(warnings.length===0){
-
-warnings.push(
-
-"🟢 No engineering issues detected. The proposed string configuration is compatible with the selected inverter."
-
-);
-
-}
-
-// ==========================================
-// CONFIGURATION REVIEW
-// ==========================================
-
-if(
-
-dcPass&&
-mpptPass&&
-currentPass&&
-iscPass
-
-){
-
-review=
-
-"The proposed PV string configuration is electrically compatible with the selected inverter. Voltage and current limits are within acceptable operating ranges.";
-
-}
-else{
-
-review=
-
-"The proposed PV string configuration requires modification before installation. Review the warnings below.";
-
-}
-
-configurationReview.textContent=
-review;
-
-// ==========================================
-// WARNINGS
-// ==========================================
-
-warningsResult.innerHTML=
-
-warnings.join("<br><br>");
-
-// ==========================================
-// ENGINEERING SUMMARY
-// ==========================================
-
-engineeringSummary.textContent=
-
-"The system consists of "+
-
-totalPanels+
-
-" solar panels arranged as "+
-
-series+
-
-"S × "+
-
-parallel+
-
-"P producing approximately "+
-
-totalPower.toFixed(0)+
-
-" W. The corrected cold-weather string voltage is "+
-
-correctedStringVoc.toFixed(1)+
-
-" V and the operating string voltage is "+
-
-stringVmp.toFixed(1)+
-
-" V. The operating current is "+
-
-arrayImp.toFixed(2)+
-
-" A while the short-circuit current is "+
-
-arrayIsc.toFixed(2)+
-
-" A. "+
-
-review;
-
-// ==========================================
-// SHOW RESULT
-// ==========================================
-
-openSheet();
-
-});
