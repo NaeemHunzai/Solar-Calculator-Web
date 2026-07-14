@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>
+
+Charge Controller Size Calculator
+
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="../../css/variables.css">
+
+<link rel="stylesheet"
+href="../../css/theme.css">
+
+<link rel="stylesheet"
+href="../../css/style.css">
+
+<link rel="stylesheet"
+href="../../css/cards.css">
+
+<link rel="stylesheet"
+href="../../css/forms.css">
+
+<link rel="stylesheet"
+href="../../css/navigation.css">
+
+<link rel="stylesheet"
+href="../../css/responsive.css">
+
+<link rel="stylesheet"
+href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+INPUTS
+========================================== */
+
+.calculator-container input,
+.calculator-container select{
+
+background:#F8FAFC;
+
+border:1px solid #E2E8F0;
+
+transition:.2s;
+
+}
+
+.calculator-container input:focus,
+.calculator-container select:focus{
+
+background:#FFFFFF;
+
+border-color:#2563EB;
+
+}
+
+/* ==========================================
+RESULT SHEET
+========================================== */
+
+#resultSheet
+.result-sheet-content{
+
+max-height:85vh;
+
+overflow-y:auto;
+
+padding:18px;
+
+}
+
+#resultSheet
+.hero-result{
+
+padding:14px;
+
+margin-bottom:14px;
+
+}
+
+#resultSheet
+.hero-label{
+
+font-size:13px;
+
+}
+
+#resultSheet
+.hero-value{
+
+font-size:30px;
+
+line-height:1.1;
+
+margin-top:4px;
+
+margin-bottom:2px;
+
+}
+
+#resultSheet
+.result-row{
+
+padding:8px 0;
+
+}
+
+#resultSheet
+.result-row span{
+
+font-size:14px;
+
+font-weight:600;
+
+color:#374151;
+
+}
+
+#resultSheet
+.result-row strong{
+
+font-size:14px;
+
+font-weight:500;
+
+color:var(--primary);
+
+text-align:right;
+
+word-break:break-word;
+
+}
+
+#resultSheet
+.primary-button,
+#resultSheet
+.secondary-button{
+
+height:46px;
+
+margin-top:10px;
+
+}
+
+/* ==========================================
+HELPER TEXT
+========================================== */
+
+.helper-text{
+
+font-size:11px;
+
+font-weight:500;
+
+color:#9CA3AF;
+
+margin-top:4px;
+
+margin-left:4px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span
+class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Charge Controller Size Calculator
+
+</h1>
+
+<p>
+
+Calculate the optimum solar charge controller size.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+    <!-- ==========================================
+CONTROLLER TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Controller Type
+
+</label>
+
+<select id="controllerType">
+
+<option value="mppt" selected>
+
+MPPT
+
+</option>
+
+<option value="pwm">
+
+PWM
+
+</option>
+
+</select>
+
+<div
+class="helper-text"
+id="controllerHelper">
+
+MPPT is recommended for most solar systems due to higher efficiency and better energy harvest.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+SYSTEM VOLTAGE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Battery / System Voltage
+
+</label>
+
+<select id="systemVoltage">
+
+<option value="12">12 V</option>
+
+<option value="24" selected>24 V</option>
+
+<option value="36">36 V</option>
+
+<option value="48">48 V</option>
+
+<option value="custom">Custom</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+CUSTOM VOLTAGE
+========================================== -->
+
+<div
+class="input-group"
+id="customVoltageGroup"
+style="display:none;">
+
+<label>
+
+Custom Voltage
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="customVoltage"
+placeholder="Enter system voltage">
+
+<span>
+
+V
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+INPUT METHOD
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+PV Input Method
+
+</label>
+
+<select id="inputMethod">
+
+<option value="power" selected>
+
+Total PV Array Power
+
+</option>
+
+<option value="panels">
+
+Panels & Wattage
+
+</option>
+
+</select>
+
+<div class="helper-text">
+
+Choose how you want to enter your solar array information.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+TOTAL PV POWER
+========================================== -->
+
+<div
+class="input-group"
+id="powerGroup">
+
+<label>
+
+Total PV Array Power
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="pvPower"
+placeholder="Enter total PV power">
+
+<span>
+
+W
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+PANELS & WATTAGE
+========================================== -->
+
+<div
+id="panelGroup"
+style="display:none;">
+
+<div class="input-group">
+
+<label>
+
+Number of Panels
+
+</label>
+
+<input
+type="number"
+id="panelCount"
+placeholder="Enter number of panels">
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Single Panel Power
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="panelPower"
+placeholder="Enter panel wattage">
+
+<span>
+
+W
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LIVE PV INFORMATION
+========================================== -->
+
+<div
+class="notes-card"
+id="livePowerCard"
+style="display:none;">
+
+<h3>
+
+Live PV Information
+
+</h3>
+
+<div class="result-row">
+
+<span>
+
+Calculated PV Array Power
+
+</span>
+
+<strong id="livePvPower">
+
+0 W
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Estimated Charging Current
+
+</span>
+
+<strong id="liveChargingCurrent">
+
+0.0 A
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Estimated Controller Size
+
+</span>
+
+<strong id="liveControllerSize">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+<!-- ==========================================
+BATTERY CAPACITY
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Battery Capacity (Optional)
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="batteryCapacity"
+placeholder="Enter battery capacity">
+
+<span>
+
+Ah
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Used to evaluate the recommended battery charging current.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+BATTERY TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Battery Type
+
+</label>
+
+<select id="batteryType">
+
+<option value="lead" selected>
+
+Lead Acid
+
+</option>
+
+<option value="agm">
+
+AGM / Gel
+
+</option>
+
+<option value="lifepo4">
+
+LiFePO₄
+
+</option>
+
+<option value="liion">
+
+Lithium-ion
+
+</option>
+
+</select>
+
+<div class="helper-text">
+
+Used to evaluate the recommended charging current based on battery chemistry.
+
+</div>
+
+</div>
+<!-- ==========================================
+SAFETY FACTOR
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Safety Factor
+
+</label>
+
+<select id="safetyFactor">
+
+<option value="1.20">
+
+1.20
+
+</option>
+
+<option
+value="1.25"
+selected>
+
+1.25 (Recommended)
+
+</option>
+
+<option value="1.30">
+
+1.30
+
+</option>
+
+</select>
+
+<div class="helper-text">
+
+Applies additional design margin when selecting the controller.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+AMBIENT TEMPERATURE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Ambient Temperature
+
+</label>
+
+<select id="temperature">
+
+<option value="25">
+
+25°C
+
+</option>
+
+<option
+value="40"
+selected>
+
+40°C
+
+</option>
+
+<option value="50">
+
+50°C
+
+</option>
+
+</select>
+
+<div class="helper-text">
+
+Higher temperatures slightly increase the required controller size.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>MPPT controllers are recommended for most modern solar systems due to higher efficiency.</li>
+
+<li>The controller rating is selected using the calculated charging current after applying the safety and ambient temperature factors.</li>
+
+<li>Battery charging analysis is shown only when battery capacity is provided.</li>
+
+<li>The calculator estimates future PV expansion capacity using the selected controller size.</li>
+
+<li>Always verify the controller manufacturer's voltage, current and PV input limits before installation.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+<!-- ==========================================
+RESULT SHEET
+========================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span
+class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+HERO RESULT
+========================================== -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Recommended Charge Controller
+
+</div>
+
+<div
+class="hero-value"
+id="recommendedController">
+
+--
+
+</div>
+
+<div
+class="helper-text"
+id="designVerdict">
+
+--
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ELECTRICAL RESULTS
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Electrical Results
+
+</h3>
+
+<div class="result-row">
+
+<span>PV Array Power</span>
+
+<strong id="pvPowerResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Charging Current</span>
+
+<strong id="chargingCurrentResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Safety Factor</span>
+
+<strong id="safetyFactorResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Temperature Factor</span>
+
+<strong id="temperatureFactorResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Design Current</span>
+
+<strong id="designCurrentResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CONTROLLER INFORMATION
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Controller Information
+
+</h3>
+
+<div class="result-row">
+
+<span>Controller Type</span>
+
+<strong id="controllerTypeResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Controller Efficiency</span>
+
+<strong id="efficiencyResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Controller Utilization</span>
+
+<strong id="utilizationResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Current Margin</span>
+
+<strong id="marginResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+EXPANSION ANALYSIS
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Expansion Analysis
+
+</h3>
+
+<div class="result-row">
+
+<span>Maximum PV Capacity</span>
+
+<strong id="maxPvResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Remaining PV Capacity</span>
+
+<strong id="remainingPvResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Additional Panels Supported</span>
+
+<strong id="additionalPanelsResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+BATTERY ANALYSIS
+========================================== -->
+
+<div
+class="notes-card"
+id="batteryCard">
+
+<h3>
+
+Battery Analysis
+
+</h3>
+
+<div class="result-row">
+
+<span>Battery Capacity</span>
+
+<strong id="batteryResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Recommended Charging Current</span>
+
+<strong id="recommendedChargeResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Actual Charging Current</span>
+
+<strong id="actualChargeResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Charging Status</span>
+
+<strong id="batteryStatusResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ENGINEERING ANALYSIS
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Analysis
+
+</h3>
+
+<h4>
+
+Controller Advice
+
+</h4>
+
+<p id="controllerAdvice">
+
+--
+
+</p>
+
+<h4>
+
+Warnings & Recommendations
+
+</h4>
+
+<p id="warningsResult">
+
+--
+
+</p>
+
+<h4>
+
+Engineering Summary
+
+</h4>
+
+<p id="engineeringSummary">
+
+--
+
+</p>
+
+</div>
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+NOTIFIER
+========================================== -->
+
+<div
+class="notifier"
+id="notifier">
+
+<span
+id="notifierText">
+
+</span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
