@@ -1202,9 +1202,17 @@ warningList.join("<br><br>");
 
 // ==========================================
 // FINAL DESIGN VERDICT
+// =========================================
+
+// ==========================================
+// FINAL DESIGN VERDICT
 // ==========================================
 
-if(utilization>95||batteryWarning){
+// The verdict evaluates only the controller sizing.
+// Battery-related issues are shown separately
+// in the Warnings section.
+
+if(utilization>95){
 
 designVerdict.textContent=
 
