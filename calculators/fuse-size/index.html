@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>
+
+Fuse Size Calculator
+
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="../../css/variables.css">
+
+<link rel="stylesheet"
+href="../../css/theme.css">
+
+<link rel="stylesheet"
+href="../../css/style.css">
+
+<link rel="stylesheet"
+href="../../css/cards.css">
+
+<link rel="stylesheet"
+href="../../css/forms.css">
+
+<link rel="stylesheet"
+href="../../css/navigation.css">
+
+<link rel="stylesheet"
+href="../../css/responsive.css">
+
+<link rel="stylesheet"
+href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+INPUTS
+========================================== */
+
+.calculator-container input,
+.calculator-container select{
+
+background:#F8FAFC;
+
+border:1px solid #E2E8F0;
+
+transition:.2s;
+
+}
+
+.calculator-container input:focus,
+.calculator-container select:focus{
+
+background:#FFFFFF;
+
+border-color:#2563EB;
+
+}
+
+/* ==========================================
+RESULT SHEET
+========================================== */
+
+#resultSheet
+.result-sheet-content{
+
+max-height:85vh;
+
+overflow-y:auto;
+
+padding:18px;
+
+}
+
+#resultSheet
+.hero-result{
+
+padding:14px;
+
+margin-bottom:14px;
+
+}
+
+#resultSheet
+.hero-label{
+
+font-size:13px;
+
+}
+
+#resultSheet
+.hero-value{
+
+font-size:30px;
+
+line-height:1.1;
+
+margin-top:4px;
+
+margin-bottom:2px;
+
+}
+
+#resultSheet
+.sheet-results{
+
+margin-top:10px;
+
+}
+
+#resultSheet
+.result-row{
+
+padding:8px 0;
+
+}
+
+#resultSheet
+.result-row span{
+
+font-size:13px;
+
+}
+
+#resultSheet
+.result-row strong{
+
+font-size:14px;
+
+text-align:right;
+
+}
+
+#resultSheet
+.primary-button,
+#resultSheet
+.secondary-button{
+
+height:46px;
+
+margin-top:10px;
+
+}
+
+/* ==========================================
+HELPER TEXT
+========================================== */
+
+.helper-text{
+
+font-size:11px;
+
+font-weight:500;
+
+color:#9CA3AF;
+
+margin-top:4px;
+
+margin-left:4px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span
+class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>
+
+Fuse Size Calculator
+
+</h1>
+
+<p>
+
+Calculate the recommended fuse size for AC and DC electrical systems.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+    <!-- ==========================================
+SYSTEM TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Type
+
+</label>
+
+<select id="systemType">
+
+<option value="dc">
+
+DC
+
+</option>
+
+<option value="single" selected>
+
+AC Single Phase
+
+</option>
+
+<option value="three">
+
+AC Three Phase
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+SYSTEM VOLTAGE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+System Voltage
+
+</label>
+
+<select id="systemVoltage">
+
+<option value="120">120 V</option>
+<option value="127">127 V</option>
+<option value="220">220 V</option>
+<option value="230" selected>230 V</option>
+<option value="240">240 V</option>
+<option value="custom">Custom</option>
+
+</select>
+
+<div class="helper-text">
+
+Voltage options change automatically according to the selected system.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CUSTOM VOLTAGE
+========================================== -->
+
+<div
+class="input-group"
+id="customVoltageGroup"
+style="display:none;">
+
+<label>
+
+Custom Voltage
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="customVoltage"
+placeholder="Enter system voltage">
+
+<span>
+
+V
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+LOAD TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Load Type
+
+</label>
+
+<select id="loadType">
+
+<option value="continuous">
+
+Continuous Load
+
+</option>
+
+<option value="noncontinuous">
+
+Non-Continuous Load
+
+</option>
+
+<option value="motor">
+
+Motor
+
+</option>
+
+<option value="solar">
+
+Solar PV
+
+</option>
+
+<option value="battery">
+
+Battery
+
+</option>
+
+<option value="inverter">
+
+Inverter
+
+</option>
+
+<option value="general">
+
+General Purpose
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+LOAD CURRENT
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Load Current
+
+</label>
+
+<div class="input-with-unit">
+
+<input
+type="number"
+id="loadCurrent"
+placeholder="Enter load current">
+
+<span>
+
+A
+
+</span>
+
+</div>
+
+<div class="helper-text">
+
+Supported range: 0.1 A to 1000 A
+
+</div>
+
+</div>
+
+<!-- ==========================================
+PROTECTION TYPE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Protection Type
+
+</label>
+
+<select id="protectionType">
+
+<option value="general">
+
+General Purpose
+
+</option>
+
+<option value="motor">
+
+Motor Protection
+
+</option>
+
+<option value="pv">
+
+Solar PV
+
+</option>
+
+<option value="battery">
+
+Battery Protection
+
+</option>
+
+<option value="semiconductor">
+
+Semiconductor
+
+</option>
+
+</select>
+
+<div
+class="helper-text"
+id="protectionHelper">
+
+Suitable for lighting, socket outlets and general electrical distribution.
+
+</div>
+
+</div>
+
+<!-- ==========================================
+BREAKING CAPACITY
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Breaking Capacity
+
+</label>
+
+<select id="breakingCapacity">
+
+<option value="20">
+
+20 kA
+
+</option>
+
+<option value="50" selected>
+
+50 kA
+
+</option>
+
+<option value="80">
+
+80 kA
+
+</option>
+
+<option value="100">
+
+100 kA
+
+</option>
+
+</select>
+
+</div>
+
+<!-- ==========================================
+AMBIENT TEMPERATURE
+========================================== -->
+
+<div class="input-group">
+
+<label>
+
+Ambient Temperature
+
+</label>
+
+<select id="temperature">
+
+<option value="30">
+
+30°C
+
+</option>
+
+<option value="40" selected>
+
+40°C
+
+</option>
+
+<option value="50">
+
+50°C
+
+</option>
+
+</select>
+
+</div>
+<!-- ==========================================
+BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>Select the electrical system and intended protection application.</li>
+
+<li>The calculator recommends the nearest standard fuse rating.</li>
+
+<li>Different load types apply different design safety factors.</li>
+
+<li>Fuse characteristics and IEC classifications are selected automatically.</li>
+
+<li>Always verify local electrical codes and manufacturer recommendations.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- ==========================================
+RESULT SHEET
+========================================== -->
+
+<div
+class="result-sheet"
+id="resultSheet">
+
+<div class="result-sheet-content">
+
+<div class="sheet-header">
+
+<h2>
+
+Calculation Result
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+HERO RESULT
+========================================== -->
+
+<div class="hero-result">
+
+<div class="hero-label">
+
+Recommended Fuse
+
+</div>
+
+<div
+class="hero-value"
+id="recommendedFuse">
+
+--
+
+</div>
+
+<div
+class="helper-text"
+id="protectionAssessment">
+
+--
+
+</div>
+
+</div>
+
+<!-- ==========================================
+CALCULATION RESULTS
+========================================== -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>Design Current</span>
+
+<strong id="designCurrentResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Safety Factor</span>
+
+<strong id="safetyFactorResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Temperature Factor</span>
+
+<strong id="temperatureFactorResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Adjusted Current</span>
+
+<strong id="adjustedCurrentResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+FUSE INFORMATION
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Fuse Information
+
+</h3>
+
+<div class="result-row">
+
+<span>Protection Device</span>
+
+<strong id="deviceResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>IEC Classification</span>
+
+<strong id="iecResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Fuse Speed</span>
+
+<strong id="speedResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Breaking Capacity</span>
+
+<strong id="breakingCapacityResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Protection Margin</span>
+
+<strong id="marginResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Load Utilization</span>
+
+<strong id="utilizationResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ELECTRICAL INFORMATION
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Electrical Information
+
+</h3>
+
+<div class="result-row">
+
+<span>Approximate Protected Load</span>
+
+<strong id="protectedLoadResult">--</strong>
+
+</div>
+<div class="result-row">
+
+<span>Voltage Rating</span>
+
+<strong id="voltageRatingResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Next Smaller Fuse</span>
+
+<strong id="smallerFuseResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Next Larger Fuse</span>
+
+<strong id="largerFuseResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+PRACTICAL INFORMATION
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Practical Information
+
+</h3>
+
+<div class="result-row">
+
+<span>Recommended Application</span>
+
+<strong id="applicationResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Installation Location</span>
+
+<strong id="locationResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>Replacement Recommendation</span>
+
+<strong id="replacementResult">--</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>IEC Standard</span>
+
+<strong id="iecStandardResult">--</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ENGINEERING SUMMARY
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Summary
+
+</h3>
+
+<p id="engineeringSummary">
+
+--
+
+</p>
+
+</div>
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+NOTIFIER
+========================================== -->
+
+<div
+class="notifier"
+id="notifier">
+
+<span id="notifierText">
+
+</span>
+
+</div>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
