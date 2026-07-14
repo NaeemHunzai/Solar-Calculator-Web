@@ -7,55 +7,108 @@
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>
 
-Solar String Sizing Calculator
+Solar String Sizing
 
 </title>
 
-<link
-rel="stylesheet"
-href="../css/variables.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link
-rel="stylesheet"
-href="../css/theme.css">
-
-<link
-rel="stylesheet"
-href="../css/style.css">
-
-<link
-rel="stylesheet"
-href="../css/cards.css">
-
-<link
-rel="stylesheet"
-href="../css/forms.css">
-
-<link
-rel="stylesheet"
-href="../css/responsive.css">
-
-<link
-rel="stylesheet"
-href="../css/animations.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
 href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
 rel="stylesheet">
 
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+/* ==========================================
+   STRING SIZING RESULT SHEET
+========================================== */
+
+#resultSheet .result-sheet-content{
+
+max-height:90vh;
+
+overflow-y:auto;
+
+}
+
+#resultSheet .hero-result{
+
+margin-bottom:12px;
+
+}
+
+#resultSheet .hero-label{
+
+font-size:14px;
+
+}
+
+#resultSheet .hero-value{
+
+font-size:26px;
+
+margin-top:4px;
+
+margin-bottom:10px;
+
+}
+
+#resultSheet .sheet-results{
+
+gap:0;
+
+}
+
+#resultSheet .result-row{
+
+padding:7px 0;
+
+}
+
+#resultSheet .result-row span{
+
+font-size:13px;
+
+}
+
+#resultSheet .result-row strong{
+
+font-size:14px;
+
+}
+
+#resultSheet .primary-button,
+
+#resultSheet .secondary-button{
+
+padding:10px;
+
+font-size:14px;
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div class="calculator-page">
-
-<!-- ==========================================
-HEADER
-========================================== -->
+<div class="app">
 
 <header class="app-header">
 
@@ -63,8 +116,7 @@ HEADER
 class="icon-button"
 onclick="history.back()">
 
-<span
-class="material-symbols-rounded">
+<span class="material-symbols-rounded">
 
 arrow_back
 
@@ -72,49 +124,31 @@ arrow_back
 
 </button>
 
+<div class="calculator-header">
+
 <h1>
 
 Solar String Sizing
 
 </h1>
 
-</header>
-
-<main>
-
-<!-- ==========================================
-DESCRIPTION
-========================================== -->
-
-<div class="welcome-card">
-
-<h2>
-
-Solar String Sizing Calculator
-
-</h2>
-
 <p>
 
-Design safe and efficient PV string configurations by checking voltage, current and inverter compatibility using professional engineering calculations.
+Design safe PV strings by checking inverter compatibility, voltage limits, current limits and MPPT operating range.
 
 </p>
 
 </div>
 
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
 <!-- ==========================================
 PANEL INFORMATION
 ========================================== -->
-
-<div class="card">
-
-<h3>
-
-Panel Information
-
-</h3>
-
-<!-- Panel Source -->
 
 <div class="input-group">
 
@@ -141,8 +175,6 @@ Custom Panel
 </select>
 
 </div>
-
-<!-- Manufacturer -->
 
 <div
 class="input-group"
@@ -226,8 +258,6 @@ REC
 
 </div>
 
-<!-- Model -->
-
 <div
 class="input-group"
 id="modelGroup">
@@ -250,35 +280,30 @@ Select Model
 
 </div>
 <!-- ==========================================
-PANEL SPECIFICATIONS
+     PANEL SPECIFICATIONS
 ========================================== -->
-
-<div
-class="card"
-id="panelSpecsCard">
-
-<h3>
-
-Panel Specifications
-
-</h3>
 
 <div class="input-group">
 
 <label>
 
-Panel Power (W)
+Panel Power
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="panelPower"
-placeholder="e.g. 550">
+placeholder="e.g. 550"
+min="1">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Rated power of one solar panel (STC).
+W
+
+</span>
 
 </div>
 
@@ -288,19 +313,24 @@ Rated power of one solar panel (STC).
 
 <label>
 
-Open Circuit Voltage - Voc (V)
+Open Circuit Voltage (Voc)
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="panelVoc"
+placeholder="e.g. 49.5"
 step="0.01"
-placeholder="e.g. 49.50">
+min="0.1">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Voltage of one panel under open-circuit conditions.
+V
+
+</span>
 
 </div>
 
@@ -310,19 +340,24 @@ Voltage of one panel under open-circuit conditions.
 
 <label>
 
-Maximum Power Voltage - Vmp (V)
+Maximum Power Voltage (Vmp)
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="panelVmp"
+placeholder="e.g. 41.8"
 step="0.01"
-placeholder="e.g. 41.80">
+min="0.1">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Voltage of one panel at maximum power.
+V
+
+</span>
 
 </div>
 
@@ -332,19 +367,24 @@ Voltage of one panel at maximum power.
 
 <label>
 
-Short Circuit Current - Isc (A)
+Short Circuit Current (Isc)
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="panelIsc"
+placeholder="e.g. 13.9"
 step="0.01"
-placeholder="e.g. 13.90">
+min="0.1">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Maximum short-circuit current of one panel.
+A
+
+</span>
 
 </div>
 
@@ -354,19 +394,24 @@ Maximum short-circuit current of one panel.
 
 <label>
 
-Maximum Power Current - Imp (A)
+Maximum Power Current (Imp)
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="panelImp"
+placeholder="e.g. 13.2"
 step="0.01"
-placeholder="e.g. 13.16">
+min="0.1">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Operating current of one panel at maximum power.
+A
+
+</span>
 
 </div>
 
@@ -376,53 +421,53 @@ Operating current of one panel at maximum power.
 
 <label>
 
-Voc Temperature Coefficient (%/°C)
+Voc Temperature Coefficient
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="tempCoefficient"
-step="0.01"
-placeholder="e.g. -0.29">
+placeholder="e.g. -0.29"
+step="0.01">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Usually a negative value from the panel datasheet.
+%/°C
+
+</span>
+
+</div>
 
 </div>
 
-</div>
-
-</div>
 <!-- ==========================================
-INVERTER SPECIFICATIONS
+     INVERTER SPECIFICATIONS
 ========================================== -->
-
-<div class="card">
-
-<h3>
-
-Inverter Specifications
-
-</h3>
 
 <div class="input-group">
 
 <label>
 
-Maximum DC Input Voltage (V)
+Maximum DC Input Voltage
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="maxDcVoltage"
-placeholder="e.g. 1000">
+placeholder="e.g. 1000"
+min="1">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Maximum allowable DC voltage of the inverter.
+V
+
+</span>
 
 </div>
 
@@ -432,7 +477,7 @@ Maximum allowable DC voltage of the inverter.
 
 <label>
 
-MPPT Voltage Range (V)
+MPPT Voltage Range
 
 </label>
 
@@ -456,15 +501,25 @@ placeholder="Maximum">
 
 <label>
 
-Maximum MPPT Input Current (A)
+Maximum MPPT Input Current
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="maxMpptCurrent"
-step="0.01"
-placeholder="e.g. 26">
+placeholder="e.g. 26"
+step="0.01">
+
+<span class="input-unit">
+
+A
+
+</span>
+
+</div>
 
 </div>
 
@@ -472,15 +527,25 @@ placeholder="e.g. 26">
 
 <label>
 
-Maximum Short-Circuit Current (A)
+Maximum Short-Circuit Current
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="maxShortCircuitCurrent"
-step="0.01"
-placeholder="e.g. 32">
+placeholder="e.g. 32"
+step="0.01">
+
+<span class="input-unit">
+
+A
+
+</span>
+
+</div>
 
 </div>
 
@@ -494,54 +559,57 @@ Number of MPPT Trackers
 
 <select id="mpptCount">
 
-<option value="1">1</option>
+<option value="1">
 
-<option value="2" selected>2</option>
+1
 
-<option value="3">3</option>
+</option>
 
-<option value="4">4</option>
+<option value="2" selected>
+
+2
+
+</option>
+
+<option value="3">
+
+3
+
+</option>
+
+<option value="4">
+
+4
+
+</option>
 
 </select>
 
-<div class="helper-text">
-
-Used only for engineering recommendations.
-
 </div>
-
-</div>
-
-</div>
-
 <!-- ==========================================
-SITE CONDITIONS
+     SITE CONDITIONS
 ========================================== -->
-
-<div class="card">
-
-<h3>
-
-Site Conditions
-
-</h3>
 
 <div class="input-group">
 
 <label>
 
-Lowest Ambient Temperature (°C)
+Lowest Ambient Temperature
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="lowestTemperature"
 placeholder="e.g. -10">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Used to calculate the maximum cold-weather string voltage.
+°C
+
+</span>
 
 </div>
 
@@ -551,36 +619,30 @@ Used to calculate the maximum cold-weather string voltage.
 
 <label>
 
-Highest Ambient Temperature (°C)
+Highest Ambient Temperature
 
 </label>
+
+<div class="input-wrapper">
 
 <input
 type="number"
 id="highestTemperature"
 placeholder="e.g. 45">
 
-<div class="helper-text">
+<span class="input-unit">
 
-Used for engineering reference.
+°C
 
-</div>
+</span>
 
 </div>
 
 </div>
 
 <!-- ==========================================
-PV ARRAY CONFIGURATION
+     PV ARRAY CONFIGURATION
 ========================================== -->
-
-<div class="card">
-
-<h3>
-
-PV Array Configuration
-
-</h3>
 
 <div class="input-group">
 
@@ -590,10 +652,21 @@ Panels in Series
 
 </label>
 
+<div class="input-wrapper">
+
 <input
 type="number"
 id="seriesPanels"
-placeholder="e.g. 12">
+placeholder="e.g. 12"
+min="1">
+
+<span class="input-unit">
+
+S
+
+</span>
+
+</div>
 
 </div>
 
@@ -605,22 +678,32 @@ Parallel Strings
 
 </label>
 
+<div class="input-wrapper">
+
 <input
 type="number"
 id="parallelStrings"
-placeholder="e.g. 2">
+placeholder="e.g. 2"
+min="1">
+
+<span class="input-unit">
+
+P
+
+</span>
 
 </div>
 
 </div>
 
 <!-- ==========================================
-LIVE INFORMATION
+     LIVE INFORMATION
 ========================================== -->
 
 <div
-class="card"
-id="liveInfoCard">
+class="notes-card"
+id="liveInfoCard"
+style="display:none;">
 
 <h3>
 
@@ -711,10 +794,8 @@ Estimated Array Current
 </div>
 
 <!-- ==========================================
-ACTION BUTTONS
+     BUTTONS
 ========================================== -->
-
-<div class="button-group">
 
 <button
 class="primary-button"
@@ -732,16 +813,66 @@ Reset
 
 </button>
 
-</div>
 <!-- ==========================================
-RESULT SHEET
+     ENGINEERING NOTES
 ========================================== -->
 
-<div
-class="result-sheet"
-id="resultSheet">
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>
+
+Corrected cold-weather Voc must remain below the inverter's maximum DC input voltage.
+
+</li>
+
+<li>
+
+String operating voltage should remain within the inverter MPPT voltage range.
+
+</li>
+
+<li>
+
+Operating current and short-circuit current must not exceed inverter limits.
+
+</li>
+
+<li>
+
+The calculator uses the lowest ambient temperature to determine the worst-case open-circuit voltage.
+
+</li>
+
+<li>
+
+Always verify the final design using the manufacturer's inverter and module datasheets.
+
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+<!-- ==========================================
+     RESULT SHEET
+========================================== -->
+
+<div class="result-sheet" id="resultSheet">
 
 <div class="result-sheet-content">
+
+<!-- Header -->
 
 <div class="sheet-header">
 
@@ -766,208 +897,282 @@ close
 </div>
 
 <!-- ==========================================
-HERO RESULT
+     HERO RESULT
 ========================================== -->
 
-<div class="result-card hero-card">
+<div class="hero-result">
 
-<h3>
+<div
+class="hero-label"
+id="heroLabel">
 
 Configuration Status
 
-</h3>
+</div>
 
-<h2 id="configurationStatus">
+<div
+class="hero-value"
+id="heroResult">
 
 --
 
-</h2>
+</div>
 
-<p id="designVerdict">
+</div>
+
+<!-- ==========================================
+     RESULTS
+========================================== -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+Total Panels
+
+</span>
+
+<strong id="totalPanelsResult">
 
 --
 
-</p>
-
-</div>
-
-<!-- ==========================================
-ELECTRICAL RESULTS
-========================================== -->
-
-<div class="result-card">
-
-<h3>
-
-Electrical Results
-
-</h3>
-
-<div class="result-row">
-
-<span>Total Panels</span>
-
-<strong id="totalPanelsResult">--</strong>
+</strong>
 
 </div>
 
 <div class="result-row">
 
-<span>Total PV Power</span>
+<span>
 
-<strong id="totalPowerResult">--</strong>
+Total PV Power
 
-</div>
+</span>
 
-<div class="result-row">
+<strong id="totalPowerResult">
 
-<span>String Voc</span>
+--
 
-<strong id="stringVocResult">--</strong>
-
-</div>
-
-<div class="result-row">
-
-<span>Corrected Cold Voc</span>
-
-<strong id="correctedVocResult">--</strong>
+</strong>
 
 </div>
 
 <div class="result-row">
 
-<span>String Vmp</span>
+<span>
 
-<strong id="stringVmpResult">--</strong>
+String Voc
 
-</div>
+</span>
 
-<div class="result-row">
+<strong id="stringVocResult">
 
-<span>Array Current (Imp)</span>
+--
 
-<strong id="arrayCurrentResult">--</strong>
-
-</div>
-
-<div class="result-row">
-
-<span>Array Short-Circuit Current</span>
-
-<strong id="arrayIscResult">--</strong>
-
-</div>
-
-</div>
-
-<!-- ==========================================
-INVERTER COMPATIBILITY
-========================================== -->
-
-<div class="result-card">
-
-<h3>
-
-Inverter Compatibility
-
-</h3>
-
-<div class="result-row">
-
-<span>Maximum DC Voltage</span>
-
-<strong id="dcVoltageCheck">--</strong>
+</strong>
 
 </div>
 
 <div class="result-row">
 
-<span>MPPT Voltage Range</span>
+<span>
 
-<strong id="mpptVoltageCheck">--</strong>
+Corrected Cold Voc
 
-</div>
+</span>
 
-<div class="result-row">
+<strong id="correctedVocResult">
 
-<span>Operating Current</span>
+--
 
-<strong id="currentCheck">--</strong>
-
-</div>
-
-<div class="result-row">
-
-<span>Short-Circuit Current</span>
-
-<strong id="iscCheck">--</strong>
-
-</div>
-
-</div>
-
-<!-- ==========================================
-ENGINEERING MARGINS
-========================================== -->
-
-<div class="result-card">
-
-<h3>
-
-Engineering Margins
-
-</h3>
-
-<div class="result-row">
-
-<span>Voltage Margin</span>
-
-<strong id="voltageMarginResult">--</strong>
+</strong>
 
 </div>
 
 <div class="result-row">
 
-<span>MPPT Margin</span>
+<span>
 
-<strong id="mpptMarginResult">--</strong>
+String Vmp
+
+</span>
+
+<strong id="stringVmpResult">
+
+--
+
+</strong>
 
 </div>
 
 <div class="result-row">
 
-<span>Current Margin</span>
+<span>
 
-<strong id="currentMarginResult">--</strong>
+Array Operating Current
+
+</span>
+
+<strong id="arrayCurrentResult">
+
+--
+
+</strong>
 
 </div>
 
 <div class="result-row">
 
-<span>Short-Circuit Margin</span>
+<span>
 
-<strong id="iscMarginResult">--</strong>
+Array Short-Circuit Current
+
+</span>
+
+<strong id="arrayIscResult">
+
+--
+
+</strong>
 
 </div>
-
-</div>
-
-<!-- ==========================================
-RECOMMENDED CONFIGURATION
-========================================== -->
-
-<div class="result-card">
-
-<h3>
-
-Recommended Configuration
-
-</h3>
 
 <div class="result-row">
 
-<span>Recommended Series Range</span>
+<span>
+
+Maximum DC Voltage Check
+
+</span>
+
+<strong id="dcVoltageCheck">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+MPPT Voltage Check
+
+</span>
+
+<strong id="mpptVoltageCheck">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Operating Current Check
+
+</span>
+
+<strong id="currentCheck">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Short-Circuit Current Check
+
+</span>
+
+<strong id="iscCheck">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Voltage Margin
+
+</span>
+
+<strong id="voltageMarginResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+MPPT Margin
+
+</span>
+
+<strong id="mpptMarginResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Current Margin
+
+</span>
+
+<strong id="currentMarginResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Short-Circuit Margin
+
+</span>
+
+<strong id="iscMarginResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Recommended Series Range
+
+</span>
 
 <strong id="recommendedSeriesResult">
 
@@ -979,7 +1184,11 @@ Recommended Configuration
 
 <div class="result-row">
 
-<span>Entered Configuration</span>
+<span>
+
+Entered Configuration
+
+</span>
 
 <strong id="enteredConfigurationResult">
 
@@ -992,22 +1201,16 @@ Recommended Configuration
 </div>
 
 <!-- ==========================================
-ENGINEERING ANALYSIS
+     ENGINEERING ANALYSIS
 ========================================== -->
 
-<div class="result-card">
+<div class="notes-card">
 
 <h3>
 
-Engineering Analysis
-
-</h3>
-
-<h4>
-
 Configuration Review
 
-</h4>
+</h3>
 
 <p id="configurationReview">
 
@@ -1015,11 +1218,11 @@ Configuration Review
 
 </p>
 
-<h4>
+<h3>
 
 Warnings & Recommendations
 
-</h4>
+</h3>
 
 <p id="warningsResult">
 
@@ -1027,11 +1230,11 @@ Warnings & Recommendations
 
 </p>
 
-<h4>
+<h3>
 
 Engineering Summary
 
-</h4>
+</h3>
 
 <p id="engineeringSummary">
 
@@ -1042,10 +1245,8 @@ Engineering Summary
 </div>
 
 <!-- ==========================================
-ACTION BUTTONS
+     BUTTONS
 ========================================== -->
-
-<div class="button-group">
 
 <button
 class="primary-button"
@@ -1067,24 +1268,23 @@ Done
 
 </div>
 
-</div>
-
-</main>
-
-</div>
+<!-- ==========================================
+     NOTIFIER
+========================================== -->
 
 <div
-class="notifier"
-id="notifier">
+id="notifier"
+class="notifier">
 
-<span
-id="notifierText">
+<span id="notifierText">
 
 </span>
 
 </div>
 
 <script src="script.js"></script>
+
+</div>
 
 </body>
 
