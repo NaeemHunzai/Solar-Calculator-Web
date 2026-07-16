@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+Battery Charging Time Calculator
+
+</title>
+
+<link
+rel="stylesheet"
+href="../../css/variables.css">
+
+<link
+rel="stylesheet"
+href="../../css/theme.css">
+
+<link
+rel="stylesheet"
+href="../../css/style.css">
+
+<link
+rel="stylesheet"
+href="../../css/cards.css">
+
+<link
+rel="stylesheet"
+href="../../css/forms.css">
+
+<link
+rel="stylesheet"
+href="../../css/navigation.css">
+
+<link
+rel="stylesheet"
+href="../../css/responsive.css">
+
+<link
+rel="stylesheet"
+href="../../css/animations.css">
+
+<link
+rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<div class="page-header">
+
+<button
+class="back-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div>
+
+<h1>
+
+Battery Charging Time
+
+</h1>
+
+<p>
+
+Estimate battery charging time using capacity, current and battery type.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     BATTERY INFORMATION
+========================================== -->
+
+<h2 class="section-title">
+
+Battery Information
+
+</h2>
+
+<div class="input-group">
+
+<label>
+
+Battery Type
+
+</label>
+
+<select id="batteryType">
+
+<option value="leadacid">
+
+Lead Acid Flooded
+
+</option>
+
+<option value="agm">
+
+AGM
+
+</option>
+
+<option value="gel">
+
+Gel
+
+</option>
+
+<option value="lifepo4">
+
+Lithium LiFePO₄
+
+</option>
+
+<option value="liion">
+
+Lithium-ion
+
+</option>
+
+</select>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Battery Bank Voltage
+
+</label>
+
+<select id="batteryVoltage">
+
+<option value="12">
+
+12 V
+
+</option>
+
+<option value="24">
+
+24 V
+
+</option>
+
+<option value="36">
+
+36 V
+
+</option>
+
+<option value="48">
+
+48 V
+
+</option>
+
+<option value="custom">
+
+Custom
+
+</option>
+
+</select>
+
+</div>
+
+<div
+class="input-group"
+id="customVoltageGroup"
+style="display:none;">
+
+<label>
+
+Custom Battery Voltage
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="customVoltage"
+placeholder="e.g. 72">
+
+<span class="input-unit">
+
+V
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Battery Capacity
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="batteryCapacity"
+placeholder="e.g. 200">
+
+<span class="input-unit">
+
+Ah
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Current State of Charge (SOC)
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="currentSOC"
+placeholder="e.g. 40"
+min="0"
+max="100">
+
+<span class="input-unit">
+
+%
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Target State of Charge (SOC)
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="targetSOC"
+placeholder="100"
+min="1"
+max="100">
+
+<span class="input-unit">
+
+%
+
+</span>
+
+</div>
+
+</div>
+<!-- ==========================================
+     CHARGING PARAMETERS
+========================================== -->
+
+<h2 class="section-title">
+
+Charging Parameters
+
+</h2>
+
+<div class="input-group">
+
+<label>
+
+Charging Source
+
+</label>
+
+<select id="chargingSource">
+
+<option value="solar">
+
+Solar Charge Controller
+
+</option>
+
+<option value="charger">
+
+Battery Charger
+
+</option>
+
+<option value="alternator">
+
+Alternator
+
+</option>
+
+<option value="powersupply">
+
+DC Power Supply
+
+</option>
+
+<option value="custom">
+
+Custom
+
+</option>
+
+</select>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Charging Current
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="chargingCurrent"
+placeholder="e.g. 20">
+
+<span class="input-unit">
+
+A
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Charging Efficiency
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="chargingEfficiency"
+readonly>
+
+<span class="input-unit">
+
+%
+
+</span>
+
+</div>
+
+<small class="input-hint">
+
+Automatically selected based on battery type.
+
+</small>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Battery Temperature
+
+</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="batteryTemperature"
+value="25">
+
+<span class="input-unit">
+
+°C
+
+</span>
+
+</div>
+
+<small class="input-hint">
+
+Used for charging stage recommendations.
+
+</small>
+
+</div>
+
+<div class="input-group">
+
+<label>
+
+Include Absorption / CV Stage
+
+</label>
+
+<select id="includeAbsorption">
+
+<option value="yes">
+
+Yes (Recommended)
+
+</option>
+
+<option value="no">
+
+No (Ideal Charging)
+
+</option>
+
+</select>
+
+</div>
+<!-- ==========================================
+     LIVE CHARGING INFORMATION
+========================================== -->
+
+<h2 class="section-title">
+
+Live Charging Information
+
+</h2>
+
+<div
+class="notes-card"
+id="liveInfoCard"
+style="display:none;">
+
+<h3>
+
+Charging Overview
+
+</h3>
+
+<div class="result-row">
+
+<span>
+
+Battery Energy
+
+</span>
+
+<strong id="liveBatteryEnergy">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Energy Required
+
+</span>
+
+<strong id="liveEnergyRequired">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Rate
+
+</span>
+
+<strong id="liveCRate">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Power
+
+</span>
+
+<strong id="liveChargingPower">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="calculateBtn">
+
+Calculate
+
+</button>
+
+<button
+class="secondary-button"
+id="resetBtn">
+
+Reset
+
+</button>
+
+<!-- ==========================================
+     ENGINEERING NOTES
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Engineering Notes
+
+</h3>
+
+<ul>
+
+<li>
+
+Charging time is estimated using battery capacity, charging current and charging efficiency.
+
+</li>
+
+<li>
+
+Charging efficiency is automatically selected based on the battery chemistry.
+
+</li>
+
+<li>
+
+Lead-acid batteries require an absorption stage near full charge, increasing total charging time.
+
+</li>
+
+<li>
+
+Lithium batteries typically use Constant Current (CC) followed by Constant Voltage (CV) charging.
+
+</li>
+
+<li>
+
+Actual charging time may vary depending on battery age, temperature and charger performance.
+
+</li>
+
+<li>
+
+For best battery life, always use the manufacturer's recommended charging current.
+
+</li>
+
+</ul>
+
+</div>
+<!-- ==========================================
+     RESULT SHEET
+========================================== -->
+
+<div class="result-sheet" id="resultSheet">
+
+<div class="result-sheet-content">
+
+<!-- Sheet Header -->
+
+<div class="sheet-header">
+
+<h2>
+
+Charging Results
+
+</h2>
+
+<button
+class="icon-button"
+id="closeSheet">
+
+<span class="material-symbols-rounded">
+
+close
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+     HERO RESULT
+========================================== -->
+
+<div class="hero-result">
+
+<div
+class="hero-label"
+id="heroLabel">
+
+Estimated Charging Time
+
+</div>
+
+<div
+class="hero-value"
+id="heroResult">
+
+--
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     RESULTS
+========================================== -->
+
+<div class="sheet-results">
+
+<div class="result-row">
+
+<span>
+
+Battery Energy
+
+</span>
+
+<strong id="batteryEnergyResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Energy Required
+
+</span>
+
+<strong id="energyRequiredResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Power
+
+</span>
+
+<strong id="chargingPowerResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Current
+
+</span>
+
+<strong id="chargingCurrentResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Efficiency
+
+</span>
+
+<strong id="chargingEfficiencyResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Rate (C-rate)
+
+</span>
+
+<strong id="chargingRateResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Speed
+
+</span>
+
+<strong id="chargingSpeedResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Charging Stage
+
+</span>
+
+<strong id="chargingStageResult">
+
+--
+
+</strong>
+
+</div>
+
+<div class="result-row">
+
+<span>
+
+Estimated Finish SOC
+
+</span>
+
+<strong id="finishSocResult">
+
+--
+
+</strong>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     ENGINEERING ANALYSIS
+========================================== -->
+
+<div class="notes-card">
+
+<h3>
+
+Battery Health Recommendation
+
+</h3>
+
+<p id="batteryRecommendation">
+
+--
+
+</p>
+
+<h3>
+
+Charging Analysis
+
+</h3>
+
+<p id="chargingAnalysis">
+
+--
+
+</p>
+
+<h3>
+
+Engineering Summary
+
+</h3>
+
+<p id="engineeringSummary">
+
+--
+
+</p>
+
+</div>
+
+<!-- ==========================================
+     BUTTONS
+========================================== -->
+
+<button
+class="primary-button"
+id="copyResults">
+
+Share Results
+
+</button>
+
+<button
+class="secondary-button"
+id="doneButton">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+<!-- ==========================================
+     NOTIFIER
+========================================== -->
+
+<div
+id="notifier"
+class="notifier">
+
+<span id="notifierText">
+
+</span>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
