@@ -759,7 +759,7 @@ return;
 
 }
 
-if(mpptMin>=mpptMax){
+if(mpptMin>mpptMax){
 
 showNotifier("Invalid MPPT voltage range.");
 
