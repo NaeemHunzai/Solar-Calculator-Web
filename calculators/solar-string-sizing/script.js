@@ -799,9 +799,29 @@ return;
 
 }
 
-if(isNaN(lowestTemp)||isNaN(highestTemp)){
+if(
+
+lowestTemperature.value.trim()==="" ||
+
+highestTemperature.value.trim()===""
+
+){
 
 showNotifier("Enter site temperatures.");
+
+return;
+
+}
+
+if(
+
+isNaN(lowestTemp) ||
+
+isNaN(highestTemp)
+
+){
+
+showNotifier("Invalid temperature.");
 
 return;
 
