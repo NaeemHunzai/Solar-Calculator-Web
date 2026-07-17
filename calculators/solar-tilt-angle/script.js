@@ -7,6 +7,9 @@
    DOM ELEMENTS
 ========================================== */
 
+const hemisphereSelect =
+document.getElementById("hemisphere");
+
 const latitudeInput = document.getElementById("latitude");
 const optimizationSelect = document.getElementById("optimization");
 const monthGroup = document.getElementById("monthGroup");
@@ -49,17 +52,7 @@ const recommendationResult = document.getElementById("recommendationResult");
    EVENT LISTENERS
 ========================================== */
 
-optimizationSelect.addEventListener("change", toggleMonthSelection);
 
-calculateBtn.addEventListener("click", calculateTilt);
-
-resetBtn.addEventListener("click", resetCalculator);
-
-closeSheet.addEventListener("click", closeResultSheet);
-
-doneButton.addEventListener("click", closeResultSheet);
-
-copyResults.addEventListener("click", copyCalculation);
 
 /* ==========================================
    INITIALIZATION
@@ -71,12 +64,17 @@ toggleMonthSelection();
    SHOW / HIDE MONTH DROPDOWN
 ========================================== */
 
-function toggleMonthSelection() {
+function toggleMonthSelection(){
 
-    monthGroup.style.display =
-        optimizationSelect.value === "monthly"
-            ? "flex"
-            : "none";
+    if(optimizationSelect.value === "monthly"){
+
+        monthGroup.style.display = "block";
+
+    }else{
+
+        monthGroup.style.display = "none";
+
+    }
 
 }
 
@@ -108,15 +106,16 @@ function validateInputs() {
 
     }
 
-    if (latitude < -90 || latitude > 90) {
+    
+    if (latitude <= 0 || latitude > 90) {
 
-        showNotifier("Latitude must be between -90° and 90°.");
+    showNotifier("Latitude must be between 0° and 90°.");
 
-        latitudeInput.focus();
+    latitudeInput.focus();
 
-        return false;
+    return false;
 
-    }
+}
 
     if (roofPitchInput.value.trim() !== "") {
 
@@ -472,8 +471,12 @@ function calculateTilt(){
     // READ INPUTS
     // ------------------------------------------
 
-    const latitude =
-    getLatitude();
+    let latitude =
+getLatitude();
+
+if (hemisphereSelect.value === "south") {
+    latitude = -latitude;
+}
 
     const roofPitch =
     getRoofPitch();
@@ -761,6 +764,8 @@ function showNotifier(message){
 function resetCalculator(){
 
     latitudeInput.value = "";
+
+    hemisphereSelect.value = "north";
 
     optimizationSelect.value = "annual";
 
