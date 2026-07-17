@@ -44,7 +44,7 @@ const copyResults = document.getElementById("copyResults");
 // RESULT FIELDS
 // -------------------------
 
-const socResult = document.getElementById("socResult");
+const heroResult = document.getElementById("heroResult");
 const batteryStatusResult = document.getElementById("batteryStatusResult");
 
 const remainingCapacityResult = document.getElementById("remainingCapacityResult");
@@ -836,7 +836,7 @@ if(calculationMethod.value === "voltage"){
 // POPULATE RESULTS
 // -------------------------
 
-socResult.textContent =
+heroResult.textContent =
 soc.toFixed(1) + " %";
 
 batteryStatusResult.textContent =
@@ -893,26 +893,11 @@ else{
     backupTimeRow.style.display = "none";
 
 }
-
 // -------------------------
-// VOLTAGE ACCURACY
+// VOLTAGE ASSESSMENT
 // -------------------------
 
-if(calculationMethod.value === "voltage"){
-
-    accuracyRow.style.display = "flex";
-
-    accuracyResult.textContent =
-    voltageAccuracy;
-
-}
-
-else{
-
-    accuracyRow.style.display = "none";
-
-}
-
+accuracyResult.textContent = voltageAccuracy;
 // -------------------------
 // SHOW RESULT SHEET
 // -------------------------
