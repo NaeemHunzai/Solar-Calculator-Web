@@ -83,17 +83,17 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wgh
 
 <div class="app">
 
-<main class="app-content">
 
-<section class="calculator-container">
 
-<div class="page-header">
+
+<header class="app-header">
 
 <button
-class="back-button"
+class="icon-button"
 onclick="history.back()">
 
-<span class="material-symbols-rounded">
+<span
+class="material-symbols-rounded">
 
 arrow_back
 
@@ -101,7 +101,7 @@ arrow_back
 
 </button>
 
-<div>
+<div class="calculator-header">
 
 <h1>
 
@@ -117,7 +117,11 @@ Estimate battery charging time using capacity, current and battery type.
 
 </div>
 
-</div>
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
 
 <!-- ==========================================
      BATTERY INFORMATION
