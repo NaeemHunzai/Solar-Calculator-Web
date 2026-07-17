@@ -923,7 +923,7 @@ Used Energy : ${usedEnergy.toFixed(0)} Wh
 
 Depth of Discharge : ${dod.toFixed(1)} %
 
-${load > 0 ? "Estimated Backup Time : " + formatTime(backupTime) : ""}
+${load > 0 ? "Estimated Backup: " + formatTime(backupTime) : ""}
 
 ${calculationMethod.value === "voltage" ? "Voltage Assessment : " + voltageAccuracy : ""}
 
