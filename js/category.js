@@ -151,57 +151,13 @@ const categories = {
             folder: "solar-tilt-angle"
         },
 
-        {
-            name: "Solar Panel Orientation",
-            icon: "explore",
-            folder: "solar-panel-orientation"
-        }
+       
 
     ]
 
 },
-    
-converter: {
 
-    title: "Unit Converters",
 
-    subtitle: "5 Professional Tools",
-
-    calculators: [
-
-        {
-            name: "Watt ↔ kW ↔ MW Converter",
-            icon: "swap_horiz",
-            folder: "power-converter"
-        },
-
-        {
-            name: "Ah ↔ Wh Converter",
-            icon: "battery_horiz_075",
-            folder: "ah-wh-converter"
-        },
-
-        {
-            name: "AWG ↔ mm² Converter",
-            icon: "straighten",
-            folder: "awg-mm2-converter"
-        },
-
-        {
-            name: "Energy Converter (Wh ↔ kWh ↔ MWh)",
-            icon: "bolt",
-            folder: "energy-converter"
-        },
-
-        {
-            name: "Temperature Converter (°C ↔ °F)",
-            icon: "device_thermostat",
-            folder: "temperature-converter"
-        }
-
-    ]
-
-},
 
 };
 
