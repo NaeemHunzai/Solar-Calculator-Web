@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Battery State of Charge</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/cards.css">
+<link rel="stylesheet" href="../../css/forms.css">
+<link rel="stylesheet" href="../../css/navigation.css">
+<link rel="stylesheet" href="../../css/responsive.css">
+<link rel="stylesheet" href="../../css/animations.css">
+
+<style>
+
+.hidden{
+
+display:none;
+
+}
+
+/* Fix dropdown appearance only for this calculator */
+
+.input-wrapper select{
+
+width:100%;
+
+height:100%;
+
+border:none;
+
+background:transparent;
+
+padding:0;
+
+outline:none;
+
+font-size:15px;
+
+color:var(--text-primary);
+
+appearance:none;
+
+-webkit-appearance:none;
+
+-moz-appearance:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="app-header">
+
+<button
+class="icon-button"
+onclick="history.back()">
+
+<span class="material-symbols-rounded">
+
+arrow_back
+
+</span>
+
+</button>
+
+<div class="calculator-header">
+
+<h1>Battery State of Charge</h1>
+
+<p>
+
+Estimate battery State of Charge (SOC), remaining capacity,
+remaining energy, depth of discharge and backup time.
+
+</p>
+
+</div>
+
+</header>
+
+<main class="app-content">
+
+<section class="calculator-container">
+
+<div class="input-group">
+
+<label>Battery Type</label>
+
+<div class="input-wrapper">
+
+<select id="batteryType">
+
+<option value="leadacid">
+
+Lead Acid Flooded
+
+</option>
+
+<option value="agm">
+
+AGM
+
+</option>
+
+<option value="gel">
+
+Gel
+
+</option>
+
+<option value="lifepo4">
+
+LiFePO₄
+
+</option>
+
+<option value="lithiumion">
+
+Lithium-ion
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Battery Bank Voltage</label>
+
+<div class="input-wrapper">
+
+<select id="batteryVoltage">
+
+<option value="12">
+
+12 V
+
+</option>
+
+<option value="24">
+
+24 V
+
+</option>
+
+<option value="36">
+
+36 V
+
+</option>
+
+<option value="48">
+
+48 V
+
+</option>
+
+<option value="custom">
+
+Custom
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div
+class="input-group hidden"
+id="customVoltageGroup">
+
+<label>Custom Battery Voltage</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="customVoltage"
+placeholder="Enter battery voltage"
+min="1"
+step="0.1">
+
+<span class="input-unit">
+
+V
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Battery Capacity</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="batteryCapacity"
+placeholder="Enter battery capacity"
+min="1"
+step="0.1">
+
+<span class="input-unit">
+
+Ah
+
+</span>
+
+</div>
+
+</div>
+<div class="input-group">
+
+<label>Calculation Method</label>
+
+<div class="input-wrapper">
+
+<select id="calculationMethod">
+
+<option value="voltage">
+
+Battery Voltage
+
+</option>
+
+<option value="remaining">
+
+Remaining Capacity (Ah)
+
+</option>
+
+<option value="used">
+
+Used Capacity (Ah)
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div
+class="input-group"
+id="voltageMethod">
+
+<label>Measured Battery Voltage</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="batteryVoltageReading"
+placeholder="Enter measured voltage"
+min="0"
+step="0.01">
+
+<span class="input-unit">
+
+V
+
+</span>
+
+</div>
+
+</div>
+
+<div
+class="input-group hidden"
+id="remainingMethod">
+
+<label>Remaining Capacity</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="remainingCapacity"
+placeholder="Enter remaining capacity"
+min="0"
+step="0.1">
+
+<span class="input-unit">
+
+Ah
+
+</span>
+
+</div>
+
+</div>
+
+<div
+class="input-group hidden"
+id="usedMethod">
+
+<label>Used Capacity</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="usedCapacity"
+placeholder="Enter used capacity"
+min="0"
+step="0.1">
+
+<span class="input-unit">
+
+Ah
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Battery Temperature</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="batteryTemp"
+value="25"
+step="1">
+
+<span class="input-unit">
+
+°C
+
+</span>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Battery at Rest</label>
+
+<div class="input-wrapper">
+
+<select id="batteryRest">
+
+<option value="yes">
+
+Yes (Recommended)
+
+</option>
+
+<option value="no">
+
+No (Under Load)
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Connected Load (Optional)</label>
+
+<div class="input-wrapper">
+
+<input
+type="number"
+id="loadPower"
+placeholder="Enter connected load"
+min="0"
+step="1">
+
+<span class="input-unit">
+
+W
+
+</span>
+
+</div>
+
+</div>
+
+<button class="primary-button">
+
+Calculate
+
+</button>
+
+<button class="secondary-button">
+
+Reset
+
+</button>
+
+<div class="notes-card">
+
+<h3>Engineering Notes</h3>
+
+<ul>
+
+<li>Voltage-based SOC estimation is most accurate when the battery has been at rest for at least 30 minutes.</li>
+
+<li>Remaining Capacity and Used Capacity methods generally provide more accurate SOC estimation than voltage-based calculations.</li>
+
+<li>Temperature affects battery voltage, especially for lead-acid batteries.</li>
+
+<li>LiFePO₄ batteries have a very flat voltage curve, so voltage alone cannot accurately determine SOC.</li>
+
+<li>Results are engineering estimates and should not replace measurements from a Battery Management System (BMS).</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+<!-- Result Sheet -->
+
+<div class="result-sheet" id="resultSheet">
+
+    <div class="result-header">
+
+        <h2>Battery State of Charge Results</h2>
+
+        <button class="icon-button" id="closeSheet">
+
+            <span class="material-symbols-rounded">
+                close
+            </span>
+
+        </button>
+
+    </div>
+
+    <div class="result-content">
+
+        <div class="result-row">
+            <span>State of Charge</span>
+            <strong id="socResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Battery Status</span>
+            <strong id="batteryStatusResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Remaining Capacity</span>
+            <strong id="remainingCapacityResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Used Capacity</span>
+            <strong id="usedCapacityResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Remaining Energy</span>
+            <strong id="remainingEnergyResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Used Energy</span>
+            <strong id="usedEnergyResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Depth of Discharge</span>
+            <strong id="dodResult">--</strong>
+        </div>
+
+        <div class="result-row" id="backupTimeRow">
+            <span>Estimated Backup Time</span>
+            <strong id="backupTimeResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Battery Type</span>
+            <strong id="batteryTypeResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Battery Voltage</span>
+            <strong id="batteryVoltageResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Calculation Method</span>
+            <strong id="methodResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Recommendation</span>
+            <strong id="recommendationResult">--</strong>
+        </div>
+
+        <div class="result-row" id="accuracyRow">
+            <span>Voltage Accuracy</span>
+            <strong id="accuracyResult">--</strong>
+        </div>
+
+        <div class="result-row">
+            <span>Temperature Warning</span>
+            <strong id="temperatureResult">--</strong>
+        </div>
+
+        <div class="result-summary">
+
+            <h3>Engineering Summary</h3>
+
+            <p id="engineeringSummary">
+                --
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="result-actions">
+
+        <button
+            class="secondary-button"
+            id="copyResults">
+
+            Copy Results
+
+        </button>
+
+        <button
+            class="primary-button"
+            id="doneButton">
+
+            Done
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Notifier -->
+
+<div class="notifier" id="notifier">
+
+    <span
+        class="material-symbols-rounded">
+
+        info
+
+    </span>
+
+    <span id="notifierText"></span>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
