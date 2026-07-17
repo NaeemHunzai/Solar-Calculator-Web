@@ -28,9 +28,11 @@ const loadPower = document.getElementById("loadPower");
 // BUTTONS
 // -------------------------
 
-const calculateBtn = document.querySelector(".primary-button");
-const resetBtn = document.querySelector(".secondary-button");
+const calculateBtn =
+document.getElementById("calculateBtn");
 
+const resetBtn =
+document.getElementById("resetBtn");
 // -------------------------
 // RESULT SHEET
 // -------------------------
@@ -902,6 +904,48 @@ accuracyResult.textContent = voltageAccuracy;
 // SHOW RESULT SHEET
 // -------------------------
 
+const report = `Battery State of Charge Report
+
+Battery Type : ${batteryType.options[batteryType.selectedIndex].text}
+Battery Voltage : ${bankVoltage} V
+Battery Capacity : ${capacity.toFixed(1)} Ah
+
+Calculation Method : ${calculationMethod.options[calculationMethod.selectedIndex].text}
+
+State of Charge : ${soc.toFixed(1)} %
+Battery Status : ${batteryStatus}
+
+Remaining Capacity : ${remainingAh.toFixed(1)} Ah
+Used Capacity : ${usedAh.toFixed(1)} Ah
+
+Remaining Energy : ${remainingEnergy.toFixed(0)} Wh
+Used Energy : ${usedEnergy.toFixed(0)} Wh
+
+Depth of Discharge : ${dod.toFixed(1)} %
+
+${load > 0 ? "Estimated Backup Time : " + formatTime(backupTime) : ""}
+
+${calculationMethod.value === "voltage" ? "Voltage Assessment : " + voltageAccuracy : ""}
+
+Recommendation :
+${recommendation}
+
+Temperature :
+${temperatureWarning}
+
+Engineering Summary :
+${engineeringText}`;
+
+copyResults.onclick = function(){
+
+    navigator.clipboard.writeText(report);
+
+    showNotifier("Results copied successfully.");
+
+};
+
+
+
 openSheet();
 
 });
@@ -936,58 +980,3 @@ resetBtn.addEventListener("click", function(){
 // -------------------------
 // COPY RESULTS
 // -------------------------
-
-copyResults.addEventListener("click", function(){
-
-    let report =
-
-`Battery State of Charge Report
-
-Battery Type : ${batteryType.options[batteryType.selectedIndex].text}
-Battery Voltage : ${bankVoltage} V
-Battery Capacity : ${capacity.toFixed(1)} Ah
-
-Calculation Method : ${calculationMethod.options[calculationMethod.selectedIndex].text}
-
-State of Charge : ${soc.toFixed(1)} %
-Battery Status : ${batteryStatus}
-
-Remaining Capacity : ${remainingAh.toFixed(1)} Ah
-Used Capacity : ${usedAh.toFixed(1)} Ah
-
-Remaining Energy : ${remainingEnergy.toFixed(0)} Wh
-Used Energy : ${usedEnergy.toFixed(0)} Wh
-
-Depth of Discharge : ${dod.toFixed(1)} %`;
-
-    if(load > 0){
-
-        report += `
-
-Estimated Backup Time : ${formatTime(backupTime)}`;
-
-    }
-
-    if(calculationMethod.value === "voltage"){
-
-        report += `
-
-Voltage Accuracy : ${voltageAccuracy}`;
-
-    }
-
-    report += `
-
-Recommendation : ${recommendation}
-
-Temperature :
-${temperatureWarning}
-
-Engineering Summary :
-${engineeringText}`;
-
-    navigator.clipboard.writeText(report);
-
-    showNotifier("Results copied successfully.");
-
-});
