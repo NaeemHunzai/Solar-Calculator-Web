@@ -70,7 +70,7 @@ const categories = {
 
     title: "Technical Calculators",
 
-    subtitle: "12 Professional Tools",
+    subtitle: "9 Professional Tools",
 
     calculators: [
 
@@ -116,11 +116,7 @@ const categories = {
             folder: "solar-string-sizing"
         },
 
-        {
-            name: "PV Array Configuration",
-            icon: "grid_view",
-            folder: "pv-array-configuration"
-        },
+       
 
         {
             name: "Battery Charging Time",
@@ -128,11 +124,7 @@ const categories = {
             folder: "battery-charging-time"
         },
 
-        {
-            name: "Battery Charging Current",
-            icon: "battery_full",
-            folder: "battery-charging-current"
-        },
+      
 
         {
             name: "Battery State of Charge (SOC)",
@@ -140,12 +132,7 @@ const categories = {
             folder: "battery-soc"
         },
 
-        {
-            name: "Battery Depth of Discharge (DOD)",
-            icon: "battery_alert",
-            folder: "battery-dod"
-        }
-
+       
     ]
 
 },
