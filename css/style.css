@@ -173,3 +173,109 @@
     color:var(--text-secondary);
 
 }
+
+/* ===================================
+   SEARCH RESULTS
+=================================== */
+
+.search-section{
+
+    position:relative;
+
+}
+
+.search-results{
+
+    display:none;
+
+    position:absolute;
+
+    left:16px;
+
+    right:16px;
+
+    top:100%;
+
+    margin-top:8px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.12);
+
+    overflow:hidden;
+
+    z-index:1000;
+
+    max-height:320px;
+
+    overflow-y:auto;
+
+}
+
+.search-results.show{
+
+    display:block;
+
+}
+
+.search-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 16px;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.search-item:hover{
+
+    background:#f5f7fa;
+
+}
+
+.search-item:not(:last-child){
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.search-item .material-symbols-rounded{
+
+    color:var(--primary);
+
+    font-size:22px;
+
+}
+
+.search-item span:last-child{
+
+    font-size:15px;
+
+    font-weight:500;
+
+    color:var(--text-primary);
+
+}
+
+.search-empty{
+
+    padding:18px;
+
+    text-align:center;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+}
