@@ -178,25 +178,16 @@
    SEARCH RESULTS
 =================================== */
 
-.search-section{
 
-    position:relative;
-
-}
+/* ===================================
+   SEARCH RESULTS
+=================================== */
 
 .search-results{
 
     display:none;
 
-    position:absolute;
-
-    left:16px;
-
-    right:16px;
-
-    top:100%;
-
-    margin-top:8px;
+    margin-top:10px;
 
     background:var(--surface);
 
@@ -204,11 +195,9 @@
 
     border-radius:16px;
 
-    box-shadow:0 8px 24px rgba(0,0,0,.12);
+    box-shadow:0 6px 20px rgba(0,0,0,.10);
 
     overflow:hidden;
-
-    z-index:1000;
 
     max-height:320px;
 
@@ -264,8 +253,6 @@
 
     font-weight:500;
 
-    color:var(--text-primary);
-
 }
 
 .search-empty{
@@ -275,7 +262,5 @@
     text-align:center;
 
     color:var(--text-secondary);
-
-    font-size:14px;
 
 }
