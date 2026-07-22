@@ -273,5 +273,24 @@
 <script src="js/search.js"></script>
 <script src="js/greeting.js"></script>
 
+
+
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const hasQuickAccess = [...document.querySelectorAll("*")]
+        .some(el => el.textContent.trim() === "Quick Access");
+
+    if (hasQuickAccess && window.AppInventor) {
+        window.AppInventor.setWebViewString("home");
+    }
+});
+</script>
+
 </body>
 </html>
